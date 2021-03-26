@@ -17,5 +17,7 @@
     <string name="nombreMascota">Facha</string>
 
     <string name="plikes">0 Likes</string>
+    <string name="mascotagenerica">MascotaGenerica</string>
+    <string name="DescripcionFab">Agregar una nueva mascota</string>
 
 </resources>

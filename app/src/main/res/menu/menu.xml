@@ -1,18 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/itemStrella"
-        android:title="Estrella"
-        android:icon="@drawable/ic_action_name"
-        app:showAsAction="ifRoom" />
-    
-    <item
-        android:id="@+id/contacto"
-        android:title="Contacto" />
-
-    <item
-        android:id="@+id/acercaDe"
-        android:title="Acerca de" />
-
-</menu>
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Main">
+        <item android:id="@+id/MenuItemBuscar"
+            android:icon="@android:drawable/ic_menu_search"
+            android:title="Buscar"
+            android:orderInCategory="1"
+            app:showAsAction="always" />
+        <item android:id="@+id/MenuItemTodos"
+            android:title="Todos"
+            android:orderInCategory="2"
+            app:showAsAction="never" />
+        <item android:id="@+id/MenuItemRecientes"
+            android:title="Recientes"
+            android:icon="@android:drawable/ic_menu_recent_history"
+            android:orderInCategory="3"
+            app:showAsAction="never" />
+        <item android:id="@+id/MenuItemCercanosAMi"
+            android:title="Cercanos a mi"
+            android:orderInCategory="4"
+            android:icon="@android:drawable/ic_menu_mylocation"
+            app:showAsAction="never" />
+        <item android:id="@+id/MenuItemEncontreUnaMascota"
+            android:title="Encontre una mascota"
+            android:orderInCategory="5"
+            android:icon="@android:drawable/ic_menu_help"
+            app:showAsAction="never" />
+    </menu>
