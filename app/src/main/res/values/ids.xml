@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="textView" type="id"></item>
+    <item name="nombre_usuario" type="id"></item>
+    <item name="email" type="id"></item>
+    <item name="contrasena" type="id"></item>
+    <item name="confContrasena" type="id"></item>
+    <item name="telefono" type="id"></item>
+    <item name="confirmar" type="id"></item>
+    <item name="link_to_login" type="id"></item>
+    <item name="register_error" type="id"></item>
+</resources>
