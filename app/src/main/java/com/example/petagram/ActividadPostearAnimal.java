@@ -13,11 +13,12 @@ public class ActividadPostearAnimal extends AppCompatActivity {
         setContentView(R.layout.activity_postear_animal);
     }
 
-    ///Este metodo se dispara cada vez que se aprieta un radioboton
+    ///Este metodo se dispara cada vez que se aprieta un radioboton de tamaño
     public void RadioBotonTamañoClickeado(View view) {
 
     }
 
+    ///Este metodo se dispara cada vez que se aprieta un radioboton de genero
     public void RadioBotonGeneroClickeado(View view) {
 
     }

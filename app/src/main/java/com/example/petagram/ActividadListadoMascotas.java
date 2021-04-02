@@ -25,7 +25,7 @@ public class ActividadListadoMascotas extends AppCompatActivity {
 
         ///Seteo el Menu del toolbar
         SetearMenuDeToolbar();
-        String variable = "fafa";
+
 
     }
 

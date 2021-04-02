@@ -43,10 +43,11 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Masc
 
     public static class MascotaViewHolder extends RecyclerView.ViewHolder {
 
-        //Aca van las views de la tarjeta, (Likes , nombre bla bla
+        //Aca van las views de la tarjeta, (Likes , nombre bla bla)
 
         public MascotaViewHolder(@NonNull View itemView) {
             super(itemView);
+
 
         }
     }
