@@ -33,4 +33,15 @@
     <string name="login">LOGIN</string>
     <string name="RetornoLogin">VolverLogin</string>
 
+    <!-- activity_login -->
+    <string name="enter_email">Correo Electronico</string>
+    <string name="enter_contraseña">Contraseña</string>
+    <string name="image_logo">Logo Footprints</string>
+    <string name="link_registrarse">Registrarse</string>
+    <string name="link_olvide_mi_contraseña">Olvide mi Contraseña</string>
+    <string name="button_login">Login</string>
+    <string name="DescripcionFab">DescriptionFab</string>
+    <string name="mascotagenerica">Mascota Generica</string>
+
+
 </resources>
