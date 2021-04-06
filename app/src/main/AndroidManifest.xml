@@ -19,7 +19,7 @@
 
         </activity>
         <activity android:name=".ActividadPostearAnimal" />
-        <activity android:name=".Prueba"  >
+        <activity android:name=".DemonstracionUtilidadTraeJson"  >
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

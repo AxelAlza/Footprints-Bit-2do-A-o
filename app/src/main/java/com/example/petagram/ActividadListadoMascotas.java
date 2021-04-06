@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.petagram.adapter.MascotaAdaptador;
+import com.example.petagram.Adaptadores.MascotaAdaptador;
 
 
 public class ActividadListadoMascotas extends AppCompatActivity {

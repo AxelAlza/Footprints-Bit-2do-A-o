@@ -1,4 +1,4 @@
-package com.example.petagram.adapter;
+package com.example.petagram.Adaptadores;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
