@@ -1,10 +1,11 @@
-package com.example.petagram;
+package com.example.petagram.Demo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.petagram.R;
 import com.example.petagram.Utilidades.TraeJSON;
 import com.example.petagram.Utilidades.AsyncResponse;
 import com.example.petagram.Modelo.Mascota;
@@ -26,7 +27,7 @@ public class DemonstracionUtilidadTraeJson extends AppCompatActivity implements 
 
         ////Crear una instancia de la clase TraeJSON y pasarle la actividad donde se llama como parametro y la ruta de donde va a traer
         ////el JSON
-        TraeJSON traeJSON = new TraeJSON(this, "https://aalza.pythonanywhere.com/mascota/json/");
+        TraeJSON traeJSON = new TraeJSON(this, "https://10.0.2.2/mascota/agregarmascotamovil/");
         ////Ejecutar la tarea de TraeJSON
         traeJSON.execute();
 
@@ -37,7 +38,7 @@ public class DemonstracionUtilidadTraeJson extends AppCompatActivity implements 
     ////Cuando se termine la tarea de red y se haya traido el JSON (o si salio mal tenerlo en cuenta)
     ////Se ejecuta este metodo
     @Override
-    public void OnGetResponse(String output) {
+    public void AlConseguirDato(String output) {
 
         ///Demo GSON, crear una nueva instancia de GSON
         Gson gson = new Gson();
