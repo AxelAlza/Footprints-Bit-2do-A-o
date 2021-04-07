@@ -30,7 +30,8 @@ public class DemonstracionUtilidadEnviarJSON extends AppCompatActivity implement
         enviarJSON.execute();
     }
 
-   ///Cuando se termine la tarea de EnviarJSON hacer lo que se necesite con el resultado "Output"
+   ///Cuando se termine la tarea de EnviarJSON hacer lo que se necesite con el resultado "Output", lo que responda el servidor es arbitrario
+    ///Lo que responda es arbitrario y se va a definir cuando defina mejor la funcion de la ruta
     @Override
     public void AlConseguirDato(String output) {
         tv.setText(output);
