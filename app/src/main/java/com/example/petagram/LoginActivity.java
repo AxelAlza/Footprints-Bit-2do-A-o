@@ -2,12 +2,16 @@ package com.example.petagram;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.gson.Gson;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -18,10 +22,16 @@ public class LoginActivity extends AppCompatActivity {
     private TextView uiNewPassword;
     private TextView uiRegistro;
 
+
     //Esto es codigo duro
     //Credenciales credenciales = new Credenciales("admin@mail.com", "Admin1234");
 
+    //Inicio metodo de validacion en falso
     boolean isValid = false;
+
+    //Instancio Subclase de datos para Login
+    public JuntarDatosLogin datosLogin;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,15 +43,20 @@ public class LoginActivity extends AppCompatActivity {
         uiNewPassword = findViewById(R.id.tvNewPassword);
         uiRegistro = findViewById(R.id.tvRegistrarse);
 
+
+
         uiLogin.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
+
+
+                //Aca Validamos correo y contraseña
+
                 String inputEmail = uiEmail.getText().toString();
                 String inputPassword = uiPassword.getText().toString();
 
-                //Aca Validamos correo y contraseña
 
                 /*if(inputEmail.isEmpty() || inputPassword.isEmpty()){
 
@@ -65,8 +80,10 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }*/
 
-                Intent intent = new Intent(LoginActivity.this, ActividadListadoMascotas.class);
-                startActivity(intent);
+                JuntarDatosLogin datosLogin = new JuntarDatosLogin(inputEmail, inputPassword);
+                Gson Convertidor = new Gson();
+                String resultado = Convertidor.toJson(datosLogin);
+                Log.d("Convertidor", resultado);
 
             }
         });
@@ -93,4 +110,20 @@ public class LoginActivity extends AppCompatActivity {
 
         return false;
     }*/
+
+    //Metodo que retorna los datos necesarios para el login
+    /*public String MostrarDatos(){
+        String inputEmail = datosLogin.inputEmail;
+        String inputPassword = datosLogin.inputPassword;
+
+        System.out.println(inputEmail);
+        System.out.println(inputPassword);
+
+        return(inputEmail, inputPassword);
+
+            }
+
+    }*/
 }
+
+
