@@ -11,10 +11,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.petagram.Utilidades.AsyncResponse;
+import com.example.petagram.Utilidades.EnviarJSON;
 import com.google.gson.Gson;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class LoginActivity extends AppCompatActivity {
+
+public class LoginActivity extends AppCompatActivity implements AsyncResponse {
 
     private EditText uiEmail;
     private EditText uiPassword;
@@ -44,12 +49,10 @@ public class LoginActivity extends AppCompatActivity {
         uiRegistro = findViewById(R.id.tvRegistrarse);
 
 
-
         uiLogin.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-
 
 
                 //Aca Validamos correo y contraseña
@@ -58,33 +61,37 @@ public class LoginActivity extends AppCompatActivity {
                 String inputPassword = uiPassword.getText().toString();
 
 
-                /*if(inputEmail.isEmpty() || inputPassword.isEmpty()){
+                if (inputEmail.isEmpty() || inputPassword.isEmpty()) {
 
                     Toast.makeText(LoginActivity.this, "Ingrese los datos correctamente", Toast.LENGTH_SHORT).show();
-                }else{
 
-                    isValid = validate(inputEmail, inputPassword);
+                } else {
 
-                    if(!isValid){   //Aca se puede mandar directamente a registro si no estan los datos en la base //
+                    Pattern pattern = Pattern
+                            .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 
-                        Toast.makeText(LoginActivity.this, "Ingrese los datos correctamente", Toast.LENGTH_SHORT).show();
 
-                    }else{
+                    Matcher mather = pattern.matcher(inputEmail);
 
-                        Toast.makeText(LoginActivity.this, "Bienvenido a BuscandoMiMascota", Toast.LENGTH_SHORT).show();
+                    if (mather.find() == true) {
 
-                        //Agregamos el codigo para enviar a Listado de Mascotas //
+                        // Cambio de formato de datosLogin
+                        JuntarDatosLogin datosLogin = new JuntarDatosLogin(inputEmail, inputPassword);
+                        Gson Convertidor = new Gson();
+                        String resultado = Convertidor.toJson(datosLogin);
+                        Log.d("Convertidor", resultado);
 
-                        Intent intent = new Intent(LoginActivity.this, SimulacionListadoMascotas.class);
-                        startActivity(intent);
+                        // Enviando datosLogin al servidor como JSON
+                        EnviarJSON enviarDatosLogin = new EnviarJSON(LoginActivity.this, "https://aalza.pythonanywhere.com/usuario/loginmovil", resultado);
+                        enviarDatosLogin.execute();
+
+
+                    }else {
+                        Toast.makeText(LoginActivity.this, "Ingrese correctamente su Email", Toast.LENGTH_SHORT).show();
                     }
-                }*/
 
-                JuntarDatosLogin datosLogin = new JuntarDatosLogin(inputEmail, inputPassword);
-                Gson Convertidor = new Gson();
-                String resultado = Convertidor.toJson(datosLogin);
-                Log.d("Convertidor", resultado);
-
+                }
             }
         });
 
@@ -98,32 +105,12 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    //Aca responde el servidor
+    @Override
+    public void AlConseguirDato(String output) {
 
-    // Aca tenemos que vincular la clase del registro para validar //
+    }
 
-    /*private boolean validate(String name, String password){
-
-        if(name.equals(credenciales.getEmail()) && password.equals(credenciales.getPassword())){
-
-            return true;
-        }
-
-        return false;
-    }*/
-
-    //Metodo que retorna los datos necesarios para el login
-    /*public String MostrarDatos(){
-        String inputEmail = datosLogin.inputEmail;
-        String inputPassword = datosLogin.inputPassword;
-
-        System.out.println(inputEmail);
-        System.out.println(inputPassword);
-
-        return(inputEmail, inputPassword);
-
-            }
-
-    }*/
 }
 
 
