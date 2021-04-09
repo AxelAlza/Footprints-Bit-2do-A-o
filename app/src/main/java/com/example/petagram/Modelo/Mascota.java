@@ -1,11 +1,64 @@
 package com.example.petagram.Modelo;
 
 public class Mascota {
-    int pk , edad , usuario;
-    String nombre, raza, genero , ciudad , barrio , imagen , descripcion;
+    int pk, edad, usuario, recompensa;
+    String nombre;
+    String especie;
+    String raza;
+    String color;
+    String genero;
+    String tamaño;
+    String imagen;
+    String descripcion;
+
+    public Mascota(int edad, int usuario, int recompensa, String nombre, String especie, String raza, String color, String genero, String tamaño, String imagen, String descripcion) {
+        this.edad = edad;
+        this.usuario = usuario;
+        this.recompensa = recompensa;
+        this.nombre = nombre;
+        this.especie = especie;
+        this.raza = raza;
+        this.color = color;
+        this.genero = genero;
+        this.tamaño = tamaño;
+        this.imagen = imagen;
+        this.descripcion = descripcion;
+    }
 
     public int getPk() {
         return pk;
+    }
+
+    public int getRecompensa() {
+        return recompensa;
+    }
+
+    public void setRecompensa(int recompensa) {
+        this.recompensa = recompensa;
+    }
+
+    public String getEspecie() {
+        return especie;
+    }
+
+    public void setEspecie(String especie) {
+        this.especie = especie;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getTamaño() {
+        return tamaño;
+    }
+
+    public void setTamaño(String tamaño) {
+        this.tamaño = tamaño;
     }
 
     public void setPk(int pk) {
@@ -50,22 +103,6 @@ public class Mascota {
 
     public void setGenero(String genero) {
         this.genero = genero;
-    }
-
-    public String getCiudad() {
-        return ciudad;
-    }
-
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
-    }
-
-    public String getBarrio() {
-        return barrio;
-    }
-
-    public void setBarrio(String barrio) {
-        this.barrio = barrio;
     }
 
     public String getImagen() {

@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.petagram.Modelo.JuntarDatosLogin;
 import com.example.petagram.Utilidades.AsyncResponse;
 import com.example.petagram.Utilidades.EnviarJSON;
 import com.google.gson.Gson;

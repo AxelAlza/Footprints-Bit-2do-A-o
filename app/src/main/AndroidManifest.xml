@@ -4,6 +4,12 @@
     package="com.example.petagram">
     <!-- Permisos para internet -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <application
         android:networkSecurityConfig="@xml/network_security_config"
@@ -15,17 +21,17 @@
         android:theme="@style/AppTheme">
         <activity android:name=".RegistroUsuarios"/>
         <activity android:name=".LoginActivity">
+        </activity>
+        <activity android:name=".ActividadListadoMascotas" />
+        <activity android:name=".ActividadPostearAnimal">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActividadListadoMascotas" />
-        <activity android:name=".ActividadPostearAnimal" />
-        <activity android:name=".DemonstracionUtilidadTraeJson"  >
+        <activity android:name=".Demo.DemonstracionUtilidadEnviarJSON"  >
 
         </activity>
     </application>
-
 </manifest>

@@ -1,15 +1,11 @@
 package com.example.petagram.Demo;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.TextView;
-
+import androidx.appcompat.app.AppCompatActivity;
 import com.example.petagram.R;
 import com.example.petagram.Utilidades.AsyncResponse;
 import com.example.petagram.Utilidades.EnviarJSON;
-
-import org.w3c.dom.Text;
 
 ///Implementar la interface AsyncResponse para traer el resultado de la clase EnviarJSON
 public class DemonstracionUtilidadEnviarJSON extends AppCompatActivity implements AsyncResponse {
@@ -35,6 +31,7 @@ public class DemonstracionUtilidadEnviarJSON extends AppCompatActivity implement
     @Override
     public void AlConseguirDato(String output) {
         tv.setText(output);
+
 
     }
 }
