@@ -15,23 +15,19 @@
     <string name="descripcionImgCardView">Imagen Mascota</string>
     <!-- -->
     <string name="nombreMascota">Facha</string>
-
     <string name="plikes">0 Likes</string>
+
+    <!-- activity_registro_usuarios -->
+    <string name="registrarse">Registro de usuario</string>
+    <string name="VolverLogin">Login</string>
+    <string name="registro">Registro de Usuario</string>
+    <string name="login">LOGIN</string>
     <string name="confirmar">Confirmar</string>
     <string name="telefono">Teléfono</string>
     <string name="cc">Confirmar contraseña</string>
     <string name="contrasena">Contraseña</string>
     <string name="email">E-mail</string>
     <string name="nombre_del_usuario">Nombre de usuario</string>
-    <string name="registrarse">Registro</string>
-    <string name="VolverLogin">Ya tienes cuenta? Accede!</string>
-    <string name="enviar">enviar</string>
-    <string name="registrate">registrate!</string>
-    <string name="password">Password</string>
-    <string name="Email">Email</string>
-    <string name="registro">REGISTRO</string>
-    <string name="login">LOGIN</string>
-    <string name="RetornoLogin">VolverLogin</string>
 
     <!-- activity_login -->
     <string name="enter_email">Correo Electronico</string>
@@ -50,6 +46,7 @@
     values-round/strings.xml for round devices.
     -->
     <string name="hello_world">Hello Square World!</string>
+    <string name="todo">todo</string>
 
 
 </resources>
