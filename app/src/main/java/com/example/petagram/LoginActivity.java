@@ -28,15 +28,6 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
     private TextView uiRegistro;
 
 
-    //Esto es codigo duro
-    //Credenciales credenciales = new Credenciales("admin@mail.com", "Admin1234");
-
-    //Inicio metodo de validacion en falso
-    boolean isValid = false;
-
-    //Instancio Subclase de datos para Login
-    public JuntarDatosLogin datosLogin;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
