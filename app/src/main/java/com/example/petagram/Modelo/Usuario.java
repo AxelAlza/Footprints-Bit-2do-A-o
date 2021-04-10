@@ -3,6 +3,7 @@ package com.example.petagram.Modelo;
 import android.widget.Button;
 import android.widget.EditText;
 
+
 public class Usuario {
     String nombre_usuario;
     String email;

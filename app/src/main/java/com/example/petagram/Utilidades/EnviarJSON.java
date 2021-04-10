@@ -51,7 +51,7 @@ public class EnviarJSON extends AsyncTask<String, Void, String > {
     @Override
     protected String doInBackground(String...strings) {
         String Respuesta = null;
-        HttpURLConnection conn = null;
+        HttpURLConnection conn;
         try {
             URL url = new URL(Direccion);
             conn = (HttpURLConnection) url.openConnection();
@@ -66,8 +66,19 @@ public class EnviarJSON extends AsyncTask<String, Void, String > {
             os.flush();
             os.close();
             Log.d("Milog", String.valueOf(conn.getResponseCode()));
-            Log.d("Milog" , conn.getResponseMessage());
-            Respuesta = conn.getResponseMessage();
+
+            if (conn.getResponseCode() == 200){
+                InputStream contenido = conn.getInputStream();
+                BufferedReader LectorFlujoDeDatos =  new BufferedReader(new InputStreamReader(contenido));
+                StringBuilder buffer = new StringBuilder();
+                String Linea = "";
+                while ((Linea = LectorFlujoDeDatos.readLine()) != null) {
+                    buffer.append(Linea).append("\n");
+                }
+                Respuesta = buffer.toString();
+                Log.d("Milog",Respuesta);
+            }
+
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
