@@ -2,10 +2,15 @@ package com.example.petagram;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Patterns;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,8 +25,10 @@ import com.google.gson.Gson;
 
 public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse {
 
-    EditText nombre_usuario, email,contrasena, confContrasena, telefono;
+    EditText nombre_usuario, email, contrasena, confContrasena, telefono;
     Button confirmar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
@@ -35,11 +42,14 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
         confirmar = findViewById (R.id.confirmar);
 
 
+        //contrasena.setOnTouchListener ((View.OnTouchListener) this);
+
+
         confirmar.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View view) {
                 if (Confirmar ()) {
-                    Usuario usuario = new Usuario (nombre_usuario.getText().toString (), email.getText().toString (), contrasena.getText().toString (), telefono.getText().toString ());
+                    Usuario usuario = new Usuario (nombre_usuario.getText ().toString (), email.getText ().toString (), contrasena.getText ().toString (), telefono.getText ().toString ());
                     Gson gson = new Gson ();
                     String datos = gson.toJson (usuario);
                     EnviarJSON datReg = new EnviarJSON (RegistroUsuarios.this, "https://aalza.pythonanywhere.com/usuario/registrousuariomovil", datos);
@@ -52,16 +62,33 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
 
     }
 
-    boolean isEmail(EditText text) {
-        CharSequence email = text.getText ().toString ();
-        return (!TextUtils.isEmpty (email) && Patterns.EMAIL_ADDRESS.matcher (email).matches ());
-    }
+
+    /*@SuppressLint("UseCompatLoadingForDrawables")
+
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        if (motionEvent.getAction () == MotionEvent.ACTION_UP) {
+            Drawable drawable = contrasena.getCompoundDrawables ()[2];
+            if (drawable != null && motionEvent.getRawX () >= (contrasena.getRight () - drawable.getBounds ().width ())) {
+                if (drawable.getConstantState ().equals (getResources ().getDrawable (R.drawable.visible).getConstantState ())) {
+                    contrasena.setCompoundDrawablesWithIntrinsicBounds (null,
+                            null, getResources ().getDrawable (R.drawable.visible_off), null);
+                    contrasena.setTransformationMethod (PasswordTransformationMethod.getInstance ());
+                } else {
+                    contrasena.setCompoundDrawablesWithIntrinsicBounds (null,
+                            null, getResources ().getDrawable (R.drawable.visible), null);
+                    contrasena.setTransformationMethod (HideReturnsTransformationMethod.getInstance ());
+                }
+                return false;
+            }
+        }
+        return false;
+    }*/
+
 
     boolean isEmpty(EditText text) {
         CharSequence str = text.getText ().toString ();
         return TextUtils.isEmpty (str);
     }
-
 
 
     Boolean Confirmar() {
@@ -87,10 +114,10 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
         if (isEmpty (contrasena)) {
             contrasena.setError ("¡Ingrese un una contraseña válida!");
             validar = false;
-        }else if (contrasena.getText().length() < 6) {
-            contrasena.setError(getResources().getString(R.string.error_invalid_password));
+        } else if (contrasena.getText ().length () < 6) {
+            contrasena.setError (getResources ().getString (R.string.error_invalid_password));
             validar = false;
-        } else  {
+        } else {
             validar = true;
         }
 
@@ -98,10 +125,10 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
         if (isEmpty (confContrasena)) {
             confContrasena.setError ("¡Ingrese un una contraseña válida!");
             validar = false;
-        }else if (confContrasena.getText().length() < 6) {
-            confContrasena.setError(getResources().getString(R.string.error_invalid_password2));
+        } else if (confContrasena.getText ().length () < 6) {
+            confContrasena.setError (getResources ().getString (R.string.error_invalid_password2));
             validar = false;
-        } else  {
+        } else {
             validar = true;
         }
 
@@ -109,15 +136,14 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
         //implementar que coincidan las contraseñas (FALTA)
 
 
-
         // chequear para validar el número de teléfono.
         if (isEmpty (telefono)) {
             telefono.setError ("¡Ingrese un número válido!");
             validar = false;
-        }else {
-            if (telefono.length () < 6 || telefono.length () >13) {
-             telefono.setError(getResources().getString(R.string.phone_error2));
-             validar = true;
+        } else {
+            if (telefono.length () < 6 || telefono.length () > 13) {
+                telefono.setError (getResources ().getString (R.string.phone_error2));
+                validar = true;
             }
         }
         Toast t = Toast.makeText (this, "Registro en proceso....", Toast.LENGTH_SHORT);
@@ -127,7 +153,7 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
     }
 
     // volver al Login
-    public void Volver (View view){
+    public void Volver(View view) {
         Intent intent = new Intent (RegistroUsuarios.this, LoginActivity.class);
         startActivity (intent);
     }
@@ -135,6 +161,9 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
     @Override
     public void AlConseguirDato(String output) {
 
+    }
+
+    public void Confirmar(View view) {
     }
 }
 
