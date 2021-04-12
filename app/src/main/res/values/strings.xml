@@ -29,6 +29,24 @@
     <string name="email">E-mail</string>
     <string name="nombre_del_usuario">Nombre de usuario</string>
 
+    <!-- activity_registro_usuarios -->
+
+    <string name="name_error">Please enter your name</string>
+    <string name="phone_error">Please enter your phone number</string>
+    <string name="email_error">Please enter your email address</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="password_error">Please enter a password</string>
+    <string name="error_invalid_password">Ingrese una contraseña mínima de 6 caracteres</string>
+    <string name="error_invalid_password2">Ingrese una contraseña mínima de 6 caracteres</string>
+    <string name="contrase_a">contraseña</string>
+    <string name="error_invalid_phone">teléfono inválido</string>
+    <string name="phone_error2">El número introducido no es válido!!!</string>
+    <string name="phone_error3">Ha ingresado un número correcto!!!</string>
+
+
+
+
+
     <!-- activity_login -->
     <string name="enter_email">Correo Electronico</string>
     <string name="enter_contraseña">Contraseña</string>

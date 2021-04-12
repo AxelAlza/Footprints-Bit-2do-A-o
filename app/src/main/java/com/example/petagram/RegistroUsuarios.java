@@ -9,23 +9,19 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.petagram.Modelo.Usuario;
 import com.example.petagram.Utilidades.AsyncResponse;
 import com.example.petagram.Utilidades.EnviarJSON;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 
 public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse {
 
-    EditText nombre_usuario;
-    EditText email;
-    EditText contrasena;
-    EditText confContrasena;
-    EditText telefono;
+    EditText nombre_usuario, email,contrasena, confContrasena, telefono;
     Button confirmar;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
@@ -37,6 +33,7 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
         confContrasena = findViewById (R.id.confContrasena);
         telefono = findViewById (R.id.telefono);
         confirmar = findViewById (R.id.confirmar);
+
 
         confirmar.setOnClickListener (new View.OnClickListener () {
             @Override
@@ -52,6 +49,7 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
             }
 
         });
+
     }
 
     boolean isEmail(EditText text) {
@@ -69,7 +67,7 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
     Boolean Confirmar() {
 
         boolean validar = true;
-
+        // chequear para validar el nombre de usuario.
 
         if (isEmpty (nombre_usuario)) {
             Toast t = Toast.makeText (this, "¡Debe ingresar el nombre para registrarse!", Toast.LENGTH_SHORT);
@@ -77,31 +75,58 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
             validar = false;
         }
 
-        if (!isEmail (email)) {
-            email.setError ("¡Ingrese un email valido!");
+        if (email.getText ().length () == 0) {
+            Toast.makeText (getApplicationContext (), "Introduce un email", Toast.LENGTH_SHORT).show ();
+            validar = false;
+        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher (email.getText ().toString ().trim ()).matches ()) {
+            Toast.makeText (getApplicationContext (), "Por favor, introduce una dirección de correo electrónico válida!!!", Toast.LENGTH_SHORT).show ();
             validar = false;
         }
 
+        // chequear para validar la contraseña.
         if (isEmpty (contrasena)) {
             contrasena.setError ("¡Ingrese un una contraseña válida!");
             validar = false;
+        }else if (contrasena.getText().length() < 6) {
+            contrasena.setError(getResources().getString(R.string.error_invalid_password));
+            validar = false;
+        } else  {
+            validar = true;
         }
 
+        // chequear para validar la confirmación de la contraseña.
         if (isEmpty (confContrasena)) {
             confContrasena.setError ("¡Ingrese un una contraseña válida!");
             validar = false;
+        }else if (confContrasena.getText().length() < 6) {
+            confContrasena.setError(getResources().getString(R.string.error_invalid_password2));
+            validar = false;
+        } else  {
+            validar = true;
         }
 
+
+        //implementar que coincidan las contraseñas (FALTA)
+
+
+
+        // chequear para validar el número de teléfono.
         if (isEmpty (telefono)) {
             telefono.setError ("¡Ingrese un número válido!");
             validar = false;
+        }else {
+            if (telefono.length () < 6 || telefono.length () >13) {
+             telefono.setError(getResources().getString(R.string.phone_error2));
+             validar = true;
+            }
         }
-
+        Toast t = Toast.makeText (this, "Registro en proceso....", Toast.LENGTH_SHORT);
+        t.show ();
         return validar;
 
     }
 
-
+    // volver al Login
     public void Volver (View view){
         Intent intent = new Intent (RegistroUsuarios.this, LoginActivity.class);
         startActivity (intent);
