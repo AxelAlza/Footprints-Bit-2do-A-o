@@ -7,11 +7,13 @@ public class Mascota {
     String raza;
     String color;
     String genero;
-    String tamaño;
+    String tamano;
     String imagen;
     String descripcion;
+    String ultima_posicion_conocida;
 
-    public Mascota(int edad, int usuario, int recompensa, String nombre, String especie, String raza, String color, String genero, String tamaño, String imagen, String descripcion) {
+    public Mascota(int pk, int edad, int usuario, int recompensa, String nombre, String especie, String raza, String color, String genero, String tamano, String imagen, String descripcion, String ultima_posicion_conocida) {
+        this.pk = pk;
         this.edad = edad;
         this.usuario = usuario;
         this.recompensa = recompensa;
@@ -20,9 +22,18 @@ public class Mascota {
         this.raza = raza;
         this.color = color;
         this.genero = genero;
-        this.tamaño = tamaño;
+        this.tamano = tamano;
         this.imagen = imagen;
         this.descripcion = descripcion;
+        this.ultima_posicion_conocida = ultima_posicion_conocida;
+    }
+
+    public String getUltima_posicion_conocida() {
+        return ultima_posicion_conocida;
+    }
+
+    public void setUltima_posicion_conocida(String ultima_posicion_conocida) {
+        this.ultima_posicion_conocida = ultima_posicion_conocida;
     }
 
     public int getPk() {
@@ -54,11 +65,11 @@ public class Mascota {
     }
 
     public String getTamaño() {
-        return tamaño;
+        return tamano;
     }
 
     public void setTamaño(String tamaño) {
-        this.tamaño = tamaño;
+        this.tamano = tamaño;
     }
 
     public void setPk(int pk) {

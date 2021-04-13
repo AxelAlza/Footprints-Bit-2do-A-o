@@ -1,5 +1,6 @@
 package com.example.petagram;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,10 +29,9 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
     private TextView uiNewPassword;
     private TextView uiRegistro;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         uiEmail = findViewById(R.id.etEmail);
@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
                         enviarDatosLogin.execute();
 
 
-                    }else {
+                    } else {
                         Toast.makeText(LoginActivity.this, "Ingrese correctamente su Email", Toast.LENGTH_SHORT).show();
                     }
 
@@ -102,7 +102,8 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
     public void AlConseguirDato(String output) {
 
     }
-
 }
+
+
 
 

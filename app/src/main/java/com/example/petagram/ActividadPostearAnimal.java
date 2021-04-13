@@ -87,10 +87,10 @@ public class ActividadPostearAnimal extends AppCompatActivity {
 
                 Intent BuscarGaleria = new Intent(Intent.ACTION_GET_CONTENT);
                 BuscarGaleria.setType("image/*");
-                BuscarGaleria.putExtra("SeUsoCamara" , false );
+                BuscarGaleria.putExtra("SeUsoCamara", false);
 
                 Intent BuscarDocumentos = new Intent(Intent.ACTION_PICK);
-                BuscarDocumentos.putExtra("SeUsoCamara" , false );
+                BuscarDocumentos.putExtra("SeUsoCamara", false);
                 BuscarDocumentos.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
 
                 Intent SeleccionarAplicacion = Intent.createChooser(BuscarGaleria, "Seleccionar imagen de mascota");
@@ -160,7 +160,7 @@ public class ActividadPostearAnimal extends AppCompatActivity {
 
         boolean validar = true;
 
-        if(!FotoAsignada){
+        if (!FotoAsignada) {
             Toast.makeText(this, "Por favor ingrese una foto", Toast.LENGTH_SHORT).show();
             validar = false;
         }
@@ -214,19 +214,19 @@ public class ActividadPostearAnimal extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-            if (data != null && resultCode == Activity.RESULT_OK) {
-                BotonImagen.setImageURI(data.getData());
-                try {
-                    Bitmap imagen = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
-                    ImagenBase64 = FormateadorDeImagenes.ABase64(imagen);
-                    FotoAsignada = true;
+        if (data != null && resultCode == Activity.RESULT_OK) {
+            BotonImagen.setImageURI(data.getData());
+            try {
+                Bitmap imagen = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
+                ImagenBase64 = FormateadorDeImagenes.ABase64(imagen);
+                FotoAsignada = true;
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+
         }
     }
+}
 
 
