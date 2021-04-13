@@ -12,6 +12,8 @@ public class Mascota {
     String imagen;
     String descripcion;
     String ultima_posicion_conocida;
+    String fecha;
+    String hora;
 
     public Mascota(int pk, int edad, String usuario, int recompensa, String nombre, String especie, String raza, String color, String genero, String tamano, String imagen, String descripcion, String ultima_posicion_conocida) {
         this.pk = pk;
@@ -27,6 +29,7 @@ public class Mascota {
         this.imagen = imagen;
         this.descripcion = descripcion;
         this.ultima_posicion_conocida = ultima_posicion_conocida;
+
     }
 
     public String getUltima_posicion_conocida() {

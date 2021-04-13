@@ -156,7 +156,6 @@
         android:background="@color/design_default_color_background"
         android:backgroundTint="@color/design_default_color_surface"
         android:gravity="center"
-        android:onClick="Volver"
         android:text="@string/VolverLogin"
         android:textColor="#0b84aa"
         android:textSize="14sp"

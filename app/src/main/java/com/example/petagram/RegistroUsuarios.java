@@ -10,6 +10,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.petagram.Modelo.Usuario;
@@ -26,6 +27,7 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
     EditText confContrasena;
     EditText telefono;
     Button confirmar;
+    TextView login;
 
 
     @Override
@@ -39,6 +41,14 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
         confContrasena = findViewById(R.id.confContrasena);
         telefono = findViewById(R.id.telefono);
         confirmar = findViewById(R.id.confirmar);
+        login = findViewById(R.id.login);
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Volver();
+            }
+        });
 
         confirmar.setOnClickListener(new View.OnClickListener() {
             @Override
