@@ -104,21 +104,19 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
 
         output = output.trim();
 
-        if(output == "0"){
-            SesionDeUsuario.Login(uiEmail.getText().toString(), uiPassword.getText().toString(), LoginActivity.this);
+       switch (output){
+           case "0":
+               SesionDeUsuario.Login(uiEmail.getText().toString(), uiPassword.getText().toString(), LoginActivity.this);
+               Intent intent_listado = new Intent(LoginActivity.this, ActividadListadoMascotas.class);
+               startActivity(intent_listado);
+               break;
+           case "1":
+               Toast.makeText(LoginActivity.this, "Ingrese correctamente su Email", Toast.LENGTH_SHORT).show();
+               break;
+           case "2":
+               Toast.makeText(LoginActivity.this, "Su contraseña no es valida", Toast.LENGTH_SHORT).show();
 
-            Intent intent_listado = new Intent(LoginActivity.this, ActividadListadoMascotas.class);
-            startActivity(intent_listado);
-        }else {
-
-            if(output == "1"){
-                Toast.makeText(LoginActivity.this, "Ingrese correctamente su Email", Toast.LENGTH_SHORT).show();
-
-            } else{
-                Toast.makeText(LoginActivity.this, "Su contraseña no es valida", Toast.LENGTH_SHORT).show();
-            }
-        }
-
+       }
     }
 }
 
