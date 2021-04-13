@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import com.example.petagram.Modelo.Usuario;
 import com.example.petagram.Utilidades.AsyncResponse;
 import com.example.petagram.Utilidades.EnviarJSON;
+import com.example.petagram.Utilidades.SesionDeUsuario;
 import com.google.gson.Gson;
 
 public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse {
@@ -101,14 +103,24 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
     }
 
 
-    public void Volver(View view) {
+    public void Volver() {
         Intent intent = new Intent(RegistroUsuarios.this, LoginActivity.class);
         startActivity(intent);
     }
 
     @Override
     public void AlConseguirDato(String output) {
-
+        output = output.trim();
+        switch (output){
+            case "0":
+                Toast.makeText(this, "Se registro su usuario con exito", Toast.LENGTH_SHORT).show();
+                Volver();
+                break;
+            case "1":
+                Toast.makeText(this, "Ya existe un usuario con ese nombre", Toast.LENGTH_SHORT).show();
+                email.setError("Ya existe un usuario con ese nombre");
+                break;
+        }
     }
 }
 

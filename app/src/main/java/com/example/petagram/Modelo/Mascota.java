@@ -1,7 +1,8 @@
 package com.example.petagram.Modelo;
 
 public class Mascota {
-    int pk, edad, usuario, recompensa;
+    int pk, edad, recompensa;
+    String usuario;
     String nombre;
     String especie;
     String raza;
@@ -12,7 +13,7 @@ public class Mascota {
     String descripcion;
     String ultima_posicion_conocida;
 
-    public Mascota(int pk, int edad, int usuario, int recompensa, String nombre, String especie, String raza, String color, String genero, String tamano, String imagen, String descripcion, String ultima_posicion_conocida) {
+    public Mascota(int pk, int edad, String usuario, int recompensa, String nombre, String especie, String raza, String color, String genero, String tamano, String imagen, String descripcion, String ultima_posicion_conocida) {
         this.pk = pk;
         this.edad = edad;
         this.usuario = usuario;
@@ -84,11 +85,11 @@ public class Mascota {
         this.edad = edad;
     }
 
-    public int getUsuario() {
+    public String getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(int usuario) {
+    public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
 

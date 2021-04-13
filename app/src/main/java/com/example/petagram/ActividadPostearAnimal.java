@@ -1,41 +1,26 @@
 package com.example.petagram;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.example.petagram.Modelo.Mascota;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.petagram.Utilidades.FormateadorDeImagenes;
+import com.example.petagram.Utilidades.SesionDeUsuario;
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.FileSystem;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class ActividadPostearAnimal extends AppCompatActivity {
 
@@ -62,7 +47,7 @@ public class ActividadPostearAnimal extends AppCompatActivity {
             public void onClick(View v) {
                 if (ValidarCampos()) {
                     int edad, recompensa;
-                    String nombre, especie, raza, color, descripcion;
+                    String nombre, especie, raza, color, descripcion, usuario;
                     nombre = EditTextNombre.getText().toString();
                     especie = EditTextEspecie.getText().toString();
                     raza = EditTextRaza.getText().toString();
@@ -70,6 +55,7 @@ public class ActividadPostearAnimal extends AppCompatActivity {
                     descripcion = EditTextDescripcion.getText().toString();
                     edad = Integer.parseInt(EditTextEdad.getText().toString());
                     recompensa = Integer.parseInt(EditTextRecompensa.getText().toString());
+                    usuario = SesionDeUsuario.ConseguirEmailDeSesion(getApplicationContext());
 
                     //TODO: Resolver la direccion y el usuario
                     //Mascota mascota = new Mascota(edad, usuario, recompensa, nombre, especie, raza, color, genero, tamaño, ImagenBase64, descripcion);
@@ -87,10 +73,9 @@ public class ActividadPostearAnimal extends AppCompatActivity {
 
                 Intent BuscarGaleria = new Intent(Intent.ACTION_GET_CONTENT);
                 BuscarGaleria.setType("image/*");
-                BuscarGaleria.putExtra("SeUsoCamara", false);
+
 
                 Intent BuscarDocumentos = new Intent(Intent.ACTION_PICK);
-                BuscarDocumentos.putExtra("SeUsoCamara", false);
                 BuscarDocumentos.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
 
                 Intent SeleccionarAplicacion = Intent.createChooser(BuscarGaleria, "Seleccionar imagen de mascota");
