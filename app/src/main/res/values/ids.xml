@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="textView" type="id"></item>
-    <item name="nombre_usuario" type="id"></item>
-    <item name="email" type="id"></item>
-    <item name="contrasena" type="id"></item>
-    <item name="confContrasena" type="id"></item>
-    <item name="telefono" type="id"></item>
-    <item name="confirmar" type="id"></item>
-    <item name="link_to_login" type="id"></item>
-    <item name="register_error" type="id"></item>
+    <item name="textView" type="id" />
+    <item name="nombre_usuario" type="id" />
+    <item name="email" type="id" />
+    <item name="contrasena" type="id" />
+    <item name="confContrasena" type="id" />
+    <item name="telefono" type="id" />
+    <item name="confirmar" type="id" />
+    <item name="link_to_login" type="id" />
+    <item name="register_error" type="id" />
+    <item name="nameError" type="id" />
+    <item name="emailError" type="id" />
+    <item name="phoneError" type="id" />
+    <item name="passError" type="id" />
 </resources>
