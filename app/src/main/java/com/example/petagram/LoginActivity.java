@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.petagram.Modelo.JuntarDatosLogin;
 import com.example.petagram.Utilidades.AsyncResponse;
 import com.example.petagram.Utilidades.EnviarJSON;
+import com.example.petagram.Utilidades.SesionDeUsuario;
 import com.google.gson.Gson;
 
 import java.util.regex.Matcher;
@@ -100,6 +101,23 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
     //Aca responde el servidor
     @Override
     public void AlConseguirDato(String output) {
+
+        output = output.trim();
+
+        if(output == "0"){
+            SesionDeUsuario.Login(uiEmail.getText().toString(), uiPassword.getText().toString(), LoginActivity.this);
+
+            Intent intent_listado = new Intent(LoginActivity.this, ActividadListadoMascotas.class);
+            startActivity(intent_listado);
+        }else {
+
+            if(output == "1"){
+                Toast.makeText(LoginActivity.this, "Ingrese correctamente su Email", Toast.LENGTH_SHORT).show();
+
+            } else{
+                Toast.makeText(LoginActivity.this, "Su contraseña no es valida", Toast.LENGTH_SHORT).show();
+            }
+        }
 
     }
 }
