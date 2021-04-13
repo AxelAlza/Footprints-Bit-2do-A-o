@@ -43,7 +43,6 @@ public class EnviarJSON extends AsyncTask<String, Void, String > {
     @Override
     protected void onPostExecute(String s) {
         progressDialog.dismiss();
-        Toast.makeText(context, "Termine", Toast.LENGTH_SHORT).show();
         delegate.AlConseguirDato(s);
     }
 
