@@ -65,9 +65,9 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
                                     + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 
 
-                    Matcher mather = pattern.matcher(inputEmail);
+                    Matcher matcher = pattern.matcher(inputEmail);
 
-                    if (mather.find() == true) {
+                    if (matcher.find() == true) {
 
                         // Cambio de formato de datosLogin
                         JuntarDatosLogin datosLogin = new JuntarDatosLogin(inputEmail, inputPassword);
@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
                         Log.d("Convertidor", resultado);
 
                         // Enviando datosLogin al servidor como JSON
-                        EnviarJSON enviarDatosLogin = new EnviarJSON(LoginActivity.this, "https://aalza.pythonanywhere.com/usuario/loginmovil", resultado);
+                        EnviarJSON enviarDatosLogin = new EnviarJSON(LoginActivity.this, "https://aalza.pythonanywhere/usuario/loginmovil", resultado);
                         enviarDatosLogin.execute();
 
 

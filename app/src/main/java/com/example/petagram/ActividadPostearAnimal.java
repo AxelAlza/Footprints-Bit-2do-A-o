@@ -16,6 +16,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.petagram.Utilidades.CheckeaPermisos;
+import com.example.petagram.Utilidades.DevuelveGps;
 import com.example.petagram.Utilidades.FormateadorDeImagenes;
 import com.example.petagram.Utilidades.SesionDeUsuario;
 import com.google.android.material.textfield.TextInputEditText;
@@ -25,10 +27,9 @@ import java.io.IOException;
 public class ActividadPostearAnimal extends AppCompatActivity {
 
     TextInputEditText EditTextNombre, EditTextEspecie, EditTextRaza, EditTextColor, EditTextEdad, EditTextRecompensa, EditTextDescripcion, EditTextDireccion;
-    String genero, tamaño;
+    String genero = "", tamaño = "", ImagenBase64 = "";
     Button Postear;
-    ImageButton BotonImagen;
-    String ImagenBase64;
+    ImageButton ImageButtonImagen, ImageButtonMapa;
     Boolean FotoAsignada = false;
     public static final int PICK_IMAGE = 1;
 
@@ -39,6 +40,25 @@ public class ActividadPostearAnimal extends AppCompatActivity {
         InicializarViews();
         OnClickBotonImagen();
         OnClickPostear();
+        OnClickImageButtonMapa();
+    }
+
+    private void OnClickImageButtonMapa() {
+        ImageButtonMapa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckeaPermisos checkeaPermisos = new CheckeaPermisos(ActividadPostearAnimal.this);
+                checkeaPermisos.CheckearPermisosyPedirlos();
+                if (checkeaPermisos.EstoyHabilitado()) {
+                    DevuelveGps gps = new DevuelveGps(ActividadPostearAnimal.this);
+                    if (!gps.Trackeando()) {
+                        gps.EmpezarTrackeo();
+                    }
+                    EditTextDireccion.setText(gps.DevolverUltimaUbicacionConocida());
+
+                }
+            }
+        });
     }
 
     private void OnClickPostear() {
@@ -67,7 +87,7 @@ public class ActividadPostearAnimal extends AppCompatActivity {
     }
 
     private void OnClickBotonImagen() {
-        BotonImagen.setOnClickListener(new View.OnClickListener() {
+        ImageButtonImagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -95,7 +115,9 @@ public class ActividadPostearAnimal extends AppCompatActivity {
         EditTextDescripcion = findViewById(R.id.TvAgregarDescripcionMascota);
         EditTextDireccion = findViewById(R.id.TvAgregarDireccionMascota);
         Postear = findViewById(R.id.PostearMascota);
-        BotonImagen = findViewById(R.id.IbFotoMascota);
+        ImageButtonImagen = findViewById(R.id.IbFotoMascota);
+        ImageButtonMapa = findViewById(R.id.Mapa);
+
 
     }
 
@@ -200,7 +222,7 @@ public class ActividadPostearAnimal extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null && resultCode == Activity.RESULT_OK) {
-            BotonImagen.setImageURI(data.getData());
+            ImageButtonImagen.setImageURI(data.getData());
             try {
                 Bitmap imagen = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
                 ImagenBase64 = FormateadorDeImagenes.ABase64(imagen);
