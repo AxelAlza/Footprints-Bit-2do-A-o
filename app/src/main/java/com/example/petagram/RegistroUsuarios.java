@@ -58,7 +58,7 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
                     Usuario usuario = new Usuario(nombre_usuario.getText().toString(), email.getText().toString(), contrasena.getText().toString(), telefono.getText().toString());
                     Gson gson = new Gson();
                     String datos = gson.toJson(usuario);
-                    EnviarJSON datReg = new EnviarJSON(RegistroUsuarios.this, RutasUrl.RutaDePruebas+"/usuario/registrousuariomovil", datos);
+                    EnviarJSON datReg = new EnviarJSON(RegistroUsuarios.this, RutasUrl.RutaDeProduccion+"/usuario/registrousuariomovil", datos);
                     datReg.execute();
                 }
 

@@ -32,7 +32,7 @@ public class DemonstracionUtilidadTraeJson extends AppCompatActivity implements 
 
         ////Crear una instancia de la clase TraeJSON y pasarle la actividad donde se llama como parametro y la ruta de donde va a traer
         ////el JSON
-        TraeJSON traeJSON = new TraeJSON(this, RutasUrl.RutaDePruebas+"/mascota/json/");
+        TraeJSON traeJSON = new TraeJSON(this, RutasUrl.RutaDeProduccion+"/mascota/json/");
         ////Ejecutar la tarea de TraeJSON
         traeJSON.execute();
 

@@ -94,7 +94,7 @@ public class ActividadPostearAnimal extends AppCompatActivity implements AsyncRe
                     String fecha_y_hora = dateFormat.format(currentTime);
                     Mascota mascota = new Mascota(edad,recompensa,usuario,nombre,especie,raza,color,genero,tamaño,ImagenBase64,descripcion,direccion,fecha_y_hora);
                     String datos_a_enviar = gson.toJson(mascota);
-                    EnviarJSON enviarJSON = new EnviarJSON(ActividadPostearAnimal.this, RutasUrl.RutaDePruebas + "/mascota/agregarmascotamovil/",datos_a_enviar);
+                    EnviarJSON enviarJSON = new EnviarJSON(ActividadPostearAnimal.this, RutasUrl.RutaDeProduccion + "/mascota/agregarmascotamovil/",datos_a_enviar);
                     enviarJSON.execute();
                 } else {
                     Toast.makeText(ActividadPostearAnimal.this, "Hay campos sin rellenar", Toast.LENGTH_SHORT).show();

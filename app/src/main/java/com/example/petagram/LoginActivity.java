@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
                         Log.d("Convertidor", resultado);
 
                         // Enviando datosLogin al servidor como JSON
-                        EnviarJSON enviarDatosLogin = new EnviarJSON(LoginActivity.this, RutasUrl.RutaDePruebas+"/usuario/loginmovil", resultado);
+                        EnviarJSON enviarDatosLogin = new EnviarJSON(LoginActivity.this, RutasUrl.RutaDeProduccion+"/usuario/loginmovil", resultado);
                         enviarDatosLogin.execute();
 
 
