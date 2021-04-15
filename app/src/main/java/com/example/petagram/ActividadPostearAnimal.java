@@ -16,15 +16,26 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.petagram.Modelo.Mascota;
+import com.example.petagram.Utilidades.AsyncResponse;
 import com.example.petagram.Utilidades.CheckeaPermisos;
 import com.example.petagram.Utilidades.DevuelveGps;
+import com.example.petagram.Utilidades.EnviarJSON;
 import com.example.petagram.Utilidades.FormateadorDeImagenes;
+import com.example.petagram.Utilidades.RutasUrl;
 import com.example.petagram.Utilidades.SesionDeUsuario;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
-public class ActividadPostearAnimal extends AppCompatActivity {
+public class ActividadPostearAnimal extends AppCompatActivity implements AsyncResponse {
 
     TextInputEditText EditTextNombre, EditTextEspecie, EditTextRaza, EditTextColor, EditTextEdad, EditTextRecompensa, EditTextDescripcion, EditTextDireccion;
     String genero = "", tamaño = "", ImagenBase64 = "";
@@ -66,8 +77,9 @@ public class ActividadPostearAnimal extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (ValidarCampos()) {
+                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
                     int edad, recompensa;
-                    String nombre, especie, raza, color, descripcion, usuario;
+                    String nombre, especie, raza, color, descripcion, usuario , direccion;
                     nombre = EditTextNombre.getText().toString();
                     especie = EditTextEspecie.getText().toString();
                     raza = EditTextRaza.getText().toString();
@@ -75,10 +87,15 @@ public class ActividadPostearAnimal extends AppCompatActivity {
                     descripcion = EditTextDescripcion.getText().toString();
                     edad = Integer.parseInt(EditTextEdad.getText().toString());
                     recompensa = Integer.parseInt(EditTextRecompensa.getText().toString());
+                    direccion = EditTextDireccion.getText().toString();
                     usuario = SesionDeUsuario.ConseguirEmailDeSesion(getApplicationContext());
-
-                    //TODO: Resolver la direccion y el usuario
-                    //Mascota mascota = new Mascota(edad, usuario, recompensa, nombre, especie, raza, color, genero, tamaño, ImagenBase64, descripcion);
+                    Date currentTime = Calendar.getInstance(TimeZone.getDefault()).getTime();
+                    DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
+                    String fecha_y_hora = dateFormat.format(currentTime);
+                    Mascota mascota = new Mascota(edad,recompensa,usuario,nombre,especie,raza,color,genero,tamaño,ImagenBase64,descripcion,direccion,fecha_y_hora);
+                    String datos_a_enviar = gson.toJson(mascota);
+                    EnviarJSON enviarJSON = new EnviarJSON(ActividadPostearAnimal.this, RutasUrl.RutaDePruebas + "/mascota/agregarmascotamovil/",datos_a_enviar);
+                    enviarJSON.execute();
                 } else {
                     Toast.makeText(ActividadPostearAnimal.this, "Hay campos sin rellenar", Toast.LENGTH_SHORT).show();
                 }
@@ -93,11 +110,8 @@ public class ActividadPostearAnimal extends AppCompatActivity {
 
                 Intent BuscarGaleria = new Intent(Intent.ACTION_GET_CONTENT);
                 BuscarGaleria.setType("image/*");
-
-
                 Intent BuscarDocumentos = new Intent(Intent.ACTION_PICK);
                 BuscarDocumentos.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-
                 Intent SeleccionarAplicacion = Intent.createChooser(BuscarGaleria, "Seleccionar imagen de mascota");
                 SeleccionarAplicacion.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{BuscarDocumentos});
                 startActivityForResult(SeleccionarAplicacion, PICK_IMAGE);
@@ -233,6 +247,11 @@ public class ActividadPostearAnimal extends AppCompatActivity {
             }
 
         }
+    }
+
+    @Override
+    public void AlConseguirDato(String output) {
+
     }
 }
 

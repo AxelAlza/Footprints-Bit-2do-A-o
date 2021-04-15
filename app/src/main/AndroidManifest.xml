@@ -21,19 +21,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".RegistroUsuarios">
-
         </activity>
         <activity android:name=".LoginActivity">
-        </activity>
-        <activity android:name=".ActividadListadoMascotas" />
-        <activity android:name=".ActividadPostearAnimal">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ActividadListadoMascotas" />
+        <activity android:name=".ActividadPostearAnimal">
+
+        </activity>
         <activity android:name=".Demo.DemonstracionUtilidadEnviarJSON"  >
+
+        </activity>
+        <activity android:name=".Demo.DemonstracionUtilidadTraeJson">
 
         </activity>
     </application>

@@ -12,14 +12,14 @@ public class Mascota {
     String imagen;
     String descripcion;
     String ultima_posicion_conocida;
-    String fecha;
-    String hora;
+    String fecha_y_hora;
 
-    public Mascota(int pk, int edad, String usuario, int recompensa, String nombre, String especie, String raza, String color, String genero, String tamano, String imagen, String descripcion, String ultima_posicion_conocida) {
-        this.pk = pk;
+
+
+    public Mascota(int edad, int recompensa, String usuario, String nombre, String especie, String raza, String color, String genero, String tamano, String imagen, String descripcion, String ultima_posicion_conocida, String fecha_y_hora) {
         this.edad = edad;
-        this.usuario = usuario;
         this.recompensa = recompensa;
+        this.usuario = usuario;
         this.nombre = nombre;
         this.especie = especie;
         this.raza = raza;
@@ -29,7 +29,7 @@ public class Mascota {
         this.imagen = imagen;
         this.descripcion = descripcion;
         this.ultima_posicion_conocida = ultima_posicion_conocida;
-
+        this.fecha_y_hora = fecha_y_hora;
     }
 
     public String getUltima_posicion_conocida() {
@@ -38,6 +38,21 @@ public class Mascota {
 
     public void setUltima_posicion_conocida(String ultima_posicion_conocida) {
         this.ultima_posicion_conocida = ultima_posicion_conocida;
+    }
+    public String getTamano() {
+        return tamano;
+    }
+
+    public void setTamano(String tamano) {
+        this.tamano = tamano;
+    }
+
+    public String getFecha_y_hora() {
+        return fecha_y_hora;
+    }
+
+    public void setFecha_y_hora(String fecha_y_hora) {
+        this.fecha_y_hora = fecha_y_hora;
     }
 
     public int getPk() {

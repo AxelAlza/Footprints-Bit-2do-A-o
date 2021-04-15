@@ -53,16 +53,17 @@ public class TraeJSON extends AsyncTask<String, Void, String > {
             URL Url = new URL(Direccion);
             connection = (HttpURLConnection) Url.openConnection();
             connection.connect();
-            InputStream stream = connection.getInputStream();
-            reader = new BufferedReader(new InputStreamReader(stream));
-            StringBuilder buffer = new StringBuilder();
-            String line = "";
-            while ((line = reader.readLine()) != null) {
-                buffer.append(line).append("\n");
-                Log.d("Milog", line);
+            if (connection.getResponseCode() == 200) {
+                InputStream stream = connection.getInputStream();
+                reader = new BufferedReader(new InputStreamReader(stream));
+                StringBuilder buffer = new StringBuilder();
+                String line = "";
+                while ((line = reader.readLine()) != null) {
+                    buffer.append(line).append("\n");
+                    Log.d("Milog", line);
+                }
+                return buffer.toString();
             }
-            return buffer.toString();
-
             ///Si hay errores:
         } catch (IOException e) {
             e.printStackTrace();

@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.petagram.Modelo.JuntarDatosLogin;
 import com.example.petagram.Utilidades.AsyncResponse;
 import com.example.petagram.Utilidades.EnviarJSON;
+import com.example.petagram.Utilidades.RutasUrl;
 import com.example.petagram.Utilidades.SesionDeUsuario;
 import com.google.gson.Gson;
 
@@ -76,7 +77,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
                         Log.d("Convertidor", resultado);
 
                         // Enviando datosLogin al servidor como JSON
-                        EnviarJSON enviarDatosLogin = new EnviarJSON(LoginActivity.this, "https://aalza.pythonanywhere/usuario/loginmovil", resultado);
+                        EnviarJSON enviarDatosLogin = new EnviarJSON(LoginActivity.this, RutasUrl.RutaDePruebas+"/usuario/loginmovil", resultado);
                         enviarDatosLogin.execute();
 
 

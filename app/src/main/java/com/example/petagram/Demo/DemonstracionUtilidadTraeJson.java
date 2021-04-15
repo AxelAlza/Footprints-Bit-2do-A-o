@@ -3,9 +3,12 @@ package com.example.petagram.Demo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.petagram.R;
+import com.example.petagram.Utilidades.FormateadorDeImagenes;
+import com.example.petagram.Utilidades.RutasUrl;
 import com.example.petagram.Utilidades.TraeJSON;
 import com.example.petagram.Utilidades.AsyncResponse;
 import com.example.petagram.Modelo.Mascota;
@@ -18,16 +21,18 @@ import java.util.Collections;
 public class DemonstracionUtilidadTraeJson extends AppCompatActivity implements AsyncResponse {
 
     public TextView TvPrueba;
+    ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prueba);
         TvPrueba = findViewById(R.id.textView);
+        imageView = findViewById(R.id.imageView);
 
         ////Crear una instancia de la clase TraeJSON y pasarle la actividad donde se llama como parametro y la ruta de donde va a traer
         ////el JSON
-        TraeJSON traeJSON = new TraeJSON(this, "https://10.0.2.2/mascota/agregarmascotamovil/");
+        TraeJSON traeJSON = new TraeJSON(this, RutasUrl.RutaDePruebas+"/mascota/json/");
         ////Ejecutar la tarea de TraeJSON
         traeJSON.execute();
 
@@ -53,7 +58,11 @@ public class DemonstracionUtilidadTraeJson extends AppCompatActivity implements 
         Collections.addAll(arrayList,a);
 
         ///Hacer lo que quieras con el arraylist
-        TvPrueba.setText(arrayList.get(1).getNombre());
+        Mascota m = arrayList.get(0);
+
+        TvPrueba.setText(m.getNombre());
+
+        imageView.setImageBitmap(FormateadorDeImagenes.DesdeBase64(m.getImagen()));
 
     }
 }

@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.petagram.Modelo.Usuario;
 import com.example.petagram.Utilidades.AsyncResponse;
 import com.example.petagram.Utilidades.EnviarJSON;
+import com.example.petagram.Utilidades.RutasUrl;
 import com.example.petagram.Utilidades.SesionDeUsuario;
 import com.google.gson.Gson;
 
@@ -57,7 +58,7 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
                     Usuario usuario = new Usuario(nombre_usuario.getText().toString(), email.getText().toString(), contrasena.getText().toString(), telefono.getText().toString());
                     Gson gson = new Gson();
                     String datos = gson.toJson(usuario);
-                    EnviarJSON datReg = new EnviarJSON(RegistroUsuarios.this, "https://aalza.pythonanywhere.com/usuario/registrousuariomovil", datos);
+                    EnviarJSON datReg = new EnviarJSON(RegistroUsuarios.this, RutasUrl.RutaDePruebas+"/usuario/registrousuariomovil", datos);
                     datReg.execute();
                 }
 
