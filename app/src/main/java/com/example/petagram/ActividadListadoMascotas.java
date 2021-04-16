@@ -1,19 +1,21 @@
 package com.example.petagram;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -28,6 +30,7 @@ public class ActividadListadoMascotas extends AppCompatActivity {
 
     private ListView ListView_ListMascota;
     String imagen,nombre,especie,raza,color,genero,tamano,descripcion,ultima_posicion_conocida,fecha_denuncia;
+    FloatingActionButton FabAgregarMascota;
 
     private static String JSON_URL="https://aalza.pythonanywhere.com/mascota/json/";
     //="https://aalza.pythonanywhere.com/mascota/json/";
@@ -40,6 +43,14 @@ public class ActividadListadoMascotas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listadomascotas);
 
+        FabAgregarMascota = findViewById(R.id.fabAgregarMascota);
+        FabAgregarMascota.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActividadListadoMascotas.this, ActividadPostearAnimal.class);
+                startActivity(intent);
+            }
+        });
         mascotaList = new ArrayList<>();
         ListView_ListMascota = findViewById(R.id.listview);
 
@@ -66,7 +77,7 @@ public class ActividadListadoMascotas extends AppCompatActivity {
         protected String doInBackground(String... strings) {
 
             StringBuilder current = new StringBuilder("{ListadoDeMascotas:");
-           // StringBuilder current = new StringBuilder();
+            // StringBuilder current = new StringBuilder();
 
             try {
                 URL url;
@@ -105,7 +116,7 @@ public class ActividadListadoMascotas extends AppCompatActivity {
 
         @Override
         protected void onPostExecute (String s){
-             String arreglofinal = "}";
+            String arreglofinal = "}";
             String currentfinal = s.concat(arreglofinal);
 
             try {
@@ -135,7 +146,7 @@ public class ActividadListadoMascotas extends AppCompatActivity {
                     ListadoDeMascotas.put("TvGenero",genero);
                     ListadoDeMascotas.put("TvAgregarEdadMascota",tamano);
                     ListadoDeMascotas.put("TvAgregarDescripcionMascota",descripcion);
-                   // ListadoDeMascotas.put("tvultima_posicion_conocida",ultima_posicion_conocida);
+                    // ListadoDeMascotas.put("tvultima_posicion_conocida",ultima_posicion_conocida);
                     ListadoDeMascotas.put("fecha_y_hora",fecha_denuncia);
                     mascotaList.add(ListadoDeMascotas);
                 }
