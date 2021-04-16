@@ -36,6 +36,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         uiEmail = findViewById(R.id.etEmail);
         uiPassword = findViewById(R.id.etPassword);
         uiLogin = findViewById(R.id.btnLogin);
@@ -95,6 +96,16 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
 
                 Intent intent = new Intent(LoginActivity.this, RegistroUsuarios.class);
                 startActivity(intent);
+            }
+        });
+
+        uiNewPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Lo mando a la actividad RecoverPassword
+                Intent intent = new Intent(LoginActivity.this, RecoverPassword.class);
+                startActivity(intent);
+
             }
         });
     }
