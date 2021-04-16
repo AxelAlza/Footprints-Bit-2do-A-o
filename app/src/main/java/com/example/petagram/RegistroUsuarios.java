@@ -81,37 +81,66 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
     Boolean Confirmar() {
 
         boolean validar = true;
+        // chequear para validar el nombre de usuario.
 
+        if (isEmpty (nombre_usuario)) {
 
-        if (isEmpty(nombre_usuario)) {
-            Toast t = Toast.makeText(this, "¡Debe ingresar el nombre para registrarse!", Toast.LENGTH_SHORT);
-            t.show();
+            nombre_usuario.setError("¡Debe ingresar el nombre para registrarse!");
             validar = false;
         }
 
-        if (!isEmail(email)) {
-            email.setError("¡Ingrese un email valido!");
+        if (email.getText ().length () == 0) {
+            email.setError("Introduce un email");
+
+        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher (email.getText ().toString ().trim ()).matches ()) {
+            Toast.makeText (getApplicationContext (), "Por favor, introduce una dirección de correo electrónico válida!!!", Toast.LENGTH_SHORT).show ();
             validar = false;
         }
 
-        if (isEmpty(contrasena)) {
-            contrasena.setError("¡Ingrese un una contraseña válida!");
+
+        // chequear para validar la contraseña.
+        if (isEmpty (contrasena)) {
+            contrasena.setError ("¡Ingrese un una contraseña válida!");
+            validar = false;
+        }else if (contrasena.getText().length() < 6) {
+            contrasena.setError(getResources().getString(R.string.error_invalid_password));
             validar = false;
         }
 
-        if (isEmpty(confContrasena)) {
-            confContrasena.setError("¡Ingrese un una contraseña válida!");
+
+        // chequear para validar la confirmación de la contraseña.
+        if (isEmpty (confContrasena)) {
+            confContrasena.setError ("¡Ingrese un una contraseña válida!");
+            validar = false;
+        }else if (confContrasena.getText().length() < 6) {
+            confContrasena.setError(getResources().getString(R.string.error_invalid_password2));
             validar = false;
         }
 
-        if (isEmpty(telefono)) {
-            telefono.setError("¡Ingrese un número válido!");
+
+        //implementar que coincidan las contraseñas (FALTA)
+
+
+
+        // chequear para validar el número de teléfono.
+        if (isEmpty (telefono)) {
+            telefono.setError ("¡Ingrese un número válido!");
             validar = false;
+        }else {
+            if (telefono.length () < 6 || telefono.length () >13) {
+                telefono.setError(getResources().getString(R.string.phone_error2));
+                validar = false;
+            }
         }
 
+        Toast t = Toast.makeText (this, "Registro en proceso....", Toast.LENGTH_SHORT);
+        t.show ();
         return validar;
 
     }
+
+
+
 
 
     public void Volver() {
@@ -132,6 +161,9 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
                 email.setError("Ya existe un usuario con ese nombre");
                 break;
         }
+    }
+
+    public void confirmar(View view) {
     }
 }
 

@@ -6,7 +6,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:orientation="vertical"
     android:padding="20dip"
     android:paddingTop="20dp"
@@ -17,13 +16,12 @@
         android:id="@+id/ivLogoFootprints"
         android:layout_width="141dp"
         android:layout_height="56dp"
+        android:layout_marginTop="36dp"
         android:contentDescription="@string/todo"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/nombre_usuario"
-        app:layout_constraintHorizontal_bias="0.447"
+        app:layout_constraintHorizontal_bias="0.439"
         app:layout_constraintStart_toStartOf="@+id/nombre_usuario"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.118"
         app:srcCompat="@drawable/logo_footprints" />
 
     <TextView
@@ -31,7 +29,7 @@
         android:layout_width="195dp"
         android:layout_height="31dp"
         android:layout_gravity="center_horizontal|center_vertical"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="4dp"
         android:text="@string/registrarse"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="18sp"
@@ -60,7 +58,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivLogoFootprints"
-        app:layout_constraintVertical_bias="1.0"
         tools:ignore="MissingConstraints" />
 
     <EditText
@@ -104,11 +101,12 @@
 
     <EditText
         android:id="@+id/confContrasena"
-        android:layout_width="370dp"
-        android:layout_height="36dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:autofillHints=""
         android:drawableStart="@drawable/baseline_lock_black_24dp"
+        android:drawableEnd="@drawable/ic_baseline_visibility_off_24"
         android:ems="10"
         android:gravity="center_horizontal"
         android:hint="@string/cc"
@@ -121,8 +119,8 @@
 
     <EditText
         android:id="@+id/telefono"
-        android:layout_width="373dp"
-        android:layout_height="50dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:autofillHints=""
         android:drawableStart="@drawable/baseline_phone_black_24dp"
@@ -134,37 +132,38 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/confContrasena"
         app:layout_constraintTop_toBottomOf="@id/confContrasena"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"/>
 
     <Button
         android:id="@+id/confirmar"
-        android:layout_width="156dp"
-        android:layout_height="72dp"
-        android:layout_marginBottom="52dp"
-        android:onClick="Confirmar"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="68dp"
+        android:backgroundTint="@color/design_default_color_background"
+        android:onClick="confirmar"
         android:text="@string/confirmar"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/telefono"
+        app:layout_constraintHorizontal_bias="0.425"
         app:layout_constraintStart_toStartOf="@+id/telefono"
-        tools:ignore="OnClick" />
+        tools:ignore="OnClick"/>
 
     <TextView
         android:id="@+id/login"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginBottom="12dp"
-        android:background="@color/design_default_color_background"
-        android:backgroundTint="@color/design_default_color_surface"
+        android:backgroundTint="@color/design_default_color_background"
         android:gravity="center"
         android:text="@string/VolverLogin"
-        android:textColor="#0b84aa"
+        android:textColor="@color/colorPrimary"
         android:textSize="14sp"
         android:typeface="monospace"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/confirmar"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/confirmar"
         app:layout_constraintTop_toBottomOf="@+id/confirmar"
-        app:layout_constraintVertical_bias="0.789"
+        app:layout_constraintVertical_bias="0.929"
         tools:ignore="MissingConstraints,OnClick" />
 </androidx.constraintlayout.widget.ConstraintLayout>
