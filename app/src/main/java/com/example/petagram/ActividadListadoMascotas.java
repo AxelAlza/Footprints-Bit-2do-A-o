@@ -27,9 +27,9 @@ import java.util.HashMap;
 public class ActividadListadoMascotas extends AppCompatActivity {
 
     private ListView ListView_ListMascota;
-    String nombre,especie,raza,color,genero,tamano,descripcion,ultima_posicion_conocida,fecha_y_hora;
+    String imagen,nombre,especie,raza,color,genero,tamano,descripcion,ultima_posicion_conocida,fecha_denuncia;
 
-    private static String JSON_URL="https://run.mocky.io/v3/d56853a9-cf5d-44fb-ba4c-323aaf0985da";
+    private static String JSON_URL="https://aalza.pythonanywhere.com/mascota/json/";
     //="https://aalza.pythonanywhere.com/mascota/json/";
     androidx.appcompat.widget.Toolbar TbListaMascotas;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -65,8 +65,8 @@ public class ActividadListadoMascotas extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
 
-            //StringBuilder current = new StringBuilder("{ListadoDeMascotas:");
-            StringBuilder current = new StringBuilder();
+            StringBuilder current = new StringBuilder("{ListadoDeMascotas:");
+           // StringBuilder current = new StringBuilder();
 
             try {
                 URL url;
@@ -105,16 +105,16 @@ public class ActividadListadoMascotas extends AppCompatActivity {
 
         @Override
         protected void onPostExecute (String s){
-            // String arreglofinal = "}";
-            //String currentfinal = s.concat(arreglofinal);
+             String arreglofinal = "}";
+            String currentfinal = s.concat(arreglofinal);
 
             try {
-                JSONObject jsonObject = new JSONObject(s);
+                JSONObject jsonObject = new JSONObject(currentfinal);
                 JSONArray jsonArray = jsonObject.getJSONArray("ListadoDeMascotas");
 
                 for (int i = 0; i<jsonArray.length();i++){
                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                    nombre = jsonObject1.getString("nombre");
+                    imagen = jsonObject1.getString("imagen");
                     nombre = jsonObject1.getString("nombre");
                     especie = jsonObject1.getString("especie");
                     raza = jsonObject1.getString("raza");
@@ -123,10 +123,11 @@ public class ActividadListadoMascotas extends AppCompatActivity {
                     tamano = jsonObject1.getString("tamano");
                     descripcion = jsonObject1.getString("descripcion");
                     //ultima_posicion_conocida = jsonObject1.getString("ultima_posicion_conocida");
-                    fecha_y_hora = jsonObject1.getString("fecha_y_hora");
+                    fecha_denuncia = jsonObject1.getString("fecha_denuncia");
                     //Hashmap
                     HashMap<String,String> ListadoDeMascotas = new HashMap<>();
-                    ListadoDeMascotas.put("ImvMascota", nombre);
+
+                    ListadoDeMascotas.put("ImvMascota", imagen);
                     ListadoDeMascotas.put("TvNombreMascota", nombre);
                     ListadoDeMascotas.put("TvEspecieMascota",especie);
                     ListadoDeMascotas.put("TvRazaMascota",raza);
@@ -135,7 +136,7 @@ public class ActividadListadoMascotas extends AppCompatActivity {
                     ListadoDeMascotas.put("TvAgregarEdadMascota",tamano);
                     ListadoDeMascotas.put("TvAgregarDescripcionMascota",descripcion);
                    // ListadoDeMascotas.put("tvultima_posicion_conocida",ultima_posicion_conocida);
-                    ListadoDeMascotas.put("fecha_y_hora",fecha_y_hora);
+                    ListadoDeMascotas.put("fecha_y_hora",fecha_denuncia);
                     mascotaList.add(ListadoDeMascotas);
                 }
             } catch (JSONException e) {
