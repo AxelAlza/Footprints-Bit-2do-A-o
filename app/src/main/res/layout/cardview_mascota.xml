@@ -4,7 +4,7 @@
     xmlns:card_view="http://schemas.android.com/tools"
     android:id="@+id/cardviewMascota"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="match_parent"
     android:layout_marginTop="6dp"
     android:layout_marginBottom="6dp"
     android:elevation="6dp"
@@ -13,87 +13,120 @@
 
     >
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="113dp"
-        android:orientation="horizontal"
-        android:padding="6dp">
+        android:layout_height="match_parent"
+        android:padding="8dp">
 
         <ImageView
             android:id="@+id/ImvMascota"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/dog1" />
+            android:layout_width="120dp"
+            android:layout_height="90dp"
+            android:padding="4dp" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/TvNombreMascota"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="6dp">
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/ImvMascota"
+            android:text="Nombre Mascota"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textColor="#000000" />
 
-            <TextView
-                android:id="@+id/TvNombreMascota"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/mascotagenerica">
-
-            </TextView>
-
-
-            <TextView
-                android:id="@+id/TvEspecieMascota"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Especie">
-
-            </TextView>
-
-
-            <TextView
-                android:id="@+id/TvRazaMascota"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Raza"></TextView>
-
-            <TextView
-                android:id="@+id/TvColorMascota"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Color" />
-        </LinearLayout>
-
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/TvEspecieMascota"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="6dp">
+            android:layout_below="@id/TvNombreMascota"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="38dp"
+            android:layout_toRightOf="@id/ImvMascota"
+            android:text="Especie"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
 
-            <TextView
-                android:id="@+id/TvDireccionMascota"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Direccion" />
+        <TextView
+            android:id="@+id/TvRazaMascota"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/TvEspecieMascota"
+            android:layout_marginLeft="6dp"
+            android:layout_marginTop="-52dp"
+            android:layout_toRightOf="@id/ImvMascota"
+            android:background="@color/colorPrimary"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="raza"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+            android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/TvColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/TvRazaMascota"
+            android:layout_marginLeft="111dp"
+            android:layout_marginTop="-20dp"
+            android:layout_toRightOf="@id/TvAgregarEdadMascota"
+            android:background="@color/colorPrimary"
+            android:text="Color"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/TvRecompensa"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Recompensa" />
+        <TextView
+            android:id="@+id/TvGenero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/TvColor"
+            android:layout_marginLeft="-186dp"
+            android:layout_marginTop="11dp"
+            android:layout_toRightOf="@id/TvColor"
+            android:background="@color/colorPrimary"
+            android:text="Genero"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+            android:textStyle="bold" />
 
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                app:srcCompat="@android:drawable/ic_menu_share" />
+        <TextView
+            android:id="@+id/TvAgregarEdadMascota"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/TvColor"
+            android:layout_marginLeft="20dp"
 
-        </LinearLayout>
+            android:layout_marginTop="33dp"
+            android:layout_toRightOf="@id/ImvMascota"
+            android:text="edad" />
 
+        <TextView
+            android:id="@+id/TvAgregarDescripcionMascota"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/TvAgregarEdadMascota"
+            android:layout_gravity="center"
 
-    </LinearLayout>
+            android:layout_marginLeft="-110dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/ImvMascota"
+            android:text="Descripcion" />
+
+        <EditText
+            android:id="@+id/fecha_y_hora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/TvAgregarEdadMascota"
+            android:layout_marginLeft="65dp"
+            android:layout_marginTop="-24dp"
+            android:layout_toRightOf="@id/ImvMascota"
+            android:ems="10"
+            android:inputType="date" />
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/tvultima_posicion_conocida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/TvAgregarDescripcionMascota"
+            android:text="mapa" />
+    </RelativeLayout>
+
 
 </androidx.cardview.widget.CardView>

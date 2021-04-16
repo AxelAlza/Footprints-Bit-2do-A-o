@@ -27,9 +27,9 @@ import java.util.HashMap;
 public class ActividadListadoMascotas extends AppCompatActivity {
 
     private ListView ListView_ListMascota;
-    String nombre, raza,genero,edad,descripcion,ciudad,barrio;
+    String nombre,especie,raza,color,genero,tamano,descripcion,ultima_posicion_conocida,fecha_y_hora;
 
-    private static String JSON_URL="https://run.mocky.io/v3/5ab470aa-3d00-4899-90c6-62eeecf12b6f";
+    private static String JSON_URL="https://run.mocky.io/v3/d56853a9-cf5d-44fb-ba4c-323aaf0985da";
     //="https://aalza.pythonanywhere.com/mascota/json/";
     androidx.appcompat.widget.Toolbar TbListaMascotas;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -114,24 +114,28 @@ public class ActividadListadoMascotas extends AppCompatActivity {
 
                 for (int i = 0; i<jsonArray.length();i++){
                     JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-
                     nombre = jsonObject1.getString("nombre");
+                    nombre = jsonObject1.getString("nombre");
+                    especie = jsonObject1.getString("especie");
                     raza = jsonObject1.getString("raza");
+                    color = jsonObject1.getString("color");
                     genero = jsonObject1.getString("genero");
-                    edad = jsonObject1.getString("edad");
+                    tamano = jsonObject1.getString("tamano");
                     descripcion = jsonObject1.getString("descripcion");
-                    ciudad = jsonObject1.getString("ciudad");
-                    barrio = jsonObject1.getString("barrio");
+                    //ultima_posicion_conocida = jsonObject1.getString("ultima_posicion_conocida");
+                    fecha_y_hora = jsonObject1.getString("fecha_y_hora");
                     //Hashmap
                     HashMap<String,String> ListadoDeMascotas = new HashMap<>();
+                    ListadoDeMascotas.put("ImvMascota", nombre);
                     ListadoDeMascotas.put("TvNombreMascota", nombre);
+                    ListadoDeMascotas.put("TvEspecieMascota",especie);
                     ListadoDeMascotas.put("TvRazaMascota",raza);
-                    ListadoDeMascotas.put("genero",genero);
-                    ListadoDeMascotas.put("edad",edad);
-                    ListadoDeMascotas.put("descripcion",descripcion);
-                    ListadoDeMascotas.put("ciudad",ciudad);
-                    ListadoDeMascotas.put("barrio",barrio);
-
+                    ListadoDeMascotas.put("TvColor",color);
+                    ListadoDeMascotas.put("TvGenero",genero);
+                    ListadoDeMascotas.put("TvAgregarEdadMascota",tamano);
+                    ListadoDeMascotas.put("TvAgregarDescripcionMascota",descripcion);
+                   // ListadoDeMascotas.put("tvultima_posicion_conocida",ultima_posicion_conocida);
+                    ListadoDeMascotas.put("fecha_y_hora",fecha_y_hora);
                     mascotaList.add(ListadoDeMascotas);
                 }
             } catch (JSONException e) {
@@ -144,8 +148,11 @@ public class ActividadListadoMascotas extends AppCompatActivity {
                     ActividadListadoMascotas.this,
                     mascotaList,
                     R.layout.cardview_mascota,
-                    new String[] {"TvNombreMascota", "TvRazaMascota","genero","edad","descripcion","ciudad","barrio"},
-                    new int[] {R.id.TvNombreMascota,R.id.TvRazaMascota});
+                    new String[] {"ImvMascota","TvNombreMascota", "TvEspecieMascota","TvRazaMascota","TvColor","TvGenero",
+                            "TvAgregarEdadMascota","TvAgregarDescripcionMascota","fecha_y_hora"},
+                    new int[] {R.id.ImvMascota,R.id.TvNombreMascota,R.id.TvEspecieMascota,R.id.TvRazaMascota,
+                            R.id.TvColor,R.id.TvGenero,R.id.TvAgregarEdadMascota,R.id.TvAgregarDescripcionMascota,
+                            R.id.fecha_y_hora});
 
 
             ListView_ListMascota.setAdapter(adapter);
