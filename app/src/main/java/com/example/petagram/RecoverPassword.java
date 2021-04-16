@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.petagram.Modelo.JuntarDatosLogin;
 import com.example.petagram.Utilidades.AsyncResponse;
 import com.example.petagram.Utilidades.EnviarJSON;
+import com.example.petagram.Utilidades.RutasUrl;
 import com.google.gson.Gson;
 
 import java.util.regex.Matcher;
@@ -57,12 +58,13 @@ public class RecoverPassword extends AppCompatActivity implements AsyncResponse 
                     if (mather.find() == true) {
 
                         // Cambio de formato de datosLogin // PRONTO
-                        Gson Convertidor = new Gson();
-                        String resultado = Convertidor.toJson(inputEmailRecover);
+                        Gson convertidor = new Gson();
+                        JuntarDatosLogin EmailRecovery = new JuntarDatosLogin(inputEmailRecover,"vacia");
+                        String resultado = convertidor.toJson(EmailRecovery);
                         Log.d("Convertidor", resultado);
 
                         // Enviando datosLogin al servidor como JSON // FALTA AGREGAR RUTA PARA TRABAJAR LOS DATOS
-                        EnviarJSON enviarRecoverPassword = new EnviarJSON(RecoverPassword.this, "https://aalza.pythonanywhere.com/usuario/loginmovil", resultado);
+                        EnviarJSON enviarRecoverPassword = new EnviarJSON(RecoverPassword.this, RutasUrl.RutaDeProduccion+"/usuario/recoverpasswordmovil", resultado);
                         enviarRecoverPassword.execute();
 
 
