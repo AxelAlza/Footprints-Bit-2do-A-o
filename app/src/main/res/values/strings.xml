@@ -45,8 +45,6 @@
 
 
 
-
-
     <!-- activity_login -->
     <string name="enter_email">Correo Electronico</string>
     <string name="enter_contraseña">Contraseña</string>

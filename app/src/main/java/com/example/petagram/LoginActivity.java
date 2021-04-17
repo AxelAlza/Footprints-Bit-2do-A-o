@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
 
                     Matcher matcher = pattern.matcher(inputEmail);
 
-                    if (matcher.find() == true) {
+                    if (matcher.find ()) {
 
                         // Cambio de formato de datosLogin
                         JuntarDatosLogin datosLogin = new JuntarDatosLogin(inputEmail, inputPassword);

@@ -20,6 +20,14 @@ import com.example.petagram.Utilidades.RutasUrl;
 import com.example.petagram.Utilidades.SesionDeUsuario;
 import com.google.gson.Gson;
 
+import java.io.File;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+;
+
+
+
+
 public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse {
 
     EditText nombre_usuario;
@@ -54,6 +62,9 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
         confirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
                 if (Confirmar()) {
                     Usuario usuario = new Usuario(nombre_usuario.getText().toString(), email.getText().toString(), contrasena.getText().toString(), telefono.getText().toString());
                     Gson gson = new Gson();
@@ -78,7 +89,7 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
     }
 
 
-    Boolean Confirmar() {
+    <function> Boolean Confirmar() {
 
         boolean validar = true;
         // chequear para validar el nombre de usuario.
@@ -99,6 +110,8 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
 
 
         // chequear para validar la contraseña.
+
+
         if (isEmpty (contrasena)) {
             contrasena.setError ("¡Ingrese un una contraseña válida!");
             validar = false;
@@ -106,7 +119,6 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
             contrasena.setError(getResources().getString(R.string.error_invalid_password));
             validar = false;
         }
-
 
         // chequear para validar la confirmación de la contraseña.
         if (isEmpty (confContrasena)) {
@@ -138,10 +150,6 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
         return validar;
 
     }
-
-
-
-
 
     public void Volver() {
         Intent intent = new Intent(RegistroUsuarios.this, LoginActivity.class);

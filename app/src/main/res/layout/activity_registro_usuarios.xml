@@ -117,6 +117,8 @@
         app:layout_constraintTop_toTopOf="@+id/contrasena"
         tools:ignore="MissingConstraints" />
 
+
+
     <EditText
         android:id="@+id/telefono"
         android:layout_width="0dp"
