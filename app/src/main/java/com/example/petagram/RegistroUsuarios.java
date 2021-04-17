@@ -138,11 +138,9 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
         if (isEmpty (telefono)) {
             telefono.setError ("¡Ingrese un número válido!");
             validar = false;
-        }else {
-            if (telefono.length () < 6 || telefono.length () >13) {
-                telefono.setError(getResources().getString(R.string.phone_error2));
-                validar = false;
-            }
+        }else if(telefono.length () < 6 || telefono.length () >13) {
+            telefono.setError("¡Ha ingresado un número inválido!");
+            validar = false;
         }
 
         Toast t = Toast.makeText (this, "Registro en proceso....", Toast.LENGTH_SHORT);
