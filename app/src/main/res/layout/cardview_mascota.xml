@@ -34,12 +34,15 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             android:textColor="#000000" />
 
-        <TextView
+        <EditText
             android:id="@+id/TVusuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="159dp"
-            android:layout_toRightOf="@id/ImvMascota"
+            android:layout_alignTop="@+id/tvultima_posicion_conocida"
+            android:layout_marginLeft="-137dp"
+            android:layout_marginTop="-124dp"
+            android:layout_toRightOf="@id/tvultima_posicion_conocida"
+            android:ems="10"
             android:text="usuario"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             android:textColor="#000000" />
@@ -49,8 +52,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/TvNombreMascota"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="38dp"
+            android:layout_marginLeft="166dp"
+            android:layout_marginTop="60dp"
             android:layout_toRightOf="@id/ImvMascota"
             android:text="Especie"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
@@ -75,9 +78,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/TvRazaMascota"
-            android:layout_marginLeft="111dp"
-            android:layout_marginTop="-20dp"
-            android:layout_toRightOf="@id/TvAgregarEdadMascota"
+            android:layout_marginLeft="171dp"
+            android:layout_marginTop="-29dp"
+            android:layout_toRightOf="@id/ImvMascota"
             android:text="Color"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
             android:textColor="@color/cardview_dark_background"
@@ -88,8 +91,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/TvColor"
-            android:layout_marginLeft="-186dp"
-            android:layout_marginTop="11dp"
+            android:layout_marginLeft="-197dp"
+            android:layout_marginTop="21dp"
             android:layout_toRightOf="@id/TvColor"
             android:text="Genero"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
@@ -101,11 +104,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/TvColor"
-            android:layout_marginLeft="20dp"
-
-            android:layout_marginTop="33dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="50dp"
             android:layout_toRightOf="@id/ImvMascota"
             android:text="edad" />
+
+        <TextView
+            android:id="@+id/TvAgregarTamano"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/TvColor"
+            android:layout_marginLeft="122dp"
+            android:layout_marginTop="49dp"
+            android:layout_toRightOf="@id/ImvMascota"
+            android:text="Tamano" />
 
         <TextView
             android:id="@+id/TvAgregarDescripcionMascota"
@@ -113,28 +125,41 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/TvAgregarEdadMascota"
             android:layout_gravity="center"
-            android:layout_marginLeft="-110dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="-96dp"
+            android:layout_marginTop="98dp"
             android:layout_toRightOf="@id/ImvMascota"
             android:text="Descripcion" />
+
+        <TextView
+            android:id="@+id/TvAgregarrecompensa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TVusuario"
+            android:layout_gravity="center"
+            android:layout_marginLeft="166dp"
+            android:layout_marginTop="163dp"
+            android:text="recompensa" />
 
         <EditText
             android:id="@+id/fecha_y_hora"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/TvAgregarEdadMascota"
-            android:layout_marginLeft="65dp"
-            android:layout_marginTop="-24dp"
+            android:layout_marginLeft="-124dp"
+            android:layout_marginTop="30dp"
             android:layout_toRightOf="@id/ImvMascota"
-            android:ems="10"
-            android:inputType="date" />
+            android:ems="10" />
 
-        <com.google.android.gms.maps.MapView
+        <EditText
             android:id="@+id/tvultima_posicion_conocida"
-            android:layout_width="wrap_content"
+            android:layout_width="387dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/TvAgregarDescripcionMascota"
-            android:text="mapa" />
+            android:layout_below="@id/TvAgregarEdadMascota"
+            android:layout_marginTop="136dp"
+            android:ems="10"
+            android:text="Ultima Posicion" />
+
+
     </RelativeLayout>
 
 
