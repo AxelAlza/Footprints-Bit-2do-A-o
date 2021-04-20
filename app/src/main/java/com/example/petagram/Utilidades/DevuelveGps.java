@@ -81,7 +81,6 @@ public class DevuelveGps  {
         ///Hay que fijarse en cada proveedor de ubicacion, tambien fijarse cual es la mas aproximada
         List<String> Proveedores = ManagerDeUbicacion.getProviders(true);
         Location MejorUbicacion = null;
-        Log.d("Milog", "getUbicacion: "+Proveedores);
         for (String Proveedor : Proveedores) {
             Location l = ManagerDeUbicacion.getLastKnownLocation(Proveedor);
             //Si un proveedor no puede darme una ubicacion ignoro el proveedor

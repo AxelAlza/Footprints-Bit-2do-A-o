@@ -1,6 +1,8 @@
 package com.example.petagram.Modelo;
 
-public class Mascota {
+import java.io.Serializable;
+
+public class Mascota implements Serializable {
     int pk, edad, recompensa;
     String usuario;
     String nombre;
@@ -12,7 +14,7 @@ public class Mascota {
     String imagen;
     String descripcion;
     String ultima_posicion_conocida;
-    String fecha_y_hora;
+    String fecha_denuncia;
 
 
 
@@ -29,66 +31,12 @@ public class Mascota {
         this.imagen = imagen;
         this.descripcion = descripcion;
         this.ultima_posicion_conocida = ultima_posicion_conocida;
-        this.fecha_y_hora = fecha_y_hora;
+        this.fecha_denuncia = fecha_y_hora;
     }
 
-    public String getUltima_posicion_conocida() {
-        return ultima_posicion_conocida;
-    }
-
-    public void setUltima_posicion_conocida(String ultima_posicion_conocida) {
-        this.ultima_posicion_conocida = ultima_posicion_conocida;
-    }
-    public String getTamano() {
-        return tamano;
-    }
-
-    public void setTamano(String tamano) {
-        this.tamano = tamano;
-    }
-
-    public String getFecha_y_hora() {
-        return fecha_y_hora;
-    }
-
-    public void setFecha_y_hora(String fecha_y_hora) {
-        this.fecha_y_hora = fecha_y_hora;
-    }
 
     public int getPk() {
         return pk;
-    }
-
-    public int getRecompensa() {
-        return recompensa;
-    }
-
-    public void setRecompensa(int recompensa) {
-        this.recompensa = recompensa;
-    }
-
-    public String getEspecie() {
-        return especie;
-    }
-
-    public void setEspecie(String especie) {
-        this.especie = especie;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public String getTamaño() {
-        return tamano;
-    }
-
-    public void setTamaño(String tamaño) {
-        this.tamano = tamaño;
     }
 
     public void setPk(int pk) {
@@ -101,6 +49,14 @@ public class Mascota {
 
     public void setEdad(int edad) {
         this.edad = edad;
+    }
+
+    public int getRecompensa() {
+        return recompensa;
+    }
+
+    public void setRecompensa(int recompensa) {
+        this.recompensa = recompensa;
     }
 
     public String getUsuario() {
@@ -119,6 +75,14 @@ public class Mascota {
         this.nombre = nombre;
     }
 
+    public String getEspecie() {
+        return especie;
+    }
+
+    public void setEspecie(String especie) {
+        this.especie = especie;
+    }
+
     public String getRaza() {
         return raza;
     }
@@ -127,12 +91,28 @@ public class Mascota {
         this.raza = raza;
     }
 
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
     public String getGenero() {
         return genero;
     }
 
     public void setGenero(String genero) {
         this.genero = genero;
+    }
+
+    public String getTamano() {
+        return tamano;
+    }
+
+    public void setTamano(String tamano) {
+        this.tamano = tamano;
     }
 
     public String getImagen() {
@@ -150,5 +130,23 @@ public class Mascota {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+    public String getUltima_posicion_conocida() {
+        return ultima_posicion_conocida;
+    }
+
+    public void setUltima_posicion_conocida(String ultima_posicion_conocida) {
+        this.ultima_posicion_conocida = ultima_posicion_conocida;
+    }
+
+    public String getFecha_y_hora() {
+        return fecha_denuncia;
+    }
+
+    public void setFecha_y_hora(String fecha_y_hora) {
+        this.fecha_denuncia = fecha_y_hora;
+    }
 }
+
+
 

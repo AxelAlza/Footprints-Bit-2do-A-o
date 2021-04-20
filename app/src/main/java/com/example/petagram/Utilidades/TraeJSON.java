@@ -60,7 +60,6 @@ public class TraeJSON extends AsyncTask<String, Void, String > {
                 String line = "";
                 while ((line = reader.readLine()) != null) {
                     buffer.append(line).append("\n");
-                    Log.d("Milog", line);
                 }
                 return buffer.toString();
             }
