@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MisMascotas</string>
+    <string name="app_name">BuscandoMiMascota</string>
     <!-- Activity Contacto -->
     <string name="title_contacto">Contacto</string>
     <string name="name_contact">Nombre</string>
@@ -48,6 +48,21 @@
     <string name="title_activity_demonstracion_utilidad_enviar_j_s_o_n">
         DemonstracionUtilidadEnviarJSON
     </string>
+
+    <!-- ListadoMascotas -->
+
+    <string name="nombre_mascota">Nombre</string>
+    <string name="ultima_posicion">Ultima vez visto en...</string>
+    <string name="fecha_y_hora">Fecha</string>
+    <string name="genero">Genero</string>
+    <string name="raza">Raza</string>
+    <string name="color_mascota">Color</string>
+    <string name="especie">Especie</string>
+    <string name="edad">Edad</string>
+    <string name="tamano">Tamaño</string>
+    <string name="descripcion">Descripcion</string>
+    <string name="recompenza">$$$</string>
+    <string name="mail">Usuario</string>
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
