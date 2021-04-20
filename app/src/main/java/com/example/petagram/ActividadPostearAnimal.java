@@ -6,11 +6,13 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -58,16 +60,13 @@ public class ActividadPostearAnimal extends AppCompatActivity implements AsyncRe
         ImageButtonMapa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CheckeaPermisos checkeaPermisos = new CheckeaPermisos(ActividadPostearAnimal.this);
-                checkeaPermisos.CheckearPermisosyPedirlos();
-                if (checkeaPermisos.EstoyHabilitado()) {
-                    DevuelveGps gps = new DevuelveGps(ActividadPostearAnimal.this);
-                    if (!gps.Trackeando()) {
-                        gps.EmpezarTrackeo();
-                    }
-                    EditTextDireccion.setText(gps.DevolverUltimaUbicacionConocida());
-
+                String direccion = null;
+                try {
+                    direccion = DevuelveGps.DevolverUltimaDireccionConocida(ActividadPostearAnimal.this);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
+                EditTextDireccion.setText(direccion);
             }
         });
     }
@@ -251,8 +250,24 @@ public class ActividadPostearAnimal extends AppCompatActivity implements AsyncRe
 
     @Override
     public void AlConseguirDato(String output) {
-
+        Log.d("Milog", "PostearMascota: " + output);
+        output = output.trim();
+        switch (output){
+            case "0":
+                Toast.makeText(this, "Se agrego la mascota", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ActividadPostearAnimal.this, ActividadListadoMascotas.class);
+                startActivity(intent);
+                break;
+            case "1":
+                Toast.makeText(this, "Ocurrio un error posteando la mascota", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                Toast.makeText(this, "Ni idea de que paso", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
+
+
 }
 
 

@@ -20,10 +20,6 @@ public class CheckeaPermisos implements  ActivityCompat.OnRequestPermissionsResu
         return Habilitado;
     }
 
-    public void SetStatus(Boolean status){
-        Habilitado = status;
-    }
-
     public void CheckearPermisosyPedirlos() {
 
         int PermisoFineLocation = ActivityCompat.checkSelfPermission(Contexto, Manifest.permission.ACCESS_FINE_LOCATION);
