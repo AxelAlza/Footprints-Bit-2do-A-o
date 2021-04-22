@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,48 +10,71 @@
         android:id="@+id/ivLogoFootprints"
         android:layout_width="180dp"
         android:layout_height="100dp"
+        android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.154"
-        app:srcCompat="@drawable/logo_footprints"
-        android:contentDescription="TODO" />
+        app:srcCompat="@drawable/logo_footprints" />
 
-    <com.google.android.material.textfield.TextInputEditText
-
-        android:id="@+id/etEmail"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/emailLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/enter_email"
-        android:inputType="textEmailAddress"
+        android:orientation="vertical"
+        app:hintEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivLogoFootprints"
-        app:layout_constraintVertical_bias="0.121"
-        android:autofillHints="" />
+        app:layout_constraintVertical_bias="0.064"
+        tools:ignore="MissingConstraints">
 
-    <EditText
-        android:id="@+id/etPassword"
+        <com.google.android.material.textfield.TextInputEditText
+
+            android:id="@+id/etEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="@string/enter_email"
+            android:inputType="textEmailAddress"
+            app:layout_constraintVertical_bias="0.121" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/enter_contraseña"
-        android:inputType="textPassword"
+        android:orientation="vertical"
+        app:endIconMode="password_toggle"
+        app:hintEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail"
-        app:layout_constraintVertical_bias="0.062"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/emailLayout"
+        app:layout_constraintVertical_bias="0.064"
+        tools:ignore="MissingConstraints">
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="@string/enter_contraseña"
+            android:inputType="textPassword"
+            app:layout_constraintVertical_bias="0.062" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="220dp"
         android:layout_height="50dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="@color/design_default_color_background"
         android:gravity="center_horizontal"
         android:text="@string/button_login"
@@ -63,8 +85,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPassword"
-        app:layout_constraintVertical_bias="0.106" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordLayout"
+        app:layout_constraintVertical_bias="0.048" />
 
     <TextView
         android:id="@+id/tvNewPassword"
