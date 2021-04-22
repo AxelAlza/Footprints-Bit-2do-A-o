@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.petagram.Adaptadores.MascotaAdaptador;
 import com.example.petagram.R;
 import com.example.petagram.Utilidades.Datos;
+import com.example.petagram.Utilidades.SesionDeUsuario;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
@@ -74,7 +75,10 @@ public class ActividadListadoMascotas extends AppCompatActivity {
                         toast = "encontre una mascota";
                         break;
                     case R.id.MenuItemLogout:
-                        toast = "Logout";
+                        Intent intent = new Intent(ActividadListadoMascotas.this, LoginActivity.class);
+                        SesionDeUsuario.Logout(ActividadListadoMascotas.this);
+                        startActivity(intent);
+                        finish();
                         break;
                     case R.id.MenuItemRecientes:
                         mascotaAdaptador.setArrayListUsado(Datos.getMascotasMasRecientes());

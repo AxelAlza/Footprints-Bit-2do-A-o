@@ -108,6 +108,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
                 Intent intent = new Intent(LoginActivity.this, RecoverPassword.class);
                 startActivity(intent);
 
+
             }
         });
     }
@@ -122,6 +123,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
             SesionDeUsuario.Login(user.getEmail(), user.getContrasena(), user.getTelefono(), LoginActivity.this);
             Intent intent_listado = new Intent(LoginActivity.this, ActividadListadoMascotas.class);
             startActivity(intent_listado);
+            finish();
         }
 
         switch (output) {
