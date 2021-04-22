@@ -12,8 +12,11 @@ import com.google.gson.Gson;
 
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 
 public class Datos implements AsyncResponse {
 
@@ -47,9 +50,11 @@ public class Datos implements AsyncResponse {
         int llavePrimariaParaEliminar = mascota.getPk();
         String JsonParaEnviar = String.format("{\"pk\" : \"%d\"}", llavePrimariaParaEliminar);
         Log.d("Milog", "EliminarMascota " + JsonParaEnviar);
+
         EnviarJSON enviarJSON = new EnviarJSON(Datos.getInstance().contexto, RutasUrl.RutaDeProduccion + "/mascota/eliminarmascotamovil/", JsonParaEnviar);
         enviarJSON.setDelegate(Datos.getInstance());
         enviarJSON.execute();
+
         int position = TodasLasMascotas.indexOf(mascota);
         TodasLasMascotas.remove(mascota);
         listenerDeDatos.OnSeEliminoMascota(position);
@@ -87,18 +92,30 @@ public class Datos implements AsyncResponse {
         );
     }
 
+    public static ArrayList<Mascota> getMascotasMasRecientes() {
+
+        ArrayList<Mascota> ordenado = new ArrayList<>(getTodasLasMascotas());
+        Collections.sort(ordenado, new Comparator<Mascota>() {
+            @Override
+            public int compare(Mascota o1, Mascota o2) {
+                return DateParser.ParseDate(o1.getFecha_denuncia()).compareTo(DateParser.ParseDate(o2.getFecha_denuncia()));
+            }
+        }.reversed());
+        return ordenado;
+    }
+
     @Override
     public void AlConseguirDato(String output) {
 
         output = output.trim();
-        if (output.length()>5){
-          Gson gson = new Gson();
-          Mascota[] array = gson.fromJson(output, Mascota[].class);
-          ArrayList<Mascota> mascotas = new ArrayList<>();
-          Collections.addAll(mascotas, array);
-          Datos.getInstance().setMascotas(mascotas);
-          ((ActividadListadoMascotas) Datos.getInstance().contexto).InicializarAdaptador();
-      }
+        if (output.length() > 5) {
+            Gson gson = new Gson();
+            Mascota[] array = gson.fromJson(output, Mascota[].class);
+            ArrayList<Mascota> mascotas = new ArrayList<>();
+            Collections.addAll(mascotas, array);
+            Datos.getInstance().setMascotas(mascotas);
+            ((ActividadListadoMascotas) Datos.getInstance().contexto).InicializarAdaptador();
+        }
         if ("0".equals(output)) {
             Log.d("Milog", "AlConseguirDato: Se elimino la mascota en el servidor todo bien");
         }

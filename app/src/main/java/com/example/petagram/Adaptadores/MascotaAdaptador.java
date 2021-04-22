@@ -19,22 +19,32 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.petagram.Actividades.ActividadInformacionDeMascota;
 import com.example.petagram.Modelo.Mascota;
 import com.example.petagram.R;
+import com.example.petagram.Utilidades.DateParser;
 import com.example.petagram.Utilidades.Datos;
 import com.example.petagram.Utilidades.FormateadorDeImagenes;
 import com.example.petagram.Utilidades.ListenerDeDatos;
 import com.example.petagram.Utilidades.SesionDeUsuario;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.ContenedorDeViews> {
 
     Activity contexto;
-    ArrayList<Mascota> mascotas;
+
+    public void setArrayListUsado(ArrayList<Mascota> arrayListUsado) {
+        ArrayListUsado = arrayListUsado;
+        notifyDataSetChanged();
+    }
+
+    ArrayList<Mascota> ArrayListUsado;
 
     public MascotaAdaptador(Activity contexto) {
-        this.mascotas = Datos.getTodasLasMascotas();
+        this.ArrayListUsado = Datos.getTodasLasMascotas();
         this.contexto = contexto;
         Datos.setListenerDeDatos(new ListenerDeDatos() {
             @Override
@@ -68,8 +78,10 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Cont
     @Override
     public void onBindViewHolder(@NonNull final ContenedorDeViews contenedorDeViews, final int position) {
 
-        final Mascota mascota = mascotas.get(position);
-        if (mascota.getUsuario().equals(SesionDeUsuario.ConseguirEmailDeSesion(contexto))){
+        final Mascota mascota = ArrayListUsado.get(position);
+
+        ////Boton De Eliminar
+        if (mascota.getUsuario().equals(SesionDeUsuario.ConseguirEmailDeSesion(contexto))) {
             contenedorDeViews.IbEliminarMascota.setVisibility(View.VISIBLE);
             contenedorDeViews.IbEliminarMascota.setEnabled(true);
             contenedorDeViews.IbEliminarMascota.setOnClickListener(new View.OnClickListener() {
@@ -82,32 +94,21 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Cont
             contenedorDeViews.IbEliminarMascota.setVisibility(View.INVISIBLE);
             contenedorDeViews.IbEliminarMascota.setEnabled(false);
         }
+        //////////////////////////////////
+
+        ///A partir de hoy odio trabajar con fechas en java
+        Date date = DateParser.ParseDate(mascota.getFecha_denuncia());
+        SimpleDateFormat output = new SimpleDateFormat("dd-MM-yyyy");
+        contenedorDeViews.TvFechaYHora.setText(output.format(date));
+        ////////////////////////////////////
+
 
         contenedorDeViews.TvNombreMascota.setText(mascota.getNombre());
         contenedorDeViews.TvUsuario.setText(mascota.getUsuario());
-
         String recompensa = "$" + mascota.getRecompensa();
         contenedorDeViews.TvRecompensaMascota.setText(recompensa);
-
         contenedorDeViews.TvDescripcionMascota.setText(mascota.getDescripcion());
-
-        ///A partir de hoy odio trabajar con fechas en java
-        TemporalAccessor date = null;
-        DateTimeFormatter output = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        DateTimeFormatter input;
-        try {
-            input = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
-            date = input.parse(mascota.getFecha_y_hora());
-
-        } catch (Exception e) {
-            input = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            date = input.parse(mascota.getFecha_y_hora());
-        }
-        contenedorDeViews.TvFechaYHora.setText(output.format(date));
-        ///////////////////////////////////////////////////////////////////////////
-
         contenedorDeViews.ImvMascota.setImageBitmap(FormateadorDeImagenes.DesdeBase64(mascota.getImagen()));
-
         contenedorDeViews.TvTelefono.setText(String.valueOf(mascota.getUsuariotelefono()));
 
         contenedorDeViews.cardView.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +123,7 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Cont
 
     @Override
     public int getItemCount() { //Cantidad de elementos de la lista
-        return mascotas.size();
+        return ArrayListUsado.size();
     }
 
 

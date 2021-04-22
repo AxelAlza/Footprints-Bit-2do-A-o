@@ -156,9 +156,7 @@ public class Mascota implements Serializable {
         this.ultima_posicion_conocida = ultima_posicion_conocida;
     }
 
-    public String getFecha_y_hora() {
-        return fecha_denuncia;
-    }
+
 
     public void setFecha_y_hora(String fecha_y_hora) {
         this.fecha_denuncia = fecha_y_hora;

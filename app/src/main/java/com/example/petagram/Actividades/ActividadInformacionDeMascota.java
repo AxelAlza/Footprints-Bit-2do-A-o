@@ -51,11 +51,11 @@ public class ActividadInformacionDeMascota extends AppCompatActivity {
         DateTimeFormatter input;
         try {
             input = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
-            date = input.parse(mascota.getFecha_y_hora());
+            date = input.parse(mascota.getFecha_denuncia());
 
         } catch (Exception e) {
             input = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            date = input.parse(mascota.getFecha_y_hora());
+            date = input.parse(mascota.getFecha_denuncia());
         }
         ///////////////////////////////////////////////
 
