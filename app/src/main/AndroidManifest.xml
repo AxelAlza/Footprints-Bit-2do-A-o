@@ -19,18 +19,18 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ActividadInformacionDeMascota"></activity>
-        <activity android:name=".RecoverPassword" />
-        <activity android:name=".RegistroUsuarios" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".Actividades.ActividadInformacionDeMascota"></activity>
+        <activity android:name=".Actividades.RecoverPassword" />
+        <activity android:name=".Actividades.RegistroUsuarios" />
+        <activity android:name=".Actividades.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActividadListadoMascotas" />
-        <activity android:name=".ActividadPostearAnimal" />
+        <activity android:name=".Actividades.ActividadListadoMascotas" />
+        <activity android:name=".Actividades.ActividadPostearAnimal" />
         <activity android:name=".Demo.DemonstracionUtilidadEnviarJSON" />
         <activity android:name=".Demo.DemonstracionUtilidadTraeJson"></activity>
     </application>

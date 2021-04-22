@@ -1,4 +1,4 @@
-package com.example.petagram;
+package com.example.petagram.Actividades;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.petagram.Modelo.Mascota;
+import com.example.petagram.R;
 import com.example.petagram.Utilidades.Datos;
 import com.example.petagram.Utilidades.FormateadorDeImagenes;
 
@@ -28,7 +29,7 @@ public class ActividadInformacionDeMascota extends AppCompatActivity {
         setContentView(R.layout.activity_informacion_de_mascota);
         InicializarViews();
         Intent intent = getIntent();
-        Mascota mascota = Datos.getMascotas().get(intent.getIntExtra("position",0));
+        Mascota mascota = Datos.getTodasLasMascotas().get(intent.getIntExtra("position", 0));
         RellenarCampos(mascota);
     }
 
@@ -43,9 +44,21 @@ public class ActividadInformacionDeMascota extends AppCompatActivity {
         TvDescripcionMascota.setText(mascota.getDescripcion());
         TvRazaMascota.setText(mascota.getRaza());
         TvEspecieMascota.setText(mascota.getEspecie());
-        final DateTimeFormatter input = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
+
+        /////Las fechas se resisten, por que son asi?
+        TemporalAccessor date = null;
         DateTimeFormatter output = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        TemporalAccessor date = input.parse(mascota.getFecha_y_hora());
+        DateTimeFormatter input;
+        try {
+            input = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
+            date = input.parse(mascota.getFecha_y_hora());
+
+        } catch (Exception e) {
+            input = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            date = input.parse(mascota.getFecha_y_hora());
+        }
+        ///////////////////////////////////////////////
+
         TvFechaYHora.setText(output.format(date));
         TvTamanoMascota.setText(mascota.getTamano());
         TvUltimaConocida.setText(mascota.getUltima_posicion_conocida());

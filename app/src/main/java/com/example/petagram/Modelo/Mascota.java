@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Mascota implements Serializable {
     int pk, edad, recompensa;
+    String usuariotelefono;
     String usuario;
     String nombre;
     String especie;
@@ -17,8 +18,7 @@ public class Mascota implements Serializable {
     String fecha_denuncia;
 
 
-
-    public Mascota(int edad, int recompensa, String usuario, String nombre, String especie, String raza, String color, String genero, String tamano, String imagen, String descripcion, String ultima_posicion_conocida, String fecha_y_hora) {
+    public Mascota(int edad, int recompensa, String usuario, String nombre, String especie, String raza, String color, String genero, String tamano, String imagen, String descripcion, String ultima_posicion_conocida, String fecha_y_hora, String usuariotelefono) {
         this.edad = edad;
         this.recompensa = recompensa;
         this.usuario = usuario;
@@ -32,6 +32,7 @@ public class Mascota implements Serializable {
         this.descripcion = descripcion;
         this.ultima_posicion_conocida = ultima_posicion_conocida;
         this.fecha_denuncia = fecha_y_hora;
+        this.usuariotelefono = usuariotelefono;
     }
 
 
@@ -45,6 +46,22 @@ public class Mascota implements Serializable {
 
     public int getEdad() {
         return edad;
+    }
+
+    public String getUsuariotelefono() {
+        return usuariotelefono;
+    }
+
+    public void setUsuariotelefono(String usuariotelefono) {
+        this.usuariotelefono = usuariotelefono;
+    }
+
+    public String getFecha_denuncia() {
+        return fecha_denuncia;
+    }
+
+    public void setFecha_denuncia(String fecha_denuncia) {
+        this.fecha_denuncia = fecha_denuncia;
     }
 
     public void setEdad(int edad) {

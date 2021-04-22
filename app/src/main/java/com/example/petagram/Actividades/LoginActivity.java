@@ -1,6 +1,5 @@
-package com.example.petagram;
+package com.example.petagram.Actividades;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +12,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.petagram.Modelo.JuntarDatosLogin;
+import com.example.petagram.Modelo.Usuario;
+import com.example.petagram.R;
 import com.example.petagram.Utilidades.AsyncResponse;
 import com.example.petagram.Utilidades.EnviarJSON;
 import com.example.petagram.Utilidades.RutasUrl;
@@ -69,7 +70,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
 
                     Matcher matcher = pattern.matcher(inputEmail);
 
-                    if (matcher.find ()) {
+                    if (matcher.find()) {
 
                         // Cambio de formato de datosLogin
                         JuntarDatosLogin datosLogin = new JuntarDatosLogin(inputEmail, inputPassword);
@@ -78,7 +79,8 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
                         Log.d("Convertidor", resultado);
 
                         // Enviando datosLogin al servidor como JSON
-                        EnviarJSON enviarDatosLogin = new EnviarJSON(LoginActivity.this, RutasUrl.RutaDeProduccion+"/usuario/loginmovil", resultado);
+                        EnviarJSON enviarDatosLogin = new EnviarJSON(LoginActivity.this, RutasUrl.RutaDeProduccion + "/usuario/loginmovil", resultado);
+                        enviarDatosLogin.setDelegate(LoginActivity.this);
                         enviarDatosLogin.execute();
 
 
@@ -113,22 +115,22 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
     //Aca responde el servidor
     @Override
     public void AlConseguirDato(String output) {
-
         output = output.trim();
+        if (output.length()>5){
+            Gson gson = new Gson();
+            Usuario user = gson.fromJson(output, Usuario.class);
+            SesionDeUsuario.Login(user.getEmail(), user.getContrasena(), user.getTelefono(), LoginActivity.this);
+            Intent intent_listado = new Intent(LoginActivity.this, ActividadListadoMascotas.class);
+            startActivity(intent_listado);
+        }
 
-       switch (output){
-           case "0":
-               SesionDeUsuario.Login(uiEmail.getText().toString(), uiPassword.getText().toString(), LoginActivity.this);
-               Intent intent_listado = new Intent(LoginActivity.this, ActividadListadoMascotas.class);
-               startActivity(intent_listado);
-               break;
-           case "1":
-               Toast.makeText(LoginActivity.this, "Ingrese correctamente su Email", Toast.LENGTH_SHORT).show();
-               break;
-           case "2":
-               Toast.makeText(LoginActivity.this, "Su contraseña no es valida", Toast.LENGTH_SHORT).show();
-
-       }
+        switch (output) {
+            case "1":
+                Toast.makeText(LoginActivity.this, "Ingrese correctamente su Email", Toast.LENGTH_SHORT).show();
+                break;
+            case "2":
+                Toast.makeText(LoginActivity.this, "Su contraseña no es valida", Toast.LENGTH_SHORT).show();
+        }
     }
 }
 

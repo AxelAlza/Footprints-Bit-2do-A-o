@@ -30,9 +30,12 @@ public class TraeJSON extends AsyncTask<String, Void, String > {
     // Y la direccion de url de los datos a traer
     public TraeJSON(Activity context, String url) {
         this.context = context;
-        this.delegate = (AsyncResponse) context;
         Direccion = url;
 
+    }
+
+    public void setDelegate(AsyncResponse delegado){
+        this.delegate = delegado;
     }
 
     // Esto se ejecuta despues de que se ejecuto la tarea, muestra un mensaje diciendo que termino de traer los datos

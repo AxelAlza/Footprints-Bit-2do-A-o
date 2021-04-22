@@ -1,16 +1,9 @@
-package com.example.petagram;
+package com.example.petagram.Actividades;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,42 +11,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.petagram.Adaptadores.MascotaAdaptador;
-import com.example.petagram.Adaptadores.MascotaSimpleAdapter_Bitmap;
-import com.example.petagram.Modelo.Mascota;
-import com.example.petagram.Utilidades.AsyncResponse;
+import com.example.petagram.R;
 import com.example.petagram.Utilidades.Datos;
-import com.example.petagram.Utilidades.EnviarJSON;
-import com.example.petagram.Utilidades.FormateadorDeImagenes;
-import com.example.petagram.Utilidades.TraeJSON;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.gson.Gson;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 
 
-public class ActividadListadoMascotas extends AppCompatActivity implements AsyncResponse {
+public class ActividadListadoMascotas extends AppCompatActivity {
 
     FloatingActionButton FabAgregarMascota;
-
     RecyclerView recyclerView;
-    private static String JSON_URL = "https://aalza.pythonanywhere.com/mascota/json/";
-    //="https://aalza.pythonanywhere.com/mascota/json/";
     androidx.appcompat.widget.Toolbar TbListaMascotas;
+    MascotaAdaptador mascotaAdaptador;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 
-    ArrayList<HashMap<String, Object>> mascotaList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +33,12 @@ public class ActividadListadoMascotas extends AppCompatActivity implements Async
         recyclerView = findViewById(R.id.RecyclerView);
         OnclickFabAgregarMascota();
         SetearMenuDeToolbar();
+        Datos.InicializarDataSet(this);
 
-        TraeJSON traeJSON = new TraeJSON(this,JSON_URL);
-        traeJSON.execute();
     }
+
+
+
 
     private void OnclickFabAgregarMascota() {
         FabAgregarMascota = findViewById(R.id.fabAgregarMascota);
@@ -85,19 +58,14 @@ public class ActividadListadoMascotas extends AppCompatActivity implements Async
     }
 
 
-    @Override
-    public void AlConseguirDato(String output) {
-        Gson gson = new Gson();
-        Mascota[] array = gson.fromJson(output, Mascota[].class);
-        ArrayList<Mascota> mascotas = new ArrayList<>();
-        Collections.addAll(mascotas,array);
-        Datos.setMascotas(mascotas);
-        MascotaAdaptador mascotaAdaptador = new MascotaAdaptador(this);
+    public void InicializarAdaptador() {
+
+        mascotaAdaptador = new MascotaAdaptador(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(mascotaAdaptador);
+
 
     }
 }
