@@ -32,10 +32,13 @@ public class EnviarJSON extends AsyncTask<String, Void, String > {
     // Y la direccion de url de los datos a traer, mas el json que se quiere enviar al servidor
     public EnviarJSON(Activity context, String url, String jsonAEnviar) {
         this.context = context;
-        this.delegate = (AsyncResponse) this.context;
         Direccion = url;
         this.JsonAEnviar = jsonAEnviar;
 
+    }
+
+    public void setDelegate(AsyncResponse delegate) {
+        this.delegate = delegate;
     }
 
     // Esto se ejecuta despues de que se ejecuto la tarea, muestra un mensaje diciendo que termino de traer los datos
@@ -75,7 +78,6 @@ public class EnviarJSON extends AsyncTask<String, Void, String > {
                     buffer.append(Linea).append("\n");
                 }
                 Respuesta = buffer.toString();
-                Log.d("Milog",Respuesta);
             }
 
         } catch (IOException ioException) {

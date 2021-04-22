@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Actividades.ActividadInformacionDeMascota">
+
+
+    <TextView
+        android:id="@+id/TvNombreMascota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Nombre Mascota"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+        android:textColor="#000000" />
+
+    <ImageView
+        android:id="@+id/ImvMascota"
+        android:layout_width="119dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="16dp"
+        android:padding="4dp" />
+
+    <TextView
+        android:id="@+id/TVusuario"
+        android:layout_width="111dp"
+        android:layout_height="19dp"
+        android:ems="10"
+        android:text="usuario"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/TvColorMascota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Color"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+        android:textColor="@color/cardview_dark_background"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/TvEspecieMascota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Especie"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+    <TextView
+        android:id="@+id/TvRazaMascota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="raza"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+        android:textColor="@color/cardview_dark_background"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/TvGeneroMascota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Genero"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+        android:textColor="@color/cardview_dark_background"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/TvEdadMascota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="edad" />
+
+    <TextView
+        android:id="@+id/TvTamanoMascota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tamano" />
+
+    <TextView
+        android:id="@+id/TvDescripcionMascota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Descripcion" />
+
+    <TextView
+        android:id="@+id/TvRecompensaMascota"
+        android:layout_width="wrap_content"
+        android:layout_height="16dp"
+        android:text="recompensa" />
+
+    <TextView
+        android:id="@+id/TvFechaYHora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10" />
+    <TextView
+        android:id="@+id/TvUltimaPosicionConocida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10" />
+
+</LinearLayout>

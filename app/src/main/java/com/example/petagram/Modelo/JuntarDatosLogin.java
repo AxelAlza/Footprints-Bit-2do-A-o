@@ -9,6 +9,7 @@ public class JuntarDatosLogin {
     public JuntarDatosLogin(String inputEmail, String inputPassword){
         this.inputEmail = inputEmail;
         this.inputPassword = inputPassword;
+
     }
 
     public String getInputEmail() {

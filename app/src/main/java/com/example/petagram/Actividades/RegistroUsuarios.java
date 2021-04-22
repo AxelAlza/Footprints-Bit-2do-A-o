@@ -23,7 +23,7 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
-
+;
 
 
 
@@ -37,6 +37,8 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
     EditText telefono;
     Button confirmar;
     TextView login;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

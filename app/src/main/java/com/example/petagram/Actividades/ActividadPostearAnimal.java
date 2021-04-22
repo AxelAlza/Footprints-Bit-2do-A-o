@@ -1,4 +1,4 @@
-package com.example.petagram;
+package com.example.petagram.Actividades;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,15 +12,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.petagram.Modelo.Mascota;
+import com.example.petagram.R;
 import com.example.petagram.Utilidades.AsyncResponse;
-import com.example.petagram.Utilidades.CheckeaPermisos;
+import com.example.petagram.Utilidades.Datos;
 import com.example.petagram.Utilidades.DevuelveGps;
 import com.example.petagram.Utilidades.EnviarJSON;
 import com.example.petagram.Utilidades.FormateadorDeImagenes;
@@ -44,6 +44,7 @@ public class ActividadPostearAnimal extends AppCompatActivity implements AsyncRe
     Button Postear;
     ImageButton ImageButtonImagen, ImageButtonMapa;
     Boolean FotoAsignada = false;
+    Mascota mascota;
     public static final int PICK_IMAGE = 1;
 
     @Override
@@ -76,9 +77,10 @@ public class ActividadPostearAnimal extends AppCompatActivity implements AsyncRe
             @Override
             public void onClick(View v) {
                 if (ValidarCampos()) {
+                    mascota = null;
                     Gson gson = new GsonBuilder().setPrettyPrinting().create();
                     int edad, recompensa;
-                    String nombre, especie, raza, color, descripcion, usuario , direccion;
+                    String nombre, especie, raza, color, descripcion, usuario, direccion,telefono;
                     nombre = EditTextNombre.getText().toString();
                     especie = EditTextEspecie.getText().toString();
                     raza = EditTextRaza.getText().toString();
@@ -88,12 +90,15 @@ public class ActividadPostearAnimal extends AppCompatActivity implements AsyncRe
                     recompensa = Integer.parseInt(EditTextRecompensa.getText().toString());
                     direccion = EditTextDireccion.getText().toString();
                     usuario = SesionDeUsuario.ConseguirEmailDeSesion(getApplicationContext());
+                    telefono = SesionDeUsuario.ConseguirTelefonoDeSesion(getApplicationContext());
                     Date currentTime = Calendar.getInstance(TimeZone.getDefault()).getTime();
                     DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
                     String fecha_y_hora = dateFormat.format(currentTime);
-                    Mascota mascota = new Mascota(edad,recompensa,usuario,nombre,especie,raza,color,genero,tamaño,ImagenBase64,descripcion,direccion,fecha_y_hora);
+                    mascota = new Mascota(edad, recompensa, usuario, nombre, especie, raza, color, genero, tamaño, ImagenBase64, descripcion, direccion, fecha_y_hora , telefono);
                     String datos_a_enviar = gson.toJson(mascota);
-                    EnviarJSON enviarJSON = new EnviarJSON(ActividadPostearAnimal.this, RutasUrl.RutaDeProduccion + "/mascota/agregarmascotamovil/",datos_a_enviar);
+
+                    EnviarJSON enviarJSON = new EnviarJSON(ActividadPostearAnimal.this, RutasUrl.RutaDeProduccion + "/mascota/agregarmascotamovil/", datos_a_enviar);
+                    enviarJSON.setDelegate(ActividadPostearAnimal.this);
                     enviarJSON.execute();
                 } else {
                     Toast.makeText(ActividadPostearAnimal.this, "Hay campos sin rellenar", Toast.LENGTH_SHORT).show();
@@ -106,7 +111,6 @@ public class ActividadPostearAnimal extends AppCompatActivity implements AsyncRe
         ImageButtonImagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent BuscarGaleria = new Intent(Intent.ACTION_GET_CONTENT);
                 BuscarGaleria.setType("image/*");
                 Intent BuscarDocumentos = new Intent(Intent.ACTION_PICK);
@@ -252,17 +256,21 @@ public class ActividadPostearAnimal extends AppCompatActivity implements AsyncRe
     public void AlConseguirDato(String output) {
         Log.d("Milog", "PostearMascota: " + output);
         output = output.trim();
-        switch (output){
+        switch (output) {
             case "0":
                 Toast.makeText(this, "Se agrego la mascota", Toast.LENGTH_SHORT).show();
+                Datos.AgregarMascota(mascota);
                 Intent intent = new Intent(ActividadPostearAnimal.this, ActividadListadoMascotas.class);
-                startActivity(intent);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityIfNeeded(intent, 0);
                 break;
             case "1":
                 Toast.makeText(this, "Ocurrio un error posteando la mascota", Toast.LENGTH_SHORT).show();
+
                 break;
             default:
                 Toast.makeText(this, "Ni idea de que paso", Toast.LENGTH_SHORT).show();
+
                 break;
         }
     }
