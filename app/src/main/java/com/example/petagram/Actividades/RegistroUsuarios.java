@@ -1,28 +1,22 @@
-package com.example.petagram;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.petagram.Actividades;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.example.petagram.R;
+import androidx.appcompat.app.AppCompatActivity;
 import com.example.petagram.Modelo.Usuario;
 import com.example.petagram.Utilidades.AsyncResponse;
 import com.example.petagram.Utilidades.EnviarJSON;
 import com.example.petagram.Utilidades.RutasUrl;
-import com.example.petagram.Utilidades.SesionDeUsuario;
 import com.google.gson.Gson;
 
-import java.io.File;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 ;
 
 
@@ -43,7 +37,6 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_usuarios);
-
         nombre_usuario = findViewById(R.id.nombre_usuario);
         email = findViewById(R.id.email);
         contrasena = findViewById(R.id.contrasena);
@@ -70,6 +63,7 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
                     Gson gson = new Gson();
                     String datos = gson.toJson(usuario);
                     EnviarJSON datReg = new EnviarJSON(RegistroUsuarios.this, RutasUrl.RutaDeProduccion+"/usuario/registrousuariomovil", datos);
+                    datReg.setDelegate(RegistroUsuarios.this);
                     datReg.execute();
                 }
 
