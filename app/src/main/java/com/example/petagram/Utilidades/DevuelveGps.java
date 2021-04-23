@@ -94,8 +94,7 @@ public class DevuelveGps {
 
         checkeaPermisos = new CheckeaPermisos(context);
         Location MejorUbicacion = null;
-        if (checkeaPermisos.CheckearPermisosyPedirlos()) {
-            if (CheckearUbicacionActivadaYPedirla(context)) {
+        if (checkeaPermisos.CheckearPermisosyPedirlos() && CheckearUbicacionActivadaYPedirla(context)) {
                 if (!Trackeando) {
                     EmpezarTrackeo();
                 }
@@ -115,7 +114,8 @@ public class DevuelveGps {
                         MejorUbicacion = l;
                     }
                 }
-            }
+        }
+        else{
         }
         return MejorUbicacion;
     }

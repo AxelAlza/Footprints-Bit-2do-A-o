@@ -105,28 +105,27 @@ public class Datos implements AsyncResponse {
     }
 
     public static ArrayList<Mascota> getMascotasCercanasAmi() {
-        Location MiUbicacion = null;
-        while (MiUbicacion == null) {
-            MiUbicacion = DevuelveGps.getUbicacion(Datos.getInstance().contexto);
-        }
+
+        Location MiUbicacion = DevuelveGps.getUbicacion(Datos.getInstance().contexto);
         ArrayList<Mascota> arrayList = new ArrayList<>(getTodasLasMascotas());
-        final Location finalMiUbicacion = MiUbicacion;
-        arrayList.sort(new Comparator<Mascota>() {
-            @Override
-            public int compare(Mascota o1, Mascota o2) {
-                Address ad1 = DevuelveGps.ConseguirLatyLong(o1.getUltima_posicion_conocida(), Datos.getInstance().contexto);
-                Location loc1 = new Location("");
-                loc1.setLatitude(ad1.getLatitude());
-                loc1.setLongitude(ad1.getLongitude());
-                Address ad2 = DevuelveGps.ConseguirLatyLong(o2.getUltima_posicion_conocida(), Datos.getInstance().contexto);
-                Location loc2 = new Location("");
-                loc2.setLatitude(ad2.getLatitude());
-                loc2.setLongitude(ad2.getLongitude());
-                return (int) (finalMiUbicacion.distanceTo(loc1) - finalMiUbicacion.distanceTo(loc2));
-            }
-        });
+        if (MiUbicacion != null){
 
-
+            final Location finalMiUbicacion = MiUbicacion;
+            arrayList.sort(new Comparator<Mascota>() {
+                @Override
+                public int compare(Mascota o1, Mascota o2) {
+                    Address ad1 = DevuelveGps.ConseguirLatyLong(o1.getUltima_posicion_conocida(), Datos.getInstance().contexto);
+                    Location loc1 = new Location("");
+                    loc1.setLatitude(ad1.getLatitude());
+                    loc1.setLongitude(ad1.getLongitude());
+                    Address ad2 = DevuelveGps.ConseguirLatyLong(o2.getUltima_posicion_conocida(), Datos.getInstance().contexto);
+                    Location loc2 = new Location("");
+                    loc2.setLatitude(ad2.getLatitude());
+                    loc2.setLongitude(ad2.getLongitude());
+                    return (int) (finalMiUbicacion.distanceTo(loc1) - finalMiUbicacion.distanceTo(loc2));
+                }
+            });
+        }
         return arrayList;
     }
 
