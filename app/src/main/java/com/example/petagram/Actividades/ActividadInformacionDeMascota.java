@@ -29,7 +29,13 @@ public class ActividadInformacionDeMascota extends AppCompatActivity {
         setContentView(R.layout.activity_informacion_de_mascota);
         InicializarViews();
         Intent intent = getIntent();
-        Mascota mascota = Datos.getTodasLasMascotas().get(intent.getIntExtra("position", 0));
+        int pk = intent.getIntExtra("pk", 0);
+        Mascota mascota = null;
+        for (Mascota m : Datos.getTodasLasMascotas()) {
+            if(m.getPk() == pk){
+                mascota = m;
+            }
+        }
         RellenarCampos(mascota);
     }
 
@@ -51,11 +57,11 @@ public class ActividadInformacionDeMascota extends AppCompatActivity {
         DateTimeFormatter input;
         try {
             input = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
-            date = input.parse(mascota.getFecha_y_hora());
+            date = input.parse(mascota.getFecha_denuncia());
 
         } catch (Exception e) {
             input = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            date = input.parse(mascota.getFecha_y_hora());
+            date = input.parse(mascota.getFecha_denuncia());
         }
         ///////////////////////////////////////////////
 
