@@ -64,6 +64,7 @@
     <string name="descripcion">Descripcion</string>
     <string name="recompenza">Recompensa $</string>
     <string name="mail">Usuario</string>
+    <string name="editar_mascota">Editar</string>
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.

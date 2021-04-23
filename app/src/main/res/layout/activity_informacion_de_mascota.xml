@@ -42,11 +42,10 @@
             android:id="@+id/TvNombreMascota"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Nombre Mascota"
             android:textAllCaps="true"
-            android:textStyle="bold"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             android:textColor="#000000"
+            android:textStyle="bold"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteY="220dp" />
@@ -61,9 +60,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat2"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat"
         tools:ignore="MissingConstraints">
 
         <TextView
@@ -72,55 +71,76 @@
             android:layout_height="match_parent"
             android:ems="10"
             android:text="fecha y hora"
+            android:textStyle="bold"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="251dp" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/linearLayoutCompat2"
+    <TableLayout
+        android:id="@+id/layUltimaPosicion"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="39dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat3">
 
-        <TextView
-            android:id="@+id/TvUltimaPosicionConocida"
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_span="1"
-            android:layout_weight="1"
-            android:ems="10"
-            android:text="Ultima vez visto en.."
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="279dp" />
+            android:layout_height="match_parent">
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            <TextView
+                android:id="@+id/TvVistoEn"
+                android:layout_width="208dp"
+                android:layout_height="wrap_content"
+                android:layout_span="1"
+                android:layout_weight="1"
+                android:text="@string/ultima_posicion"
+                android:textAlignment="textStart"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/TvUltimaPosicionConocida"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_span="1"
+                android:layout_weight="1"
+                android:ems="10"
+                android:textAlignment="textStart"
+                android:textStyle="italic"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="279dp" />
+        </TableRow>
+
+    </TableLayout>
 
     <TextView
         android:id="@+id/TvDescripcionMascota"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:hint="@string/descripcion"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat3" />
+        app:layout_constraintTop_toBottomOf="@+id/layUltimaPosicion" />
 
     <TableLayout
         android:id="@+id/layUsuarioRecompenza"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -185,7 +205,6 @@
                 android:layout_height="wrap_content"
                 android:layout_span="1"
                 android:layout_weight="1"
-                android:text="recompensa"
                 android:textAlignment="viewStart"
                 android:textStyle="bold|italic" />
 
@@ -205,7 +224,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -265,8 +284,6 @@
                 android:layout_height="wrap_content"
                 android:layout_span="1"
                 android:layout_weight="1"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
                 android:textAlignment="textStart"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
                 android:textColor="@color/cardview_dark_background"
@@ -350,5 +367,22 @@
         </TableRow>
 
     </TableLayout>
+
+    <Button
+        android:id="@+id/btnEditarMascota"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="26dp"
+        android:backgroundTint="@color/design_default_color_background"
+        android:text="@string/editar_mascota"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layAtributosMascota"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
