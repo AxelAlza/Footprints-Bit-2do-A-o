@@ -51,7 +51,8 @@
 
     <!-- ListadoMascotas -->
 
-    <string name="nombre_mascota">Nombre</string>
+    <string name="edscripcion_imagen">Imagen Mascota</string>
+    <string name="nombre_mascota">Nombre Mascota</string>
     <string name="ultima_posicion">Ultima vez visto en...</string>
     <string name="fecha_y_hora">Fecha</string>
     <string name="genero">Genero</string>
@@ -61,7 +62,7 @@
     <string name="edad">Edad</string>
     <string name="tamano">Tamaño</string>
     <string name="descripcion">Descripcion</string>
-    <string name="recompenza">$$$</string>
+    <string name="recompenza">Recompenza $</string>
     <string name="mail">Usuario</string>
     <!--
     This string is used for square devices and overridden by hello_world in
