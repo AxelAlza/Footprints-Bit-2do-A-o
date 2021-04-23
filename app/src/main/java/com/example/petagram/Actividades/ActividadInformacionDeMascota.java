@@ -29,7 +29,13 @@ public class ActividadInformacionDeMascota extends AppCompatActivity {
         setContentView(R.layout.activity_informacion_de_mascota);
         InicializarViews();
         Intent intent = getIntent();
-        Mascota mascota = Datos.getTodasLasMascotas().get(intent.getIntExtra("position", 0));
+        int pk = intent.getIntExtra("pk", 0);
+        Mascota mascota = null;
+        for (Mascota m : Datos.getTodasLasMascotas()) {
+            if(m.getPk() == pk){
+                mascota = m;
+            }
+        }
         RellenarCampos(mascota);
     }
 

@@ -69,15 +69,16 @@ public class ActividadListadoMascotas extends AppCompatActivity {
                         toast = "buscar";
                         break;
                     case R.id.MenuItemCercanosAMi:
-                        toast = "cercanos a mi";
+                        mascotaAdaptador.setArrayListUsado(Datos.getMascotasCercanasAmi());
                         break;
                     case R.id.MenuItemEncontreUnaMascota:
-                        toast = "encontre una mascota";
+                        Intent Encontre = new Intent(ActividadListadoMascotas.this, ActividadPostearAnimal.class);
+                        startActivity(Encontre);
                         break;
                     case R.id.MenuItemLogout:
-                        Intent intent = new Intent(ActividadListadoMascotas.this, LoginActivity.class);
+                        Intent Logout = new Intent(ActividadListadoMascotas.this, LoginActivity.class);
                         SesionDeUsuario.Logout(ActividadListadoMascotas.this);
-                        startActivity(intent);
+                        startActivity(Logout);
                         finish();
                         break;
                     case R.id.MenuItemRecientes:

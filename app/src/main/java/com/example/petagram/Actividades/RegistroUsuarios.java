@@ -56,8 +56,6 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
             @Override
             public void onClick(View view) {
 
-
-
                 if (Confirmar()) {
                     Usuario usuario = new Usuario(nombre_usuario.getText().toString(), email.getText().toString(), contrasena.getText().toString(), telefono.getText().toString());
                     Gson gson = new Gson();
@@ -123,10 +121,11 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
             validar = false;
         }
 
-
-        //implementar que coincidan las contraseñas (FALTA)
-
-
+       if (contrasena.getText().toString() != confContrasena.getText().toString()){
+           contrasena.setError ("Las contraseñas no coinciden!!");
+           confContrasena.setError ("Las contraseñas no coinciden!!");
+           validar = false;
+       }
 
         // chequear para validar el número de teléfono.
         if (isEmpty (telefono)) {

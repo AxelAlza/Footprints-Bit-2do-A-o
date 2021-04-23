@@ -43,8 +43,6 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
         uiLogin = findViewById(R.id.btnLogin);
         uiNewPassword = findViewById(R.id.tvNewPassword);
         uiRegistro = findViewById(R.id.tvRegistrarse);
-
-
         uiLogin.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -128,7 +126,9 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
 
         switch (output) {
             case "1":
-                Toast.makeText(LoginActivity.this, "Ingrese correctamente su Email", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Su mail no esta registrado", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(LoginActivity.this , RegistroUsuarios.class );
+                startActivity(intent);
                 break;
             case "2":
                 Toast.makeText(LoginActivity.this, "Su contraseña no es valida", Toast.LENGTH_SHORT).show();

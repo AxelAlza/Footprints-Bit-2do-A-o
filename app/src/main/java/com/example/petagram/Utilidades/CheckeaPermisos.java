@@ -16,11 +16,7 @@ public class CheckeaPermisos implements  ActivityCompat.OnRequestPermissionsResu
         Contexto = contexto;
     }
 
-    public Boolean EstoyHabilitado(){
-        return Habilitado;
-    }
-
-    public void CheckearPermisosyPedirlos() {
+    public Boolean CheckearPermisosyPedirlos() {
 
         int PermisoFineLocation = ActivityCompat.checkSelfPermission(Contexto, Manifest.permission.ACCESS_FINE_LOCATION);
         int PermisoCoarseLocation = ActivityCompat.checkSelfPermission(Contexto, Manifest.permission.ACCESS_COARSE_LOCATION);
@@ -36,6 +32,7 @@ public class CheckeaPermisos implements  ActivityCompat.OnRequestPermissionsResu
 
             Habilitado = true;
         }
+        return Habilitado;
     }
 
     @Override

@@ -35,6 +35,7 @@ import java.util.Date;
 public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.ContenedorDeViews> {
 
     Activity contexto;
+   
 
     public void setArrayListUsado(ArrayList<Mascota> arrayListUsado) {
         ArrayListUsado = arrayListUsado;
@@ -76,7 +77,7 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Cont
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
-    public void onBindViewHolder(@NonNull final ContenedorDeViews contenedorDeViews, final int position) {
+    public void onBindViewHolder(@NonNull  ContenedorDeViews contenedorDeViews, final int position) {
 
         final Mascota mascota = ArrayListUsado.get(position);
 
@@ -115,7 +116,7 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Cont
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(contexto, ActividadInformacionDeMascota.class);
-                intent.putExtra("position", position);
+                intent.putExtra("pk", mascota.getPk());
                 contexto.startActivity(intent);
             }
         });
