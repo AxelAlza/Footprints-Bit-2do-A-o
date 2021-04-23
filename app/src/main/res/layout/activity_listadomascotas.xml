@@ -39,6 +39,8 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:contentDescription="descripcion"
+        android:backgroundTint="@color/colorPrimary"
+        app:fabSize="mini"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.912"

@@ -105,7 +105,7 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Cont
 
 
         contenedorDeViews.TvNombreMascota.setText(mascota.getNombre());
-        contenedorDeViews.TvUsuario.setText(mascota.getUsuario());
+        //contenedorDeViews.TvUsuario.setText(mascota.getUsuario());
         String recompensa = "$" + mascota.getRecompensa();
         contenedorDeViews.TvRecompensaMascota.setText(recompensa);
         contenedorDeViews.TvDescripcionMascota.setText(mascota.getDescripcion());
@@ -130,7 +130,7 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Cont
 
     public static class ContenedorDeViews extends RecyclerView.ViewHolder {
         CardView cardView;
-        TextView TvNombreMascota, TvUsuario, TvDescripcionMascota, TvRecompensaMascota, TvFechaYHora, TvTelefono;
+        TextView TvNombreMascota, /*TvUsuario,*/ TvDescripcionMascota, TvRecompensaMascota, TvFechaYHora, TvTelefono;
         ImageView ImvMascota;
         ImageButton IbEliminarMascota;
 
@@ -139,7 +139,7 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Cont
             super(itemView);
             cardView = itemView.findViewById(R.id.cardviewMascota);
             TvNombreMascota = itemView.findViewById(R.id.TvNombreMascota);
-            TvUsuario = itemView.findViewById(R.id.TVusuario);
+            //TvUsuario = itemView.findViewById(R.id.TVusuario);
             TvRecompensaMascota = itemView.findViewById(R.id.TvRecompensaMascota);
             TvDescripcionMascota = itemView.findViewById(R.id.TvDescripcionMascota);
             TvFechaYHora = itemView.findViewById(R.id.TvFechaYHora);

@@ -19,7 +19,7 @@ import java.time.temporal.TemporalAccessor;
 
 public class ActividadInformacionDeMascota extends AppCompatActivity {
 
-    TextView TvNombreMascota, TvUsuario, TvEspecieMascota, TvRazaMascota, TvDescripcionMascota, TvEdadMascota, TvGeneroMascota, TvColorMascota, TvRecompensaMascota, TvFechaYHora, TvUltimaConocida, TvTamanoMascota;
+    TextView TvNombreMascota, TvUsuario, TvEspecieMascota, TvRazaMascota, TvDescripcionMascota, TvEdadMascota, TvGeneroMascota, TvColorMascota, TvRecompensaMascota, TvFechaYHora, TvUltimaConocida, TvTamanoMascota, TvTelefono;
     ImageView ImvMascota;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -50,6 +50,8 @@ public class ActividadInformacionDeMascota extends AppCompatActivity {
         TvDescripcionMascota.setText(mascota.getDescripcion());
         TvRazaMascota.setText(mascota.getRaza());
         TvEspecieMascota.setText(mascota.getEspecie());
+        TvTelefono.setText(mascota.getUsuariotelefono());
+
 
         /////Las fechas se resisten, por que son asi?
         TemporalAccessor date = null;
@@ -85,5 +87,6 @@ public class ActividadInformacionDeMascota extends AppCompatActivity {
         TvTamanoMascota = findViewById(R.id.TvTamanoMascota);
         TvUltimaConocida = findViewById(R.id.TvUltimaPosicionConocida);
         ImvMascota = findViewById(R.id.ImvMascota);
+        TvTelefono = findViewById(R.id.TvTelefono);
     }
 }
