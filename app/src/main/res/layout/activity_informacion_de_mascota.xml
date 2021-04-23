@@ -43,6 +43,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Nombre Mascota"
+            android:textAllCaps="true"
+            android:textStyle="bold"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             android:textColor="#000000"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -118,7 +120,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="8dp"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -135,7 +137,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/mail"
-                android:textAlignment="center"
+                android:textAlignment="viewStart"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="137dp"
+                android:layout_height="wrap_content"
+                android:text="@string/telefono"
                 android:textStyle="bold" />
 
             <TextView
@@ -144,7 +153,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/recompenza"
-                android:textAlignment="center"
+                android:textAlignment="viewStart"
                 android:textStyle="bold" />
 
         </TableRow>
@@ -160,11 +169,15 @@
                 android:layout_span="1"
                 android:layout_weight="1"
                 android:ems="10"
-                android:text="usuario"
-                android:textAlignment="center"
+                android:textAlignment="viewStart"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                android:textColor="#000000"
-                android:textStyle="italic" />
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/TvTelefono"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold|italic" />
 
             <TextView
                 android:id="@+id/TvRecompensaMascota"
@@ -173,8 +186,8 @@
                 android:layout_span="1"
                 android:layout_weight="1"
                 android:text="recompensa"
-                android:textAlignment="center"
-                android:textStyle="italic" />
+                android:textAlignment="viewStart"
+                android:textStyle="bold|italic" />
 
         </TableRow>
 
@@ -192,7 +205,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -209,7 +222,7 @@
                 android:layout_span="1"
                 android:layout_weight="1"
                 android:text="@string/especie"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:textStyle="bold" />
 
             <TextView
@@ -218,7 +231,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/raza"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:textStyle="bold" />
 
             <TextView
@@ -227,7 +240,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/genero"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:textStyle="bold" />
 
         </TableRow>
@@ -242,7 +255,7 @@
                 android:layout_height="wrap_content"
                 android:layout_span="1"
                 android:layout_weight="1"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textStyle="italic" />
 
@@ -254,7 +267,7 @@
                 android:layout_weight="1"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
                 android:textColor="@color/cardview_dark_background"
                 android:textStyle="italic" />
@@ -265,7 +278,7 @@
                 android:layout_height="wrap_content"
                 android:layout_span="1"
                 android:layout_weight="1"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
                 android:textColor="@color/cardview_dark_background"
                 android:textStyle="italic" />
@@ -281,7 +294,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/color_mascota"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:textStyle="bold" />
 
             <TextView
@@ -290,7 +303,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/tamano"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:textStyle="bold" />
 
             <TextView
@@ -299,7 +312,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/edad"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:textStyle="bold" />
         </TableRow>
 
@@ -313,7 +326,7 @@
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
                 android:textColor="@color/cardview_dark_background"
                 android:textStyle="italic" />
@@ -323,7 +336,7 @@
                 android:layout_width="99dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:textStyle="italic" />
 
             <TextView
@@ -331,7 +344,7 @@
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:textStyle="italic" />
 
         </TableRow>

@@ -62,7 +62,7 @@
     <string name="edad">Edad</string>
     <string name="tamano">Tamaño</string>
     <string name="descripcion">Descripcion</string>
-    <string name="recompenza">Recompenza $</string>
+    <string name="recompenza">Recompensa $</string>
     <string name="mail">Usuario</string>
     <!--
     This string is used for square devices and overridden by hello_world in
