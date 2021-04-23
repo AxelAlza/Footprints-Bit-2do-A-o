@@ -48,12 +48,10 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
             @Override
             public void onClick(View v) {
 
-
                 //Aca Validamos correo y contraseña
 
                 String inputEmail = uiEmail.getText().toString();
                 String inputPassword = uiPassword.getText().toString();
-
 
                 if (inputEmail.isEmpty() || inputPassword.isEmpty()) {
 
@@ -64,7 +62,6 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
                     Pattern pattern = Pattern
                             .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                                     + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-
 
                     Matcher matcher = pattern.matcher(inputEmail);
 
@@ -80,7 +77,6 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
                         EnviarJSON enviarDatosLogin = new EnviarJSON(LoginActivity.this, RutasUrl.RutaDeProduccion + "/usuario/loginmovil", resultado);
                         enviarDatosLogin.setDelegate(LoginActivity.this);
                         enviarDatosLogin.execute();
-
 
                     } else {
                         Toast.makeText(LoginActivity.this, "Ingrese correctamente su Email", Toast.LENGTH_SHORT).show();
@@ -115,7 +111,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
     @Override
     public void AlConseguirDato(String output) {
         output = output.trim();
-        if (output.length()>5){
+        if (output.length() > 5) {
             Gson gson = new Gson();
             Usuario user = gson.fromJson(output, Usuario.class);
             SesionDeUsuario.Login(user.getEmail(), user.getContrasena(), user.getTelefono(), LoginActivity.this);
@@ -127,7 +123,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
         switch (output) {
             case "1":
                 Toast.makeText(LoginActivity.this, "Su mail no esta registrado", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(LoginActivity.this , RegistroUsuarios.class );
+                Intent intent = new Intent(LoginActivity.this, RegistroUsuarios.class);
                 startActivity(intent);
                 break;
             case "2":
