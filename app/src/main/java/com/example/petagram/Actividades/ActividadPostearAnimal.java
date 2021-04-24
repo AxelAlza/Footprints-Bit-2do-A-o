@@ -80,7 +80,7 @@ public class ActividadPostearAnimal extends AppCompatActivity implements AsyncRe
                     mascota = null;
                     Gson gson = new GsonBuilder().setPrettyPrinting().create();
                     int edad, recompensa;
-                    String nombre, especie, raza, color, descripcion, usuario, direccion,telefono;
+                    String nombre, especie, raza, color, descripcion, usuario, direccion, telefono;
                     nombre = EditTextNombre.getText().toString();
                     especie = EditTextEspecie.getText().toString();
                     raza = EditTextRaza.getText().toString();
@@ -94,7 +94,7 @@ public class ActividadPostearAnimal extends AppCompatActivity implements AsyncRe
                     Date currentTime = Calendar.getInstance(TimeZone.getDefault()).getTime();
                     DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
                     String fecha_y_hora = dateFormat.format(currentTime);
-                    mascota = new Mascota(edad, recompensa, usuario, nombre, especie, raza, color, genero, tamaño, ImagenBase64, descripcion, direccion, fecha_y_hora , telefono);
+                    mascota = new Mascota(edad, recompensa, usuario, nombre, especie, raza, color, genero, tamaño, ImagenBase64, descripcion, direccion, fecha_y_hora, telefono);
                     String datos_a_enviar = gson.toJson(mascota);
 
                     EnviarJSON enviarJSON = new EnviarJSON(ActividadPostearAnimal.this, RutasUrl.RutaDeProduccion + "/mascota/agregarmascotamovil/", datos_a_enviar);
@@ -256,22 +256,16 @@ public class ActividadPostearAnimal extends AppCompatActivity implements AsyncRe
     public void AlConseguirDato(String output) {
         Log.d("Milog", "PostearMascota: " + output);
         output = output.trim();
-        switch (output) {
-            case "0":
-                Toast.makeText(this, "Se agrego la mascota", Toast.LENGTH_SHORT).show();
-                Datos.AgregarMascota(mascota);
-                Intent intent = new Intent(ActividadPostearAnimal.this, ActividadListadoMascotas.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityIfNeeded(intent, 0);
-                break;
-            case "1":
-                Toast.makeText(this, "Ocurrio un error posteando la mascota", Toast.LENGTH_SHORT).show();
-
-                break;
-            default:
-                Toast.makeText(this, "Ni idea de que paso", Toast.LENGTH_SHORT).show();
-
-                break;
+        if ("-1".equals(output)) {
+            Toast.makeText(this, "Ocurrio un error posteando la mascota", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Se agrego la mascota", Toast.LENGTH_SHORT).show();
+            mascota.setPk(Integer.parseInt(output));
+            Datos.AgregarMascota(mascota);
+            Intent intent = new Intent(ActividadPostearAnimal.this, ActividadListadoMascotas.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivityIfNeeded(intent, 0);
+            finish();
         }
     }
 

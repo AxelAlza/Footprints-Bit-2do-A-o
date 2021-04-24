@@ -21,7 +21,10 @@ import java.util.Comparator;
 public class Datos implements AsyncResponse {
 
     private static Datos single_instance = null;
-    private static ArrayList<Mascota> TodasLasMascotas = null;
+
+
+    private static ArrayList<Mascota> TodasLasMascotas;
+    private static ArrayList<Mascota> ArrayEnUso = null;
     private static ListenerDeDatos listenerDeDatos;
     private Activity contexto;
 
@@ -36,13 +39,14 @@ public class Datos implements AsyncResponse {
     }
 
     public static void AgregarMascota(Mascota mascota) {
+        ArrayEnUso.add(mascota);
         TodasLasMascotas.add(mascota);
-        int position = TodasLasMascotas.indexOf(mascota);
+        int position = ArrayEnUso.indexOf(mascota);
         listenerDeDatos.OnSeAgregoMascota(position);
     }
 
     public static void ModificarMascota(Mascota mascota) {
-        int position = TodasLasMascotas.indexOf(mascota);
+        int position = ArrayEnUso.indexOf(mascota);
         listenerDeDatos.OnSeModificoMascota(position);
     }
 
@@ -55,8 +59,9 @@ public class Datos implements AsyncResponse {
         enviarJSON.setDelegate(Datos.getInstance());
         enviarJSON.execute();
 
-        int position = TodasLasMascotas.indexOf(mascota);
+        int position = ArrayEnUso.indexOf(mascota);
         TodasLasMascotas.remove(mascota);
+        ArrayEnUso.remove(mascota);
         listenerDeDatos.OnSeEliminoMascota(position);
     }
 
@@ -70,26 +75,21 @@ public class Datos implements AsyncResponse {
         }
     }
 
-    public static ArrayList<Mascota> getTodasLasMascotas() {
-        return TodasLasMascotas;
-    }
-
-    private void setMascotas(ArrayList<Mascota> mascotas) {
-        TodasLasMascotas = mascotas;
-    }
 
     public static void setListenerDeDatos(ListenerDeDatos listenerDeDatos) {
         Datos.listenerDeDatos = listenerDeDatos;
     }
 
     public static ArrayList<Mascota> getMascotasDelUsuario(final Activity contexto) {
-        return Lists.newArrayList(Collections2.filter(TodasLasMascotas, new Predicate<Mascota>() {
+        ArrayList<Mascota> ordenado = Lists.newArrayList(Collections2.filter(ArrayEnUso, new Predicate<Mascota>() {
                     @Override
                     public boolean apply(@NullableDecl Mascota input) {
                         return input.getUsuario().equals(SesionDeUsuario.ConseguirEmailDeSesion(contexto));
                     }
                 })
         );
+        ArrayEnUso = ordenado;
+        return ArrayEnUso;
     }
 
     public static ArrayList<Mascota> getMascotasMasRecientes() {
@@ -101,7 +101,8 @@ public class Datos implements AsyncResponse {
                 return DateParser.ParseDate(o1.getFecha_denuncia()).compareTo(DateParser.ParseDate(o2.getFecha_denuncia()));
             }
         }.reversed());
-        return ordenado;
+        ArrayEnUso = ordenado;
+        return ArrayEnUso;
     }
 
     public static ArrayList<Mascota> getMascotasCercanasAmi() {
@@ -126,8 +127,18 @@ public class Datos implements AsyncResponse {
                 }
             });
         }
-        return arrayList;
+        ArrayEnUso = arrayList;
+        return ArrayEnUso;
     }
+
+    public static ArrayList<Mascota> getTodasLasMascotas() {
+        return TodasLasMascotas;
+    }
+
+    public static void setTodasLasMascotas(ArrayList<Mascota> todasLasMascotas) {
+        TodasLasMascotas = todasLasMascotas;
+    }
+
 
     @Override
     public void AlConseguirDato(String output) {
@@ -138,7 +149,7 @@ public class Datos implements AsyncResponse {
             Mascota[] array = gson.fromJson(output, Mascota[].class);
             ArrayList<Mascota> mascotas = new ArrayList<>();
             Collections.addAll(mascotas, array);
-            Datos.getInstance().setMascotas(mascotas);
+            Datos.getInstance().setTodasLasMascotas(mascotas);
             ((ActividadListadoMascotas) Datos.getInstance().contexto).InicializarAdaptador();
         }
         if ("0".equals(output)) {

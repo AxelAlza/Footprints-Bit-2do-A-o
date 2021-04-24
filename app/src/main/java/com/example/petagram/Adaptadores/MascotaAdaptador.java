@@ -25,10 +25,7 @@ import com.example.petagram.Utilidades.FormateadorDeImagenes;
 import com.example.petagram.Utilidades.ListenerDeDatos;
 import com.example.petagram.Utilidades.SesionDeUsuario;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.Date;
 
