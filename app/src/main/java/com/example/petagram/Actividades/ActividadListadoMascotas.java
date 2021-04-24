@@ -69,7 +69,9 @@ public class ActividadListadoMascotas extends AppCompatActivity {
                         toast = "buscar";
                         break;
                     case R.id.MenuItemCercanosAMi:
+
                         mascotaAdaptador.setArrayListUsado(Datos.getMascotasCercanasAmi());
+
                         break;
                     case R.id.MenuItemEncontreUnaMascota:
                         Intent Encontre = new Intent(ActividadListadoMascotas.this, ActividadPostearAnimal.class);

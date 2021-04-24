@@ -1,4 +1,4 @@
-package com.example.petagram;
+package com.example.petagram.Actividades;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,7 +13,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.petagram.Actividades.LoginActivity;
 import com.example.petagram.Modelo.Usuario;
+import com.example.petagram.R;
 import com.example.petagram.Utilidades.AsyncResponse;
 import com.example.petagram.Utilidades.EnviarJSON;
 import com.example.petagram.Utilidades.RutasUrl;
