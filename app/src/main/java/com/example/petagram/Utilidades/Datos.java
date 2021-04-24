@@ -132,7 +132,8 @@ public class Datos implements AsyncResponse {
     }
 
     public static ArrayList<Mascota> getTodasLasMascotas() {
-        return TodasLasMascotas;
+        ArrayEnUso = new ArrayList<>(TodasLasMascotas);
+        return ArrayEnUso;
     }
 
     public static void setTodasLasMascotas(ArrayList<Mascota> todasLasMascotas) {
