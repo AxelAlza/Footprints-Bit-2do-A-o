@@ -29,11 +29,7 @@ import java.util.regex.Matcher;
 
 public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse {
 
-    EditText nombre_usuario;
-    EditText email;
-    EditText contrasena;
-    EditText confContrasena;
-    EditText telefono;
+    EditText nombre_usuario, email, contrasena, confContrasena, telefono;
     Button confirmar;
     TextView login;
 
@@ -60,8 +56,6 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
         confirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 if (Confirmar()) {
                     Toast t = Toast.makeText(RegistroUsuarios.this, "Registro en proceso....", Toast.LENGTH_SHORT);
                     t.show();
@@ -71,7 +65,6 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
                     EnviarJSON datReg = new EnviarJSON(RegistroUsuarios.this, RutasUrl.RutaDeProduccion + "/usuario/registrousuariomovil", datos);
                     datReg.execute();
                 }
-
             }
 
         });
@@ -89,10 +82,8 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
 
 
     Boolean Confirmar() {
-
         boolean validar = true;
         // chequear para validar el nombre de usuario.
-
         if (isEmpty(nombre_usuario)) {
 
             nombre_usuario.setError("¡Debe ingresar el nombre para registrarse!");
@@ -102,15 +93,13 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
         if (email.getText().length() == 0) {
             email.setError("Introduce un email");
 
-        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString().trim()).matches()) {
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email.getText().toString().trim()).matches()) {
             Toast.makeText(getApplicationContext(), "Por favor, introduce una dirección de correo electrónico válida!!!", Toast.LENGTH_SHORT).show();
             validar = false;
         }
 
 
         // chequear para validar la contraseña.
-
-
         if (isEmpty(contrasena)) {
             contrasena.setError("¡Ingrese un una contraseña válida!");
             validar = false;
@@ -126,10 +115,13 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
         } else if (confContrasena.getText().length() < 6) {
             confContrasena.setError(getResources().getString(R.string.error_invalid_password2));
             validar = false;
-        }
-
+        }else
 
         //implementar que coincidan las contraseñas (FALTA)
+        if(!confContrasena.getText().toString().equals(contrasena.getText().toString())) {
+            confContrasena.setError("La contraseña ingresada no coincide!!! Vuelva a intentarlo!!!");
+            validar = false;
+        }
 
 
         // chequear para validar el número de teléfono.
@@ -141,10 +133,7 @@ public class RegistroUsuarios extends AppCompatActivity implements AsyncResponse
             telefono.setError("¡Ha ingresado un número inválido!");
             validar = false;
         }
-
-
         return validar;
-
     }
 
     public void Volver() {
