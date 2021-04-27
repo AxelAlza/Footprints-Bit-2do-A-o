@@ -47,6 +47,7 @@ public class ActividadListadoMascotas extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ActividadListadoMascotas.this, ActividadPostearAnimal.class);
+                intent.putExtra("Modo" , false);
                 startActivity(intent);
             }
         });

@@ -4,8 +4,11 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +16,7 @@ import com.example.petagram.Modelo.Mascota;
 import com.example.petagram.R;
 import com.example.petagram.Utilidades.Datos;
 import com.example.petagram.Utilidades.FormateadorDeImagenes;
+import com.example.petagram.Utilidades.SesionDeUsuario;
 
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAccessor;
@@ -21,21 +25,49 @@ public class ActividadInformacionDeMascota extends AppCompatActivity {
 
     TextView TvNombreMascota, TvUsuario, TvEspecieMascota, TvRazaMascota, TvDescripcionMascota, TvEdadMascota, TvGeneroMascota, TvColorMascota, TvRecompensaMascota, TvFechaYHora, TvUltimaConocida, TvTamanoMascota, TvTelefono;
     ImageView ImvMascota;
+    Button EditarMascota;
+    Mascota mascota;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
+
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informacion_de_mascota);
         InicializarViews();
         Intent intent = getIntent();
         int pk = intent.getIntExtra("pk", 0);
-        Mascota mascota = null;
+
+
+        EditarMascota = findViewById(R.id.btnEditarMascota);
+
         for (Mascota m : Datos.getTodasLasMascotas()) {
             if(m.getPk() == pk){
                 mascota = m;
             }
         }
+
+        if (mascota.getUsuario().equals(SesionDeUsuario.ConseguirEmailDeSesion(this))) {
+            EditarMascota.setVisibility(View.VISIBLE);
+            EditarMascota.setEnabled(true);
+
+            EditarMascota.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(ActividadInformacionDeMascota.this, ActividadPostearAnimal.class);
+                    intent.putExtra("Modo" , true);
+                    intent.putExtra("pk" , mascota.getPk());
+                    startActivity(intent);
+                }
+            });
+        } else {
+            EditarMascota.setVisibility(View.INVISIBLE);
+            EditarMascota.setEnabled(false);
+        }
+
+
         RellenarCampos(mascota);
     }
 

@@ -45,16 +45,27 @@ public class ActividadPostearAnimal extends AppCompatActivity implements AsyncRe
     ImageButton ImageButtonImagen, ImageButtonMapa;
     Boolean FotoAsignada = false;
     Mascota mascota;
+    Boolean Modo;
     public static final int PICK_IMAGE = 1;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_postear_animal);
+        Modo = getIntent().getBooleanExtra("Modo", false);
+        int pk = getIntent().getIntExtra("pk", 0);
         InicializarViews();
         OnClickBotonImagen();
         OnClickPostear();
         OnClickImageButtonMapa();
+        if (Modo) {
+            for (Mascota m : Datos.getTodasLasMascotas()) {
+                if (m.getPk() == pk) {
+                    mascota = m;
+                }
+            }
+            RellenarCampos(mascota);
+        }
     }
 
     private void OnClickImageButtonMapa() {
@@ -70,6 +81,21 @@ public class ActividadPostearAnimal extends AppCompatActivity implements AsyncRe
                 EditTextDireccion.setText(direccion);
             }
         });
+    }
+
+    private void RellenarCampos(Mascota mascota) {
+
+        EditTextColor.setText(mascota.getColor());
+        EditTextDescripcion.setText(mascota.getDescripcion());
+        EditTextEdad.setText(String.valueOf(mascota.getEdad()));
+        EditTextEspecie.setText(mascota.getEspecie());
+        EditTextNombre.setText(mascota.getNombre());
+        EditTextRaza.setText(mascota.getRaza());
+        EditTextRecompensa.setText(String.valueOf(mascota.getRecompensa()));
+        ImageButtonImagen.setImageBitmap(FormateadorDeImagenes.DesdeBase64(mascota.getImagen()));
+        EditTextDireccion.setText(mascota.getUltima_posicion_conocida());
+
+
     }
 
     private void OnClickPostear() {

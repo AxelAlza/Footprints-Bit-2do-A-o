@@ -54,13 +54,20 @@ public class DevuelveGps {
 
     public static Address ConseguirLatyLong(String Direccion, Activity context) {
         Geocoder geocoder = new Geocoder(context, locale);
+        Address pordefecto = new Address(locale);
+        pordefecto.setLatitude(-34.905948);
+        pordefecto.setLongitude(-56.191350);
         List<Address> direcciones = null;
         try {
             direcciones = geocoder.getFromLocationName(Direccion, 1);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return direcciones.get(0);
+        if (direcciones.size() == 0){
+            return pordefecto;
+        } else {
+            return direcciones.get(0);
+        }
     }
 
     public static Boolean CheckearUbicacionActivadaYPedirla(final Activity contexto) {
