@@ -43,7 +43,7 @@ public class ActividadInformacionDeMascota extends AppCompatActivity {
 
         EditarMascota = findViewById(R.id.btnEditarMascota);
 
-        for (Mascota m : Datos.getTodasLasMascotas()) {
+        for (Mascota m : Datos.TodasLasMascotas) {
             if(m.getPk() == pk){
                 mascota = m;
             }

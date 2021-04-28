@@ -52,23 +52,42 @@ public class DevuelveGps {
         return ubicacion;
     }
 
-    public static Address ConseguirLatyLong(String Direccion, Activity context) {
-        Geocoder geocoder = new Geocoder(context, locale);
+    public static Address ConseguirLatyLong(final String Direccion, Activity context) {
+        final Geocoder geocoder = new Geocoder(context, locale);
         Address pordefecto = new Address(locale);
         pordefecto.setLatitude(-34.905948);
         pordefecto.setLongitude(-56.191350);
-        List<Address> direcciones = null;
+        final List<Address>[] direcciones = new List[1];
+
+        Thread thread = new Thread() {
+            public void run() {
+                try {
+
+                    direcciones[0] = geocoder.getFromLocationName(Direccion, 1);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        thread.start();
         try {
-            direcciones = geocoder.getFromLocationName(Direccion, 1);
-        } catch (IOException e) {
+            thread.join(0);
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        if (direcciones.size() == 0){
+        if (direcciones[0] == null) {
             return pordefecto;
         } else {
-            return direcciones.get(0);
+            if (direcciones[0].size() == 0)
+            return pordefecto;
+            else {
+                return direcciones[0].get(0);
+            }
+
         }
     }
+
 
     public static Boolean CheckearUbicacionActivadaYPedirla(final Activity contexto) {
         if (ManagerDeUbicacion == null) {
@@ -102,27 +121,26 @@ public class DevuelveGps {
         checkeaPermisos = new CheckeaPermisos(context);
         Location MejorUbicacion = null;
         if (checkeaPermisos.CheckearPermisosyPedirlos() && CheckearUbicacionActivadaYPedirla(context)) {
-                if (!Trackeando) {
-                    EmpezarTrackeo();
+            if (!Trackeando) {
+                EmpezarTrackeo();
+            }
+
+            ///Hay que fijarse en cada proveedor de ubicacion, tambien fijarse cual es la mas aproximada
+            List<String> Proveedores = ManagerDeUbicacion.getProviders(true);
+            MejorUbicacion = null;
+            for (String Proveedor : Proveedores) {
+                Location l = ManagerDeUbicacion.getLastKnownLocation(Proveedor);
+                //Si un proveedor no puede darme una ubicacion ignoro el proveedor
+                if (l == null) {
+                    continue;
                 }
 
-                ///Hay que fijarse en cada proveedor de ubicacion, tambien fijarse cual es la mas aproximada
-                List<String> Proveedores = ManagerDeUbicacion.getProviders(true);
-                MejorUbicacion = null;
-                for (String Proveedor : Proveedores) {
-                    Location l = ManagerDeUbicacion.getLastKnownLocation(Proveedor);
-                    //Si un proveedor no puede darme una ubicacion ignoro el proveedor
-                    if (l == null) {
-                        continue;
-                    }
-
-                    ///Checkeo cual de todas las ubicaciones de los proveedores son las mas exactas y me quedo con la mas precisa
-                    if (MejorUbicacion == null || l.getAccuracy() < MejorUbicacion.getAccuracy()) {
-                        MejorUbicacion = l;
-                    }
+                ///Checkeo cual de todas las ubicaciones de los proveedores son las mas exactas y me quedo con la mas precisa
+                if (MejorUbicacion == null || l.getAccuracy() < MejorUbicacion.getAccuracy()) {
+                    MejorUbicacion = l;
                 }
-        }
-        else{
+            }
+        } else {
         }
         return MejorUbicacion;
     }

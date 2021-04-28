@@ -23,8 +23,8 @@ public class Datos implements AsyncResponse {
     private static Datos single_instance = null;
 
 
-    private static ArrayList<Mascota> TodasLasMascotas;
-    private static ArrayList<Mascota> ArrayEnUso = null;
+    public static ArrayList<Mascota> TodasLasMascotas;
+    public static ArrayList<Mascota> ArrayEnUso = new ArrayList<>();
     private static ListenerDeDatos listenerDeDatos;
     private Activity contexto;
 
@@ -82,20 +82,19 @@ public class Datos implements AsyncResponse {
     }
 
     public static ArrayList<Mascota> getMascotasDelUsuario(final Activity contexto) {
-        ArrayList<Mascota> ordenado = Lists.newArrayList(Collections2.filter(ArrayEnUso, new Predicate<Mascota>() {
-                    @Override
-                    public boolean apply(@NullableDecl Mascota input) {
-                        return input.getUsuario().equals(SesionDeUsuario.ConseguirEmailDeSesion(contexto));
-                    }
-                })
-        );
+        ArrayList<Mascota> ordenado = new ArrayList<>();
+        for (Mascota m : TodasLasMascotas) {
+            if (m.getUsuario().equals(SesionDeUsuario.ConseguirEmailDeSesion(contexto))) {
+                ordenado.add(m);
+            }
+        }
         ArrayEnUso = ordenado;
         return ArrayEnUso;
     }
 
     public static ArrayList<Mascota> getMascotasMasRecientes() {
 
-        ArrayList<Mascota> ordenado = new ArrayList<>(getTodasLasMascotas());
+        ArrayList<Mascota> ordenado = new ArrayList<>(TodasLasMascotas);
         Collections.sort(ordenado, new Comparator<Mascota>() {
             @Override
             public int compare(Mascota o1, Mascota o2) {
@@ -109,8 +108,8 @@ public class Datos implements AsyncResponse {
     public static ArrayList<Mascota> getMascotasCercanasAmi() {
 
         Location MiUbicacion = DevuelveGps.getUbicacion(Datos.getInstance().contexto);
-        ArrayList<Mascota> arrayList = new ArrayList<>(getTodasLasMascotas());
-        if (MiUbicacion != null){
+        ArrayList<Mascota> arrayList = new ArrayList<>(TodasLasMascotas);
+        if (MiUbicacion != null) {
             final Location finalMiUbicacion = MiUbicacion;
             arrayList.sort(new Comparator<Mascota>() {
                 @Override
@@ -151,7 +150,8 @@ public class Datos implements AsyncResponse {
             Mascota[] array = gson.fromJson(output, Mascota[].class);
             ArrayList<Mascota> mascotas = new ArrayList<>();
             Collections.addAll(mascotas, array);
-            Datos.getInstance().setTodasLasMascotas(mascotas);
+            setTodasLasMascotas(mascotas);
+            ((ActividadListadoMascotas) Datos.getInstance().contexto).mascotaAdaptador.setArrayListUsado(getTodasLasMascotas());
             ((ActividadListadoMascotas) Datos.getInstance().contexto).InicializarAdaptador();
         }
         if ("0".equals(output)) {

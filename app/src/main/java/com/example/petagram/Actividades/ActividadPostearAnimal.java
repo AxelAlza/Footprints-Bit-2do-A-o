@@ -3,6 +3,7 @@ package com.example.petagram.Actividades;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.hardware.SensorAdditionalInfo;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -55,16 +56,22 @@ public class ActividadPostearAnimal extends AppCompatActivity implements AsyncRe
         Modo = getIntent().getBooleanExtra("Modo", false);
         int pk = getIntent().getIntExtra("pk", 0);
         InicializarViews();
+        InicializarModo(pk);
         OnClickBotonImagen();
         OnClickPostear();
         OnClickImageButtonMapa();
+
+    }
+
+    private void InicializarModo(int pk) {
         if (Modo) {
-            for (Mascota m : Datos.getTodasLasMascotas()) {
+            for (Mascota m : Datos.TodasLasMascotas) {
                 if (m.getPk() == pk) {
                     mascota = m;
                 }
             }
             RellenarCampos(mascota);
+            Postear.setText("Modificar");
         }
     }
 
@@ -84,7 +91,6 @@ public class ActividadPostearAnimal extends AppCompatActivity implements AsyncRe
     }
 
     private void RellenarCampos(Mascota mascota) {
-
         EditTextColor.setText(mascota.getColor());
         EditTextDescripcion.setText(mascota.getDescripcion());
         EditTextEdad.setText(String.valueOf(mascota.getEdad()));
@@ -94,8 +100,33 @@ public class ActividadPostearAnimal extends AppCompatActivity implements AsyncRe
         EditTextRecompensa.setText(String.valueOf(mascota.getRecompensa()));
         ImageButtonImagen.setImageBitmap(FormateadorDeImagenes.DesdeBase64(mascota.getImagen()));
         EditTextDireccion.setText(mascota.getUltima_posicion_conocida());
-
-
+        FotoAsignada = true;
+        ImagenBase64 = mascota.getImagen();
+        RadioButton grande = findViewById(R.id.RadioTamañoGrande);
+        RadioButton mediano = findViewById(R.id.RadioTamañoMediano);
+        RadioButton pequeño = findViewById(R.id.RadioTamañoPequeño);
+        RadioButton macho = findViewById(R.id.RadioGeneropMacho);
+        RadioButton hembra = findViewById(R.id.RadioGeneroHembra);
+        genero = mascota.getGenero();
+        tamaño = mascota.getTamano();
+        switch (mascota.getGenero()) {
+            case "Hembra":
+                hembra.setChecked(true);
+                break;
+            case "Macho":
+                macho.setChecked(true);
+        }
+        switch (mascota.getTamano()) {
+            case "Grande":
+                grande.setChecked(true);
+                break;
+            case "Mediano":
+                mediano.setChecked(true);
+                break;
+            case "Pequeño":
+                pequeño.setChecked(true);
+                break;
+        }
     }
 
     private void OnClickPostear() {

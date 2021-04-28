@@ -32,23 +32,22 @@ import java.util.Date;
 public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.ContenedorDeViews> {
 
     Activity contexto;
-   
+    ArrayList<Mascota> ArrayListUsado;
 
     public void setArrayListUsado(ArrayList<Mascota> arrayListUsado) {
         ArrayListUsado = arrayListUsado;
         notifyDataSetChanged();
     }
 
-    ArrayList<Mascota> ArrayListUsado;
+
 
     public MascotaAdaptador(Activity contexto) {
-        this.ArrayListUsado = Datos.getTodasLasMascotas();
+
         this.contexto = contexto;
         Datos.setListenerDeDatos(new ListenerDeDatos() {
             @Override
             public void OnSeAgregoMascota(int position) {
                 notifyItemInserted(position);
-                Log.d("Milog", "Se agrego una mascota");
             }
 
             @Override
@@ -136,7 +135,6 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Cont
             super(itemView);
             cardView = itemView.findViewById(R.id.cardviewMascota);
             TvNombreMascota = itemView.findViewById(R.id.TvNombreMascota);
-            //TvUsuario = itemView.findViewById(R.id.TVusuario);
             TvRecompensaMascota = itemView.findViewById(R.id.TvRecompensaMascota);
             TvDescripcionMascota = itemView.findViewById(R.id.TvDescripcionMascota);
             TvFechaYHora = itemView.findViewById(R.id.TvFechaYHora);

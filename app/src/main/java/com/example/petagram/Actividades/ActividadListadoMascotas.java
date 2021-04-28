@@ -3,6 +3,7 @@ package com.example.petagram.Actividades;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -25,7 +26,7 @@ public class ActividadListadoMascotas extends AppCompatActivity {
     FloatingActionButton FabAgregarMascota;
     RecyclerView recyclerView;
     androidx.appcompat.widget.Toolbar TbListaMascotas;
-    MascotaAdaptador mascotaAdaptador;
+    public MascotaAdaptador mascotaAdaptador;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 
@@ -37,6 +38,7 @@ public class ActividadListadoMascotas extends AppCompatActivity {
         recyclerView = findViewById(R.id.RecyclerView);
         OnclickFabAgregarMascota();
         SetearMenuDeToolbar();
+        mascotaAdaptador = new MascotaAdaptador(this);
         Datos.InicializarDataSet(this);
 
     }
@@ -52,6 +54,20 @@ public class ActividadListadoMascotas extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("Milog", "onResume: " + Datos.ArrayEnUso.size());
+        if (mascotaAdaptador == null && Datos.TodasLasMascotas !=null){
+
+            mascotaAdaptador = new MascotaAdaptador(this);
+            mascotaAdaptador.setArrayListUsado(Datos.getTodasLasMascotas());
+            InicializarAdaptador();
+        }
+    }
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void SetearMenuDeToolbar() {
@@ -98,11 +114,13 @@ public class ActividadListadoMascotas extends AppCompatActivity {
 
         });
     }
-
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
 
     public void InicializarAdaptador() {
 
-        mascotaAdaptador = new MascotaAdaptador(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
