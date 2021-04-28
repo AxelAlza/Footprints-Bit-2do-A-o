@@ -47,6 +47,7 @@ public class ActividadPostearAnimal extends AppCompatActivity implements AsyncRe
     Boolean FotoAsignada = false;
     Mascota mascota;
     Boolean Modo;
+    int pk;
     public static final int PICK_IMAGE = 1;
 
     @Override
@@ -54,7 +55,7 @@ public class ActividadPostearAnimal extends AppCompatActivity implements AsyncRe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_postear_animal);
         Modo = getIntent().getBooleanExtra("Modo", false);
-        int pk = getIntent().getIntExtra("pk", 0);
+        pk = getIntent().getIntExtra("pk", 0);
         InicializarViews();
         InicializarModo(pk);
         OnClickBotonImagen();
@@ -72,6 +73,7 @@ public class ActividadPostearAnimal extends AppCompatActivity implements AsyncRe
             }
             RellenarCampos(mascota);
             Postear.setText("Modificar");
+
         }
     }
 
@@ -152,9 +154,15 @@ public class ActividadPostearAnimal extends AppCompatActivity implements AsyncRe
                     DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
                     String fecha_y_hora = dateFormat.format(currentTime);
                     mascota = new Mascota(edad, recompensa, usuario, nombre, especie, raza, color, genero, tamaño, ImagenBase64, descripcion, direccion, fecha_y_hora, telefono);
-                    String datos_a_enviar = gson.toJson(mascota);
 
-                    EnviarJSON enviarJSON = new EnviarJSON(ActividadPostearAnimal.this, RutasUrl.RutaDeProduccion + "/mascota/agregarmascotamovil/", datos_a_enviar);
+                    String Url = RutasUrl.RutaDeProduccion + "/mascota/agregarmascotamovil/";
+                    if (Modo){
+                        mascota.setPk(pk);
+                        Url = RutasUrl.RutaDeProduccion + "/mascota/modificarmascotamovil/";
+                    }
+
+                    String datos_a_enviar = gson.toJson(mascota);
+                    EnviarJSON enviarJSON = new EnviarJSON(ActividadPostearAnimal.this, Url, datos_a_enviar);
                     enviarJSON.setDelegate(ActividadPostearAnimal.this);
                     enviarJSON.execute();
                 } else {
@@ -313,17 +321,28 @@ public class ActividadPostearAnimal extends AppCompatActivity implements AsyncRe
     public void AlConseguirDato(String output) {
         Log.d("Milog", "PostearMascota: " + output);
         output = output.trim();
-        if ("-1".equals(output)) {
-            Toast.makeText(this, "Ocurrio un error posteando la mascota", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Se agrego la mascota", Toast.LENGTH_SHORT).show();
-            mascota.setPk(Integer.parseInt(output));
-            Datos.AgregarMascota(mascota);
-            Intent intent = new Intent(ActividadPostearAnimal.this, ActividadListadoMascotas.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            startActivityIfNeeded(intent, 0);
-            finish();
+        switch (output){
+            case "-1":
+                Toast.makeText(this, "Ocurrio un error posteando la mascota", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                Toast.makeText(this, "Se agrego la mascota", Toast.LENGTH_SHORT).show();
+                mascota.setPk(Integer.parseInt(output));
+                Datos.AgregarMascota(mascota);
+                Intent intent = new Intent(ActividadPostearAnimal.this, ActividadListadoMascotas.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityIfNeeded(intent, 0);
+                finish();
+            case "1":
+                Toast.makeText(this, "Se modifico la mascota", Toast.LENGTH_SHORT).show();
+                Datos.ModificarMascota(mascota);
+                Intent intent2 = new Intent(ActividadPostearAnimal.this, ActividadListadoMascotas.class);
+                intent2.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityIfNeeded(intent2, 0);
+                finish();
         }
+
+
     }
 
 

@@ -60,7 +60,6 @@ public class ActividadListadoMascotas extends AppCompatActivity {
         super.onResume();
         Log.d("Milog", "onResume: " + Datos.ArrayEnUso.size());
         if (mascotaAdaptador == null && Datos.TodasLasMascotas !=null){
-
             mascotaAdaptador = new MascotaAdaptador(this);
             mascotaAdaptador.setArrayListUsado(Datos.getTodasLasMascotas());
             InicializarAdaptador();

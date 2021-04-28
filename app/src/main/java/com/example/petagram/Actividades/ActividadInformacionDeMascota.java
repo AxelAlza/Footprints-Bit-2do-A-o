@@ -60,6 +60,7 @@ public class ActividadInformacionDeMascota extends AppCompatActivity {
                     intent.putExtra("Modo" , true);
                     intent.putExtra("pk" , mascota.getPk());
                     startActivity(intent);
+                    finish();
                 }
             });
         } else {

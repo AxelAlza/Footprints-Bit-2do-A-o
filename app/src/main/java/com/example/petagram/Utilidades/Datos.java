@@ -45,9 +45,25 @@ public class Datos implements AsyncResponse {
         listenerDeDatos.OnSeAgregoMascota(position);
     }
 
-    public static void ModificarMascota(Mascota mascota) {
-        int position = ArrayEnUso.indexOf(mascota);
-        listenerDeDatos.OnSeModificoMascota(position);
+    public static void ModificarMascota(Mascota modificada) {
+        Mascota originaltodaslasmascotas = null;
+        Mascota originalarrayenuso = null;
+        for (Mascota m : TodasLasMascotas){
+            if (m.getPk() == modificada.getPk()){
+                 originaltodaslasmascotas = m;
+            }
+        }
+        for (Mascota m : ArrayEnUso){
+            if (m.getPk() == modificada.getPk()){
+                originalarrayenuso = m;
+            }
+        }
+        int positionarrayenuso = ArrayEnUso.indexOf(originalarrayenuso);
+        int positiontodaslasmascotas = TodasLasMascotas.indexOf(originaltodaslasmascotas);
+        Log.d("Milog", "ModificarMascota:" + positionarrayenuso);
+        ArrayEnUso.set(positionarrayenuso,modificada);
+        TodasLasMascotas.set(positiontodaslasmascotas,modificada);
+        listenerDeDatos.OnSeModificoMascota(positionarrayenuso);
     }
 
     public static void EliminarMascota(Mascota mascota) {
