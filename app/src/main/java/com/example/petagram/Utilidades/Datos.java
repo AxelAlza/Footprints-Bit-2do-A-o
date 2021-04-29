@@ -7,12 +7,7 @@ import android.util.Log;
 
 import com.example.petagram.Actividades.ActividadListadoMascotas;
 import com.example.petagram.Modelo.Mascota;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.Lists;
 import com.google.gson.Gson;
-
-import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -91,7 +86,6 @@ public class Datos implements AsyncResponse {
             traeJSON.execute();
         }
     }
-
 
     public static void setListenerDeDatos(ListenerDeDatos listenerDeDatos) {
         Datos.listenerDeDatos = listenerDeDatos;

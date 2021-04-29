@@ -39,8 +39,6 @@ public class MascotaAdaptador extends RecyclerView.Adapter<MascotaAdaptador.Cont
         notifyDataSetChanged();
     }
 
-
-
     public MascotaAdaptador(Activity contexto) {
 
         this.contexto = contexto;
