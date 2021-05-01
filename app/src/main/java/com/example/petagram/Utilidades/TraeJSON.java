@@ -55,7 +55,8 @@ public class TraeJSON extends AsyncTask<String, Void, String > {
             URL Url = new URL(Direccion);
             connection = (HttpURLConnection) Url.openConnection();
             connection.connect();
-            if (connection.getResponseCode() == 200) {
+            if (connection.getResponseCode() == 200
+            ) {
                 InputStream stream = connection.getInputStream();
                 reader = new BufferedReader(new InputStreamReader(stream));
                 StringBuilder buffer = new StringBuilder();
@@ -92,12 +93,6 @@ public class TraeJSON extends AsyncTask<String, Void, String > {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Cargando");
         progressDialog.show();
-        progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                TraeJSON.this.cancel(true);
-            }
-        });
     }
 
 }

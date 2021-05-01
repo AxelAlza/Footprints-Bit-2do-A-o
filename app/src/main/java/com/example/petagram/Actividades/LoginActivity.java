@@ -1,6 +1,8 @@
 package com.example.petagram.Actividades;
 
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +19,7 @@ import com.example.petagram.R;
 import com.example.petagram.Actividades.RegistroUsuarios;
 import com.example.petagram.Utilidades.AsyncResponse;
 import com.example.petagram.Utilidades.EnviarJSON;
+import com.example.petagram.Utilidades.Internet;
 import com.example.petagram.Utilidades.RutasUrl;
 import com.example.petagram.Utilidades.SesionDeUsuario;
 import com.google.gson.Gson;
@@ -60,27 +63,32 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
 
                 } else {
 
-                    Pattern pattern = Pattern
-                            .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+                    if (Internet.TengoConexion(LoginActivity.this)) {
 
-                    Matcher matcher = pattern.matcher(inputEmail);
+                        Pattern pattern = Pattern
+                                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 
-                    if (matcher.find()) {
+                        Matcher matcher = pattern.matcher(inputEmail);
 
-                        // Cambio de formato de datosLogin
-                        JuntarDatosLogin datosLogin = new JuntarDatosLogin(inputEmail, inputPassword);
-                        Gson Convertidor = new Gson();
-                        String resultado = Convertidor.toJson(datosLogin);
-                        Log.d("Convertidor", resultado);
+                        if (matcher.find()) {
 
-                        // Enviando datosLogin al servidor como JSON
-                        EnviarJSON enviarDatosLogin = new EnviarJSON(LoginActivity.this, RutasUrl.RutaDeProduccion + "/usuario/loginmovil", resultado);
-                        enviarDatosLogin.setDelegate(LoginActivity.this);
-                        enviarDatosLogin.execute();
+                            // Cambio de formato de datosLogin
+                            JuntarDatosLogin datosLogin = new JuntarDatosLogin(inputEmail, inputPassword);
+                            Gson Convertidor = new Gson();
+                            String resultado = Convertidor.toJson(datosLogin);
+                            Log.d("Convertidor", resultado);
 
+                            // Enviando datosLogin al servidor como JSON
+                            EnviarJSON enviarDatosLogin = new EnviarJSON(LoginActivity.this, RutasUrl.RutaDeProduccion + "/usuario/loginmovil", resultado);
+                            enviarDatosLogin.setDelegate(LoginActivity.this);
+                            enviarDatosLogin.execute();
+
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Ingrese correctamente su Email", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
-                        Toast.makeText(LoginActivity.this, "Ingrese correctamente su Email", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Por favor conectese a internet", Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -102,8 +110,6 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
                 // Lo mando a la actividad RecoverPassword
                 Intent intent = new Intent(LoginActivity.this, RecoverPassword.class);
                 startActivity(intent);
-
-
             }
         });
     }

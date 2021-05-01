@@ -4,13 +4,16 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +30,7 @@ public class ActividadListadoMascotas extends AppCompatActivity {
     RecyclerView recyclerView;
     androidx.appcompat.widget.Toolbar TbListaMascotas;
     public MascotaAdaptador mascotaAdaptador;
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 
@@ -49,7 +53,7 @@ public class ActividadListadoMascotas extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ActividadListadoMascotas.this, ActividadPostearAnimal.class);
-                intent.putExtra("Modo" , false);
+                intent.putExtra("Modo", false);
                 startActivity(intent);
             }
         });
@@ -59,33 +63,49 @@ public class ActividadListadoMascotas extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.d("Milog", "onResume: " + Datos.ArrayEnUso.size());
-        if (mascotaAdaptador == null && Datos.TodasLasMascotas !=null){
+        if (mascotaAdaptador == null && Datos.TodasLasMascotas != null) {
             mascotaAdaptador = new MascotaAdaptador(this);
             mascotaAdaptador.setArrayListUsado(Datos.getTodasLasMascotas());
             InicializarAdaptador();
         }
     }
 
-
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void SetearMenuDeToolbar() {
         TbListaMascotas = findViewById(R.id.toolbar);
         TbListaMascotas.inflateMenu(R.menu.menu);
+        TbListaMascotas.setTitle("Bienvenido");
+        final SearchView searchView = findViewById(R.id.Buscar);
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                mascotaAdaptador.setArrayListUsado(Datos.getTodasLasMascotas());
+                TbListaMascotas.setTitle("Todas las mascotas");
+                return false;
+            }
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                mascotaAdaptador.setArrayListUsado(Datos.Buscar(newText));
+                return true;
+            }
+
+        });
         TbListaMascotas.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 int id = item.getItemId();
-
-                String toast = "";
                 switch (id) {
-                    case R.id.MenuItemBuscar:
-                        toast = "buscar";
-                        break;
                     case R.id.MenuItemCercanosAMi:
-
                         mascotaAdaptador.setArrayListUsado(Datos.getMascotasCercanasAmi());
-
+                        TbListaMascotas.setTitle("Cercanos a mi");
                         break;
                     case R.id.MenuItemEncontreUnaMascota:
                         Intent Encontre = new Intent(ActividadListadoMascotas.this, ActividadPostearAnimal.class);
@@ -99,20 +119,24 @@ public class ActividadListadoMascotas extends AppCompatActivity {
                         break;
                     case R.id.MenuItemRecientes:
                         mascotaAdaptador.setArrayListUsado(Datos.getMascotasMasRecientes());
+                        TbListaMascotas.setTitle("Recientes");
                         break;
                     case R.id.MenuItemTodos:
                         mascotaAdaptador.setArrayListUsado(Datos.getTodasLasMascotas());
+                        TbListaMascotas.setTitle("Todas las mascotas");
                         break;
                     case R.id.MenuItemMisMascotas:
                         mascotaAdaptador.setArrayListUsado(Datos.getMascotasDelUsuario(ActividadListadoMascotas.this));
+                        TbListaMascotas.setTitle("Mis mascotas");
                         break;
                 }
-                Toast.makeText(ActividadListadoMascotas.this, toast, Toast.LENGTH_SHORT).show();
+
                 return true;
             }
 
         });
     }
+
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);

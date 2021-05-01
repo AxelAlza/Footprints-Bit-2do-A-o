@@ -43,21 +43,21 @@ public class Datos implements AsyncResponse {
     public static void ModificarMascota(Mascota modificada) {
         Mascota originaltodaslasmascotas = null;
         Mascota originalarrayenuso = null;
-        for (Mascota m : TodasLasMascotas){
-            if (m.getPk() == modificada.getPk()){
-                 originaltodaslasmascotas = m;
+        for (Mascota m : TodasLasMascotas) {
+            if (m.getPk() == modificada.getPk()) {
+                originaltodaslasmascotas = m;
             }
         }
-        for (Mascota m : ArrayEnUso){
-            if (m.getPk() == modificada.getPk()){
+        for (Mascota m : ArrayEnUso) {
+            if (m.getPk() == modificada.getPk()) {
                 originalarrayenuso = m;
             }
         }
         int positionarrayenuso = ArrayEnUso.indexOf(originalarrayenuso);
         int positiontodaslasmascotas = TodasLasMascotas.indexOf(originaltodaslasmascotas);
         Log.d("Milog", "ModificarMascota:" + positionarrayenuso);
-        ArrayEnUso.set(positionarrayenuso,modificada);
-        TodasLasMascotas.set(positiontodaslasmascotas,modificada);
+        ArrayEnUso.set(positionarrayenuso, modificada);
+        TodasLasMascotas.set(positiontodaslasmascotas, modificada);
         listenerDeDatos.OnSeModificoMascota(positionarrayenuso);
     }
 
@@ -69,8 +69,6 @@ public class Datos implements AsyncResponse {
         EnviarJSON enviarJSON = new EnviarJSON(Datos.getInstance().contexto, RutasUrl.RutaDeProduccion + "/mascota/eliminarmascotamovil/", JsonParaEnviar);
         enviarJSON.setDelegate(Datos.getInstance());
         enviarJSON.execute();
-
-
         int position = ArrayEnUso.indexOf(mascota);
         TodasLasMascotas.remove(mascota);
         ArrayEnUso.remove(mascota);
@@ -148,6 +146,19 @@ public class Datos implements AsyncResponse {
 
     public static void setTodasLasMascotas(ArrayList<Mascota> todasLasMascotas) {
         TodasLasMascotas = todasLasMascotas;
+    }
+
+    public static ArrayList<Mascota> Buscar(String Busqueda) {
+        Busqueda = Busqueda.toLowerCase();
+
+        ArrayList<Mascota> filtrado = new ArrayList<>();
+        for (Mascota m : TodasLasMascotas) {
+            if (m.getNombre().toLowerCase().contains(Busqueda) || m.getRaza().toLowerCase().contains(Busqueda)||m.getEspecie().toLowerCase().contains(Busqueda)){
+                filtrado.add(m);
+            }
+        }
+        ArrayEnUso = filtrado;
+        return filtrado;
     }
 
 

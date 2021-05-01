@@ -92,12 +92,7 @@ public class EnviarJSON extends AsyncTask<String, Void, String > {
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Cargando");
         progressDialog.show();
-        progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                EnviarJSON.this.cancel(true);
-            }
-        });
+
     }
 
 }

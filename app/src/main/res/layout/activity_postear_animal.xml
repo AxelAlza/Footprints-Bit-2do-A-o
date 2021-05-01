@@ -22,7 +22,10 @@
             android:id="@+id/IbFotoMascota"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxHeight="258dp"
+            android:maxWidth="332dp"
             android:layout_gravity="center"
+            android:adjustViewBounds="true"
             app:srcCompat="@android:drawable/ic_menu_camera" />
 
         <com.google.android.material.textfield.TextInputLayout
