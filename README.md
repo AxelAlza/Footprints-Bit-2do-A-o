@@ -1,5 +1,10 @@
-# MisMascotas
+# BuscandoMiMascota
+# Equipo FootPrints:
 
-# Coursera
-# Curso: Aplicaciones Android.
-#
+# Manuel Fernández
+# Axel Alza
+# Juan Mendoza
+# Santiago Stareczek
+
+# 2020
+
