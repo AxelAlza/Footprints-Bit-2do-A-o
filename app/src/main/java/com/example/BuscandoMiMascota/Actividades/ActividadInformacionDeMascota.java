@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -31,45 +32,15 @@ public class ActividadInformacionDeMascota extends AppCompatActivity {
     @Override
 
 
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informacion_de_mascota);
         InicializarViews();
-        Intent intent = getIntent();
-        int pk = intent.getIntExtra("pk", 0);
-
-
-        EditarMascota = findViewById(R.id.btnEditarMascota);
-
-        for (Mascota m : Datos.TodasLasMascotas) {
-            if(m.getPk() == pk){
-                mascota = m;
-            }
-        }
-
-        if (mascota.getUsuario().equals(SesionDeUsuario.ConseguirEmailDeSesion(this))) {
-            EditarMascota.setVisibility(View.VISIBLE);
-            EditarMascota.setEnabled(true);
-
-            EditarMascota.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(ActividadInformacionDeMascota.this, ActividadPostearAnimal.class);
-                    intent.putExtra("Modo" , 0);
-                    intent.putExtra("pk" , mascota.getPk());
-                    startActivity(intent);
-                    finish();
-                }
-            });
-        } else {
-            EditarMascota.setVisibility(View.INVISIBLE);
-            EditarMascota.setEnabled(false);
-        }
-
-
+        TraerMascota();
         RellenarCampos(mascota);
+
     }
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void RellenarCampos(Mascota mascota) {
@@ -84,7 +55,6 @@ public class ActividadInformacionDeMascota extends AppCompatActivity {
         TvRazaMascota.setText(mascota.getRaza());
         TvEspecieMascota.setText(mascota.getEspecie());
         TvTelefono.setText(mascota.getUsuariotelefono());
-
         /////Las fechas se resisten, por que son asi?
         TemporalAccessor date = null;
         DateTimeFormatter output = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -120,5 +90,34 @@ public class ActividadInformacionDeMascota extends AppCompatActivity {
         TvUltimaConocida = findViewById(R.id.TvUltimaPosicionConocida);
         ImvMascota = findViewById(R.id.ImvMascota);
         TvTelefono = findViewById(R.id.TvTelefono);
+        EditarMascota = findViewById(R.id.btnEditarMascota);
+
+    }
+
+    private void TraerMascota() {
+        Intent intent = getIntent();
+        int pk = intent.getIntExtra("pk", 0);
+        for (Mascota m : Datos.TodasLasMascotas) {
+            if (m.getPk() == pk) {
+                mascota = m;
+            }
+        }
+        if (mascota.getUsuario().equals(SesionDeUsuario.ConseguirEmailDeSesion(this))) {
+            EditarMascota.setVisibility(View.VISIBLE);
+            EditarMascota.setEnabled(true);
+            EditarMascota.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(ActividadInformacionDeMascota.this, ActividadPostearAnimal.class);
+                    intent.putExtra("Modo", 0);
+                    intent.putExtra("pk", mascota.getPk());
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        } else {
+            EditarMascota.setVisibility(View.INVISIBLE);
+            EditarMascota.setEnabled(false);
+        }
     }
 }

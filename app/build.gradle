@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        Clave1 {
+            keyAlias 'Llave'
+            keyPassword '123456'
+            storePassword '123456'
+            storeFile file('C:\\Users\\Axel Alza\\Desktop\\Bit\\FirmaBMM.jks')
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
@@ -32,6 +40,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

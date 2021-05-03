@@ -119,7 +119,7 @@ public class LoginActivity extends AppCompatActivity implements AsyncResponse {
             Gson gson = new Gson();
             Usuario user = gson.fromJson(output, Usuario.class);
             SesionDeUsuario.Login(user.getEmail(), user.getContrasena(), user.getTelefono(), LoginActivity.this);
-            Intent intent_listado = new Intent(LoginActivity.this, ActividadListadoMascotas.class);
+            Intent intent_listado = new Intent(LoginActivity.this, ActividadPrincipal.class);
             startActivity(intent_listado);
             finish();
         }

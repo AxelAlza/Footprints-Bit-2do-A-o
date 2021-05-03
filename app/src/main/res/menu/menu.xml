@@ -3,7 +3,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.BuscandoMiMascota.Actividades.ActividadListadoMascotas">
+    tools:context="com.example.BuscandoMiMascota.Actividades.ActividadPrincipal">
         <item
             android:id="@+id/Buscar"
             android:icon="@drawable/ic_search_black_24dp"

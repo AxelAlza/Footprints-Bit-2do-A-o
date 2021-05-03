@@ -5,8 +5,9 @@ import android.location.Address;
 import android.location.Location;
 import android.util.Log;
 
+import com.example.BuscandoMiMascota.Actividades.FragmentListadoMascotas;
 import com.example.BuscandoMiMascota.Modelo.Mascota;
-import com.example.BuscandoMiMascota.Actividades.ActividadListadoMascotas;
+import com.example.BuscandoMiMascota.Actividades.ActividadPrincipal;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -172,8 +173,9 @@ public class Datos implements AsyncResponse {
             ArrayList<Mascota> mascotas = new ArrayList<>();
             Collections.addAll(mascotas, array);
             setTodasLasMascotas(mascotas);
-            ((ActividadListadoMascotas) Datos.getInstance().contexto).mascotaAdaptador.setArrayListUsado(getTodasLasMascotas());
-            ((ActividadListadoMascotas) Datos.getInstance().contexto).InicializarAdaptador();
+            FragmentListadoMascotas Listado = (FragmentListadoMascotas) ((ActividadPrincipal) Datos.getInstance().contexto).getSupportFragmentManager().findFragmentByTag("f0");
+            Listado.mascotaAdaptador.setArrayListUsado(mascotas);
+            Listado.InicializarAdaptador();
         }
         if ("0".equals(output)) {
             Log.d("Milog", "AlConseguirDato: Se elimino la mascota en el servidor todo bien");

@@ -336,14 +336,14 @@ public class ActividadPostearAnimal extends AppCompatActivity implements AsyncRe
                 Toast.makeText(this, "Se agrego la mascota", Toast.LENGTH_SHORT).show();
                 mascota.setPk(Integer.parseInt(output));
                 Datos.AgregarMascota(mascota);
-                Intent intent = new Intent(ActividadPostearAnimal.this, ActividadListadoMascotas.class);
+                Intent intent = new Intent(ActividadPostearAnimal.this, ActividadPrincipal.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivityIfNeeded(intent, 0);
                 finish();
             case "1":
                 Toast.makeText(this, "Se modifico la mascota", Toast.LENGTH_SHORT).show();
                 Datos.ModificarMascota(mascota);
-                Intent intent2 = new Intent(ActividadPostearAnimal.this, ActividadListadoMascotas.class);
+                Intent intent2 = new Intent(ActividadPostearAnimal.this, ActividadPrincipal.class);
                 intent2.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivityIfNeeded(intent2, 0);
                 finish();

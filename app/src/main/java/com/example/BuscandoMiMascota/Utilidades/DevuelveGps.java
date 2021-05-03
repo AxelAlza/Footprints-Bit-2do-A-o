@@ -138,7 +138,6 @@ public class DevuelveGps {
                     MejorUbicacion = l;
                 }
             }
-        } else {
         }
         return MejorUbicacion;
     }
