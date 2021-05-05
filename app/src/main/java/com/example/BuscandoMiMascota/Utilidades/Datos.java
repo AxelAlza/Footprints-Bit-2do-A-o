@@ -10,6 +10,7 @@ import com.example.BuscandoMiMascota.Modelo.Mascota;
 import com.example.BuscandoMiMascota.Actividades.ActividadPrincipal;
 import com.google.gson.Gson;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -123,8 +124,18 @@ public class Datos implements AsyncResponse {
             arrayList.sort(new Comparator<Mascota>() {
                 @Override
                 public int compare(Mascota o1, Mascota o2) {
-                    Address ad1 = DevuelveGps.ConseguirLatyLong(o1.getUltima_posicion_conocida(), Datos.getInstance().contexto);
-                    Address ad2 = DevuelveGps.ConseguirLatyLong(o2.getUltima_posicion_conocida(), Datos.getInstance().contexto);
+                    Address ad1 = null;
+                    try {
+                        ad1 = DevuelveGps.ConseguirLatyLong(o1.getUltima_posicion_conocida(), Datos.getInstance().contexto);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Address ad2 = null;
+                    try {
+                        ad2 = DevuelveGps.ConseguirLatyLong(o2.getUltima_posicion_conocida(), Datos.getInstance().contexto);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     Location loc1 = new Location("");
                     loc1.setLatitude(ad1.getLatitude());
                     loc1.setLongitude(ad1.getLongitude());

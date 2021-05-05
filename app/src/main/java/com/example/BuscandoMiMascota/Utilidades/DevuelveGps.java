@@ -50,40 +50,18 @@ public class DevuelveGps {
         return ubicacion;
     }
 
-    public static Address ConseguirLatyLong(final String Direccion, Activity context) {
+    public static Address ConseguirLatyLong(final String Direccion, Activity context) throws IOException {
         final Geocoder geocoder = new Geocoder(context, locale);
-        Address pordefecto = new Address(locale);
-        pordefecto.setLatitude(-34.905948);
-        pordefecto.setLongitude(-56.191350);
-        final List<Address>[] direcciones = new List[1];
-
-        Thread thread = new Thread() {
-            public void run() {
-                try {
-
-                    direcciones[0] = geocoder.getFromLocationName(Direccion, 1);
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        Address address = new Address(locale);
+        address.setLatitude(-34.905948);
+        address.setLongitude(-56.191350);
+        List<Address> direcciones = geocoder.getFromLocationName(Direccion, 1);
+        if (direcciones != null){
+            if (!direcciones.isEmpty()){
+                address = direcciones.get(0);
             }
-        };
-        thread.start();
-        try {
-            thread.join(0);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
-        if (direcciones[0] == null) {
-            return pordefecto;
-        } else {
-            if (direcciones[0].size() == 0)
-            return pordefecto;
-            else {
-                return direcciones[0].get(0);
-            }
-
-        }
+        return address;
     }
 
 

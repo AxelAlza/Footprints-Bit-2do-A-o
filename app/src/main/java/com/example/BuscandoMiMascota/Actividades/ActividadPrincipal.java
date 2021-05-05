@@ -26,7 +26,6 @@ public class ActividadPrincipal extends AppCompatActivity {
 
     FloatingActionButton FabAgregarMascota;
     androidx.appcompat.widget.Toolbar TbListaMascotas;
-    public MascotaAdaptador mascotaAdaptador;
     ViewPager2 FragmentViewPager;
     TabLayout TabLayout;
 
@@ -53,20 +52,18 @@ public class ActividadPrincipal extends AppCompatActivity {
                 switch (tab.getPosition()) {
                     case 0:
                         FragmentViewPager.setCurrentItem(0);
+                        FragmentViewPager.setUserInputEnabled(true);
                         break;
                     case 1:
                         FragmentViewPager.setCurrentItem(1);
+                        FragmentViewPager.setUserInputEnabled(false);
                 }
             }
-
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
-
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
         FragmentViewPager.setAdapter(new AdaptadorDePagina(getSupportFragmentManager(), getLifecycle()));
@@ -77,9 +74,11 @@ public class ActividadPrincipal extends AppCompatActivity {
                 switch (position) {
                     case 0:
                         TabLayout.selectTab(TabLayout.getTabAt(0));
+                        FragmentViewPager.setUserInputEnabled(true);
                         break;
                     case 1:
                         TabLayout.selectTab(TabLayout.getTabAt(1));
+                        FragmentViewPager.setUserInputEnabled(false);
 
                 }
             }
@@ -100,7 +99,7 @@ public class ActividadPrincipal extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void SetearMenuDeToolbar() {
-        final FragmentListadoMascotas fr = (FragmentListadoMascotas) getSupportFragmentManager().findFragmentByTag("f0");
+
         TbListaMascotas = findViewById(R.id.toolbar);
         TbListaMascotas.inflateMenu(R.menu.menu);
         TbListaMascotas.setTitle("Bienvenido");
@@ -108,7 +107,7 @@ public class ActividadPrincipal extends AppCompatActivity {
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
-
+                FragmentListadoMascotas fr = (FragmentListadoMascotas) getSupportFragmentManager().findFragmentByTag("f0");
                 fr.mascotaAdaptador.setArrayListUsado(Datos.getTodasLasMascotas());
                 TbListaMascotas.setTitle("Todas las mascotas");
                 return false;
@@ -123,6 +122,7 @@ public class ActividadPrincipal extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                FragmentListadoMascotas fr = (FragmentListadoMascotas) getSupportFragmentManager().findFragmentByTag("f0");
                 fr.mascotaAdaptador.setArrayListUsado(Datos.Buscar(newText));
                 return true;
             }
@@ -131,6 +131,7 @@ public class ActividadPrincipal extends AppCompatActivity {
         TbListaMascotas.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                FragmentListadoMascotas fr = (FragmentListadoMascotas) getSupportFragmentManager().findFragmentByTag("f0");
                 int id = item.getItemId();
                 switch (id) {
                     case R.id.MenuItemCercanosAMi:
