@@ -1,8 +1,10 @@
 package com.example.BuscandoMiMascota.Actividades;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.AnimationDrawable;
 import android.location.Address;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -51,48 +53,34 @@ public class FragmentMapa extends Fragment implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         return v;
-
-
     }
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                Intent llamar = new Intent(Intent.ACTION_SEND);
+                getActivity().startActivity(llamar);
+                return true;
+            }
+        });
         LatLng Uruguay = new LatLng(-34.905948, -56.191350);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(Uruguay));
-
-        ////El ejecutador de threads
-        ThreadPoolExecutor Ejecutador = (ThreadPoolExecutor) Executors.newFixedThreadPool(4);
-
-        //// El hashmap que el mapa va usar para colocar marcadores
-        final HashMap<Mascota , LatLng> hashMap = new HashMap<>();
-        for (final Mascota m : Datos.TodasLasMascotas) {
-            Ejecutador.execute(new Runnable() {
-                @Override
-                public void run() {
-                    Address Ubicacion = null;
-                    try {
-                        Ubicacion = DevuelveGps.ConseguirLatyLong(m.getUltima_posicion_conocida(), getActivity());
-                        LatLng LatitudYlongitud = new LatLng(Ubicacion.getLatitude(), Ubicacion.getLongitude());
-                        hashMap.put(m,LatitudYlongitud);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }
-        try {
-            Ejecutador.awaitTermination(1, TimeUnit.SECONDS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        for (Map.Entry<Mascota,LatLng> entry : hashMap.entrySet()) {
-            Mascota m = entry.getKey();
-            Bitmap bm = FormateadorDeImagenes.DesdeBase64(m.getImagen());
-            Bitmap rbm = Bitmap.createScaledBitmap(bm,100,100,true);
-            BitmapDescriptor icono = BitmapDescriptorFactory.fromBitmap(rbm);
-            mMap.addMarker(new MarkerOptions().position(entry.getValue()).title(m.getNombre()).icon(icono));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(10));
+        Address Ubicacion = null;
+        for (Mascota mascota : Datos.TodasLasMascotas) {
+            try {
+                Bitmap imagen = FormateadorDeImagenes.DesdeBase64(mascota.getImagen());
+                Bitmap imagenescalada = Bitmap.createScaledBitmap(imagen , 80 , 80 , true);
+                BitmapDescriptor icono = BitmapDescriptorFactory.fromBitmap(imagenescalada);
+                Ubicacion = DevuelveGps.ConseguirLatyLong(mascota.getUltima_posicion_conocida() , getActivity());
+                LatLng latLng = new LatLng(Ubicacion.getLatitude(),Ubicacion.getLongitude());
+                mMap.addMarker(new MarkerOptions().position(latLng).icon(icono).title(mascota.getNombre()).snippet(String.valueOf(mascota.getUsuariotelefono())));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

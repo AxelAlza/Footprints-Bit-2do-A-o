@@ -57,6 +57,7 @@ public class ActividadPrincipal extends AppCompatActivity {
                     case 1:
                         FragmentViewPager.setCurrentItem(1);
                         FragmentViewPager.setUserInputEnabled(false);
+
                 }
             }
             @Override

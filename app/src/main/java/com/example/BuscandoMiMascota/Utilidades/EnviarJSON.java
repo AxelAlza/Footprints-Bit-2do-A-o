@@ -40,9 +40,9 @@ public class EnviarJSON extends AsyncTask<String, Void, String > {
     // Esto se ejecuta despues de que se ejecuto la tarea, muestra un mensaje diciendo que termino de traer los datos
     //Tambien hace desaparecer el progress dialog, el parametro "Object o" es lo que se retorna en el metodo doInBackground
     @Override
-    protected void onPostExecute(String s) {
+    protected void onPostExecute(String respuesta) {
         progressDialog.dismiss();
-        delegate.AlConseguirDato(s);
+        delegate.AlConseguirDato(respuesta);
     }
 
     /// Esta es la tarea que se va a ejecutar, es el codigo que se encarga de hacer la peticion http para traer el json

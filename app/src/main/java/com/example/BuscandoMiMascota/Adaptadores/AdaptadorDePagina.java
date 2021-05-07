@@ -28,11 +28,9 @@ public class AdaptadorDePagina extends FragmentStateAdapter {
                 break;
             case 1:
                 fr = new FragmentMapa();
-
         }
         return fr;
     }
-
 
     @Override
     public int getItemCount() {
